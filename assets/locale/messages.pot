@@ -1,0 +1,84 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+
+msgid "Hello world!"
+msgstr ""
+
+msgid "PAUSE_MESSAGE"
+msgstr ""
+
+msgid "PAUSE_HINT"
+msgstr ""
+
+msgid "BACK"
+msgstr ""
+
+msgid "RESUME"
+msgstr ""
+
+msgid "START_MISSION"
+msgstr ""
+
+msgid "RESTART"
+msgstr ""
+
+msgid "ABORT"
+msgstr ""
+
+msgid "SELECT_MISSION"
+msgstr ""
+
+msgid "QUIT"
+msgstr ""
+
+msgid "NEW"
+msgstr ""
+
+msgid "LOAD"
+msgstr ""
+
+msgid "SAVE"
+msgstr ""
+
+msgid "NEW_NOTIFICATION"
+msgstr ""
+
+msgid "LOAD_NOTIFICATION"
+msgstr ""
+
+msgid "SAVE_NOTIFICATION"
+msgstr ""
+
+msgid "SETTINGS"
+msgstr ""
+
+msgid "AUDIO"
+msgstr ""
+
+msgid "MASTER"
+msgstr ""
+
+msgid "MUSIC"
+msgstr ""
+
+msgid "MUTE_MUSIC"
+msgstr ""
+
+msgid "SFX"
+msgstr ""
+
+msgid "MUTE_SFX"
+msgstr ""
+
+msgid "LANGUAGE"
+msgstr ""
+
+msgid "LOCALE"
+msgstr ""
+
+msgid "MISSION_SELECT"
+msgstr ""
+
+msgid "MISSION_FAILED"
+msgstr ""

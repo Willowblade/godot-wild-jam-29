@@ -1,0 +1,92 @@
+# Don't remove the two lines below, they're required for gettext to work correctly.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Hello world!"
+msgstr "Bonjour monde!"
+
+msgid "PAUSE_MESSAGE"
+msgstr "JEU EST EN PAUSE"
+
+msgid "PAUSE_HINT"
+msgstr "Appuyez sur 'ESCAPE' pour mettre en pause/reprendre"
+
+msgid "BACK"
+msgstr "Retour"
+
+msgid "RESUME"
+msgstr "Reprendre"
+
+msgid "START_MISSION"
+msgstr "Commencer la Mission"
+
+msgid "RESTART"
+msgstr "Redémarrer"
+
+msgid "ABORT"
+msgstr "Abandonner"
+
+msgid "SELECT_MISSION"
+msgstr "Sélectionnez une Mission"
+
+msgid "QUIT"
+msgstr "Quitter"
+
+msgid "NEW"
+msgstr "Nouveau"
+
+msgid "LOAD"
+msgstr "Charger"
+
+msgid "SAVE"
+msgstr "Sauver"
+
+msgid "NEW_NOTIFICATION"
+msgstr "Redémarrage du système... Effacement de toutes les données..."
+
+msgid "LOAD_NOTIFICATION"
+msgstr "Chargement de la sauvegarde depuis le stockage..."
+
+msgid "SAVE_NOTIFICATION"
+msgstr "Génération de la sauvegarde d'image..."
+
+msgid "SETTINGS"
+msgstr "Paramètres"
+
+msgid "AUDIO"
+msgstr "Audio"
+
+msgid "MASTER"
+msgstr "Maître"
+
+msgid "MUSIC"
+msgstr "Musique"
+
+msgid "MUTE_MUSIC"
+msgstr "Muet de la Musique"
+
+msgid "SFX"
+msgstr "SFX"
+
+msgid "MUTE_SFX"
+msgstr "Muet de la SFX"
+
+msgid "LANGUAGE"
+msgstr "Langue"
+
+msgid "LOCALE"
+msgstr "Français"
+
+msgid "MISSION_SELECT"
+msgstr "Sélection de Mission"
+
+msgid "MISSION_FAILED"
+msgstr "Mission Échouée"

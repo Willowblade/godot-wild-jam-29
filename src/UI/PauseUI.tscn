@@ -1,0 +1,471 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/UI/PauseUI.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/pause/SettingsPauseTab.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/pause/MainPauseTab.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/pause/PauseTabContainer.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="PauseUI" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+tabs_visible = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainTab" type="MarginContainer" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MainTab"]
+margin_right = 1024.0
+margin_bottom = 576.0
+custom_constants/separation = 26
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleHBox" type="HBoxContainer" parent="TabContainer/MainTab/VBoxContainer"]
+margin_left = 447.0
+margin_top = 146.0
+margin_right = 577.0
+margin_bottom = 160.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="FrontLabel" type="Label" parent="TabContainer/MainTab/VBoxContainer/TitleHBox"]
+margin_right = 8.0
+margin_bottom = 14.0
+text = "~"
+
+[node name="TitleLabel" type="Label" parent="TabContainer/MainTab/VBoxContainer/TitleHBox"]
+margin_left = 12.0
+margin_right = 118.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "PAUSE_MESSAGE"
+align = 1
+valign = 1
+
+[node name="BackLabel" type="Label" parent="TabContainer/MainTab/VBoxContainer/TitleHBox"]
+margin_left = 122.0
+margin_right = 130.0
+margin_bottom = 14.0
+text = "~"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/MainTab/VBoxContainer"]
+margin_left = 448.0
+margin_top = 186.0
+margin_right = 576.0
+margin_bottom = 390.0
+size_flags_horizontal = 4
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../RestartButton")
+focus_next = NodePath("../RestartButton")
+focus_previous = NodePath("../QuitButton")
+text = "RESUME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../ResumeButton")
+focus_neighbour_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ResumeButton")
+text = "RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator1" type="HSeparator" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 128.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 92.0
+margin_right = 128.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../RestartButton")
+focus_neighbour_bottom = NodePath("../MainMenuButton")
+focus_next = NodePath("../MainMenuButton")
+focus_previous = NodePath("../RestartButton")
+text = "SETTINGS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 132.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 148.0
+margin_right = 128.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../SettingsButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../SettingsButton")
+text = "MAIN MENU"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="TabContainer/MainTab/VBoxContainer/VBoxContainer"]
+margin_top = 184.0
+margin_right = 128.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../MainMenuButton")
+focus_neighbour_bottom = NodePath("../ResumeButton")
+focus_next = NodePath("../ResumeButton")
+focus_previous = NodePath("../MainMenuButton")
+text = "QUIT"
+
+[node name="HintLabel" type="Label" parent="TabContainer/MainTab/VBoxContainer"]
+margin_left = 472.0
+margin_top = 416.0
+margin_right = 551.0
+margin_bottom = 430.0
+size_flags_horizontal = 4
+text = "PAUSE_HINT"
+align = 1
+valign = 1
+
+[node name="SettingsTab" type="MarginContainer" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+script = ExtResource( 2 )
+tab_type = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SettingsTab"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 544.0
+custom_constants/separation = 24
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
+margin_left = 436.0
+margin_right = 524.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="FrontLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/TitleHBox"]
+margin_right = 8.0
+margin_bottom = 16.0
+text = "~"
+
+[node name="TitleLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/TitleHBox"]
+margin_left = 12.0
+margin_right = 76.0
+margin_bottom = 16.0
+size_flags_horizontal = 4
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="BackLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/TitleHBox"]
+margin_left = 80.0
+margin_right = 88.0
+margin_bottom = 16.0
+text = "~"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/SettingsTab/VBoxContainer"]
+margin_top = 40.0
+margin_right = 960.0
+margin_bottom = 461.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer"]
+margin_right = 960.0
+margin_bottom = 421.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+alignment = 1
+
+[node name="AudioContainer" type="VBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 85.0
+margin_right = 960.0
+margin_bottom = 261.0
+custom_constants/separation = 16
+
+[node name="SectionHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_right = 960.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="FrontHSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_right = 456.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_left = 460.0
+margin_right = 500.0
+margin_bottom = 16.0
+text = "AUDIO"
+
+[node name="BackHSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_left = 504.0
+margin_right = 960.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+
+[node name="MasterVolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 32.0
+margin_right = 960.0
+margin_bottom = 48.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_right = 412.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "MASTER"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../../../../../BackButton")
+focus_neighbour_bottom = NodePath("../../MusicVolumeHBox/VolumeSlider")
+focus_next = NodePath("../../MusicVolumeHBox/VolumeSlider")
+focus_previous = NodePath("../../../../../BackButton")
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_left = 548.0
+margin_right = 960.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "(100 %)"
+
+[node name="MusicVolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 64.0
+margin_right = 960.0
+margin_bottom = 80.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_right = 412.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "MUSIC"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../../MasterVolumeHBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../../MuteMusicCheckBox")
+focus_next = NodePath("../../MuteMusicCheckBox")
+focus_previous = NodePath("../../MasterVolumeHBox/VolumeSlider")
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_left = 548.0
+margin_right = 960.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "(100 %)"
+
+[node name="MuteMusicCheckBox" type="CheckBox" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_left = 430.0
+margin_top = 96.0
+margin_right = 530.0
+margin_bottom = 112.0
+focus_neighbour_top = NodePath("../MusicVolumeHBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../SFXVolumeHBox/VolumeSlider")
+focus_next = NodePath("../SFXVolumeHBox/VolumeSlider")
+focus_previous = NodePath("../MasterVolumeHBox/VolumeSlider")
+size_flags_horizontal = 4
+text = "MUTE_MUSIC"
+align = 1
+
+[node name="SFXVolumeHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 128.0
+margin_right = 960.0
+margin_bottom = 144.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_right = 412.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "SFX"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+focus_neighbour_top = NodePath("../../MuteMusicCheckBox")
+focus_neighbour_bottom = NodePath("../../MuteSFXCheckBox")
+focus_next = NodePath("../../MuteSFXCheckBox")
+focus_previous = NodePath("../../MuteMusicCheckBox")
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_left = 548.0
+margin_right = 960.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "(100 %)"
+
+[node name="MuteSFXCheckBox" type="CheckBox" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_left = 438.0
+margin_top = 160.0
+margin_right = 522.0
+margin_bottom = 176.0
+focus_neighbour_top = NodePath("../SFXVolumeHBox/VolumeSlider")
+focus_neighbour_bottom = NodePath("../../../../BackButton")
+focus_next = NodePath("../../../../BackButton")
+focus_previous = NodePath("../SFXVolumeHBox/VolumeSlider")
+size_flags_horizontal = 4
+text = "MUTE_SFX"
+align = 1
+
+[node name="LocaleContainer" type="VBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 277.0
+margin_right = 960.0
+margin_bottom = 336.0
+custom_constants/separation = 16
+
+[node name="SectionHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer"]
+margin_right = 960.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="FrontHSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_right = 444.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_left = 448.0
+margin_right = 512.0
+margin_bottom = 16.0
+text = "LANGUAGE"
+
+[node name="BackHSeparator" type="HSeparator" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_left = 516.0
+margin_right = 960.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+
+[node name="LanguageHBox" type="HBoxContainer" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer"]
+margin_top = 32.0
+margin_right = 960.0
+margin_bottom = 59.0
+alignment = 1
+
+[node name="PreviousButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_left = 390.0
+margin_right = 412.0
+margin_bottom = 27.0
+text = "<"
+
+[node name="Label" type="Label" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_left = 416.0
+margin_top = 5.0
+margin_right = 544.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 128, 0 )
+text = "LOCALE"
+align = 1
+valign = 1
+
+[node name="NextButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_left = 548.0
+margin_right = 570.0
+margin_bottom = 27.0
+text = ">"
+
+[node name="BackButton" type="Button" parent="TabContainer/SettingsTab/VBoxContainer"]
+margin_left = 432.0
+margin_top = 485.0
+margin_right = 528.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_top = NodePath("../ScrollContainer/VBoxContainer/AudioContainer/MuteSFXCheckBox")
+focus_neighbour_bottom = NodePath("../ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox/VolumeSlider")
+focus_next = NodePath("../ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox/VolumeSlider")
+focus_previous = NodePath("../ScrollContainer/VBoxContainer/AudioContainer/MuteSFXCheckBox")
+size_flags_horizontal = 4
+text = "BACK"

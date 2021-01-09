@@ -1,0 +1,306 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/menu/settings/SettingsMenuTab.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/base/VolumeHBox.gd" type="Script" id=3]
+
+[node name="SettingsMenuTab" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tab_type = 1
+
+[node name="BackContainer" type="VBoxContainer" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 544.0
+mouse_filter = 2
+
+[node name="BackButton" type="Button" parent="BackContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 0
+text = "BACK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 992.0
+margin_bottom = 544.0
+mouse_filter = 2
+
+[node name="TitleHBox" type="HBoxContainer" parent="VBoxContainer"]
+margin_left = 438.0
+margin_right = 522.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="FrontLabel" type="Label" parent="VBoxContainer/TitleHBox"]
+margin_top = 3.0
+margin_right = 8.0
+margin_bottom = 17.0
+text = "~"
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/TitleHBox"]
+margin_left = 12.0
+margin_right = 72.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 4
+text = "SETTINGS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackLabel" type="Label" parent="VBoxContainer/TitleHBox"]
+margin_left = 76.0
+margin_top = 3.0
+margin_right = 84.0
+margin_bottom = 17.0
+text = "~"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 960.0
+margin_bottom = 512.0
+mouse_filter = 2
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 960.0
+margin_bottom = 488.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+alignment = 1
+
+[node name="AudioContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 116.0
+margin_right = 960.0
+margin_bottom = 306.0
+mouse_filter = 2
+custom_constants/separation = 16
+
+[node name="SectionHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_right = 960.0
+margin_bottom = 14.0
+
+[node name="FrontHSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_right = 453.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_left = 457.0
+margin_right = 502.0
+margin_bottom = 14.0
+text = "AUDIO"
+
+[node name="BackHSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SectionHBox"]
+margin_left = 506.0
+margin_right = 960.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="MasterVolumeHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 30.0
+margin_right = 960.0
+margin_bottom = 46.0
+alignment = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "MASTER"
+value = 100.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_top = 1.0
+margin_right = 412.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "MASTER"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox"]
+margin_left = 548.0
+margin_top = 1.0
+margin_right = 960.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="MusicVolumeHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 62.0
+margin_right = 960.0
+margin_bottom = 78.0
+alignment = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "MUSIC"
+value = 100.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_top = 1.0
+margin_right = 412.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "MUSIC"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox"]
+margin_left = 548.0
+margin_top = 1.0
+margin_right = 960.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="MuteMusicCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_left = 424.0
+margin_top = 94.0
+margin_right = 536.0
+margin_bottom = 118.0
+size_flags_horizontal = 4
+text = "MUTE_MUSIC"
+align = 1
+
+[node name="SFXVolumeHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_top = 134.0
+margin_right = 960.0
+margin_bottom = 150.0
+alignment = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text = "SFX"
+value = 100.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_top = 1.0
+margin_right = 412.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "SFX"
+align = 2
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_left = 416.0
+margin_right = 544.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+value = 100.0
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox"]
+margin_left = 548.0
+margin_top = 1.0
+margin_right = 960.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+text = "100%"
+
+[node name="MuteSFXCheckBox" type="CheckBox" parent="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer"]
+margin_left = 434.0
+margin_top = 166.0
+margin_right = 526.0
+margin_bottom = 190.0
+size_flags_horizontal = 4
+text = "MUTE_SFX"
+align = 1
+
+[node name="LocaleContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 322.0
+margin_right = 960.0
+margin_bottom = 372.0
+mouse_filter = 2
+custom_constants/separation = 16
+
+[node name="SectionHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer"]
+margin_right = 960.0
+margin_bottom = 14.0
+
+[node name="FrontHSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_right = 440.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_left = 444.0
+margin_right = 516.0
+margin_bottom = 14.0
+text = "LANGUAGE"
+
+[node name="BackHSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/SectionHBox"]
+margin_left = 520.0
+margin_right = 960.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="LanguageHBox" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer"]
+margin_left = 392.0
+margin_top = 30.0
+margin_right = 568.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="PreviousButton" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_right = 20.0
+margin_bottom = 20.0
+text = "<"
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_left = 24.0
+margin_top = 3.0
+margin_right = 152.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 128, 0 )
+text = "LOCALE"
+align = 1
+valign = 1
+
+[node name="NextButton" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox"]
+margin_left = 156.0
+margin_right = 176.0
+margin_bottom = 20.0
+text = ">"
+[connection signal="mouse_entered" from="BackContainer/BackButton" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MasterVolumeHBox/VolumeSlider" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/MusicVolumeHBox/VolumeSlider" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/ScrollContainer/VBoxContainer/AudioContainer/SFXVolumeHBox/VolumeSlider" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox/PreviousButton" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/ScrollContainer/VBoxContainer/LocaleContainer/LanguageHBox/NextButton" to="." method="_on_button_mouse_entered"]

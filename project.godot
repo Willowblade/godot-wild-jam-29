@@ -8,17 +8,89 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Reference",
+"class": "JSONBeautifier",
+"language": "GDScript",
+"path": "res://addons/json_beautifier/json_beautifier.gd"
+}, {
+"base": "MarginContainer",
+"class": "class_menu_tab",
+"language": "GDScript",
+"path": "res://src/menu/MenuTab.gd"
+}, {
+"base": "MarginContainer",
+"class": "class_pause_tab",
+"language": "GDScript",
+"path": "res://src/UI/pause/PauseTab.gd"
+}, {
+"base": "Reference",
+"class": "class_player",
+"language": "GDScript",
+"path": "res://src/autoload/state/Player.gd"
+}, {
+"base": "Reference",
+"class": "class_upgrade",
+"language": "GDScript",
+"path": "res://src/autoload/state/Upgrade.gd"
+} ]
 _global_script_class_icons={
-
+"JSONBeautifier": "",
+"class_menu_tab": "",
+"class_pause_tab": "",
+"class_player": "",
+"class_upgrade": ""
 }
 
 [application]
 
 config/name="Godot Wild Jam 29"
-run/main_scene="res://src/Game.tscn"
+run/main_scene="res://src/Menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+ConfigData="*res://src/autoload/ConfigData.tscn"
+Flow="*res://src/autoload/Flow.tscn"
+State="*res://src/autoload/State.tscn"
+LevelFlow="*res://src/autoload/LevelFlow.tscn"
+AudioEngine="*res://src/audio/AudioEngine.tscn"
+
+[display]
+
+window/size/height=576
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[locale]
+
+translations=PoolStringArray( "res://assets/locale/en.po", "res://assets/locale/pt.po", "res://assets/locale/fr.po" )
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.12549, 0.188235, 0.258824, 1 )
 environment/default_environment="res://default_env.tres"
