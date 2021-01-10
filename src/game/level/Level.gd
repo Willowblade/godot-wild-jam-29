@@ -1,9 +1,9 @@
 extends Node2D
 
 
-onready var player = $Player
+onready var player = $YSort/Player
 onready var floors = $Floors
-onready var camera = $Player/Camera
+onready var camera = $YSort/Player/Camera
 
 onready var tween = $Tween
 
@@ -25,7 +25,7 @@ func _process(delta):
 		var i = 2
 		for floor_below in floors_below:
 			print(floor_below.name)
-			tween.interpolate_property(floor_below, "modulate", null, Color(1 - 0.04 * i, 1 - 0.04 * i, 1 - 0.02 * i), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+			tween.interpolate_property(floor_below, "modulate", null, Color(1 - 0.04 * i, 1 - 0.04 * i, 1 - 0.04 * i), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 			i += 1
 		print("ABOVE")
 		for floor_above in floors_above:
