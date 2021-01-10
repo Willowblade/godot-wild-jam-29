@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Game.gd" type="Script" id=3]
+[ext_resource path="res://src/game/level/Level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/UI/DialogueView.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Control"]
@@ -43,3 +44,5 @@ __meta__ = {
 }
 
 [node name="Canvas" parent="ViewportContainer" instance=ExtResource( 2 )]
+
+[node name="Level" parent="ViewportContainer/Canvas" instance=ExtResource( 4 )]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player.png-c624171c8c32c2cc3a3d55f21aa531e0.stex"
+path="res://.import/desert.png-0d1c61a4abf6096fe48a021999e385f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/characters/player.png"
-dest_files=[ "res://.import/player.png-c624171c8c32c2cc3a3d55f21aa531e0.stex" ]
+source_file="res://assets/graphics/tilesets/desert.png"
+dest_files=[ "res://.import/desert.png-0d1c61a4abf6096fe48a021999e385f8.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
