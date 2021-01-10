@@ -4,7 +4,7 @@ extends TileMap
 var name_to_id_mapping = {}
 var id_to_name_mapping = {}
 
-var floor_border = {}
+var floor_borders = {}
 
 func _ready():
 	var ids = tile_set.get_tiles_ids()
@@ -14,7 +14,40 @@ func _ready():
 		id_to_name_mapping[id] = tile_name
 	print(name_to_id_mapping)
 	print(id_to_name_mapping)
-	clean()
+	print(collision_mask)
+	print(collision_layer)
+	
+func add_border(cell: Vector2, direction: String):
+	if not floor_borders.has(cell):
+		floor_borders[cell] = {
+			"sw": false,
+			"se": false,
+			"nw": false,
+			"ne": false,
+		}
+		
+	floor_borders[cell][direction] = true
+
+func activate_borders():
+	for floor_border in floor_borders:
+		# directions are found as in which direction they are experienced, not from the border's perspective!
+		var bordering_directions = floor_borders[floor_border]
+		if bordering_directions.nw and bordering_directions.ne:
+			set_cellv(floor_border, name_to_id_mapping["collision_s"])
+		elif bordering_directions.nw:
+			set_cellv(floor_border, name_to_id_mapping["collision_nw"])
+		elif bordering_directions.ne:
+			set_cellv(floor_border, name_to_id_mapping["collision_ne"])
+			
+func activate():
+#	show()
+	collision_layer = 1
+	collision_mask = 1
+			
+func deactivate():
+	collision_layer = 2
+	collision_mask = 2147483650
+#	hide()
 	
 func clean():
 	var used_cells = {}
@@ -33,13 +66,13 @@ func clean():
 		var se_exists = used_cells.has(se)
 		if cell_name.begins_with("floor"):
 			if !sw_exists:
-				floor_border[sw] = "sw"
+				add_border(sw, "sw")
 			if !nw_exists:
-				floor_border[nw] = "nw"
+				add_border(nw, "nw")
 			if !ne_exists:
-				floor_border[ne] = "ne"
+				add_border(ne, "ne")
 			if !se_exists:
-				floor_border[se] = "se"
+				add_border(se, "se")
 				
 			if !sw_exists and !se_exists:
 				set_cellv(used_cell, name_to_id_mapping["floor_half"])

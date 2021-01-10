@@ -97,6 +97,6 @@ translations=PoolStringArray( "res://assets/locale/en.po", "res://assets/locale/
 
 [rendering]
 
-quality/2d/use_pixel_snap=true
+quality/2d/use_nvidia_rect_flicker_workaround=true
 environment/default_clear_color=Color( 0.12549, 0.188235, 0.258824, 1 )
 environment/default_environment="res://default_env.tres"
