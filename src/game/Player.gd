@@ -3,12 +3,12 @@ class_name Player
 
 onready var sprite: AnimatedSprite = $Sprite
 
+export var MOVEMENT_SPEED: float = 50.0
 
 signal interact
 
 var direction = Vector2(1, 0)
 
-const MOVEMENT_SPEED: float = 50.0
 
 var state = "IDLE"
 
@@ -37,13 +37,13 @@ func set_animation(velocity: Vector2):
 #
 	if velocity.y < 0:
 		sprite.animation = "up"
-		if state != "VERTICAL_UP":
-			state = "VERTICAL_UP"
+		if state != "MOVING":
+			state = "MOVING"
 
 	elif velocity.y > 0:
 		sprite.animation = "down"
-		if state != "VERTICAL_DOWN":
-			state = "VERTICAL_DOWN"
+		if state != "MOVING":
+			state = "MOVING"
 	else:
 		sprite.animation = "idle"
 		state = "IDLE"
@@ -61,6 +61,12 @@ func set_direction(velocity: Vector2):
 	
 func player_specific(delta):
 	pass
+
+func set_moving():
+	set_physics_process(true)
+
+func set_still():
+	set_physics_process(false)
 			
 func _physics_process(delta):
 	player_specific(delta)
@@ -93,4 +99,4 @@ func _physics_process(delta):
 	set_animation(velocity)
 	set_direction(velocity)
 	
-	move_and_collide(velocity * delta)
+	move_and_slide(velocity)

@@ -5,43 +5,43 @@
 [ext_resource path="res://assets/graphics/characters/walk_up.png" type="Texture" id=3]
 [ext_resource path="res://assets/graphics/characters/walk_down.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 160, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 48 )
 
@@ -69,14 +69,14 @@ region = Rect2( 128, 0, 32, 48 )
 atlas = ExtResource( 4 )
 region = Rect2( 160, 0, 32, 48 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=17]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "up",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.5
@@ -87,7 +87,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=18]
 radius = 0.865484
 height = 3.41006
 
@@ -98,11 +98,12 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.154678, -6.12473 )
-frames = SubResource( 3 )
+frames = SubResource( 17 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.291372, 1.02243 )
 rotation = 1.57079
-shape = SubResource( 4 )
+shape = SubResource( 18 )
