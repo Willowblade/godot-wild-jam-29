@@ -1,4 +1,5 @@
-extends Node2D
+extends StaticBody2D
+class_name Yurt
 
 onready var door = $Door
 onready var sprite = $Sprite
@@ -49,3 +50,4 @@ const colors_to_colors = {
 func _ready():
 	door.region_rect = types_to_rects[door_type]
 	door.modulate = colors_to_colors[door_color]
+

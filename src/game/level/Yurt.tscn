@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/graphics/level/yurt.png" type="Texture" id=1]
 [ext_resource path="res://src/game/level/Yurt.gd" type="Script" id=2]
 [ext_resource path="res://assets/graphics/level/yurt-doors.png" type="Texture" id=3]
 
-[node name="Yurt" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 14.7961
+height = 36.0993
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 32.2676 )
+
+[node name="Yurt" type="StaticBody2D" groups=[
+"yurt",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -16,3 +25,13 @@ position = Vector2( -0.5, -12 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 7, 37, 17, 22 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.198425, -17.4614 )
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -0.0109253, -9.84961 )
+rotation = 1.57079
+shape = SubResource( 2 )

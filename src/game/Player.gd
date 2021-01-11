@@ -26,25 +26,26 @@ func set_flip(velocity: Vector2):
 			sprite.flip_h = false
 			
 func set_animation(velocity: Vector2):	
-	if velocity.x < 0:
-		sprite.animation = "walk"
-		if state != "HORIZONTAL_LEFT":
-			state = "HORIZONTAL_LEFT"
-	elif velocity.x > 0:
-		sprite.animation = "walk"
-		if state != "HORIZONTAL_RIGHT":
-			state = "HORIZONTAL_RIGHT"
-		
-	elif velocity.y < 0:
-		sprite.animation = "walk"
+#	if velocity.x < 0:
+#		sprite.animation = "walk"
+#		if state != "HORIZONTAL_LEFT":
+#			state = "HORIZONTAL_LEFT"
+#	elif velocity.x > 0:
+#		sprite.animation = "walk"
+#		if state != "HORIZONTAL_RIGHT":
+#			state = "HORIZONTAL_RIGHT"
+#
+	if velocity.y < 0:
+		sprite.animation = "up"
 		if state != "VERTICAL_UP":
 			state = "VERTICAL_UP"
 
 	elif velocity.y > 0:
-		sprite.animation = "walk"
+		sprite.animation = "down"
 		if state != "VERTICAL_DOWN":
 			state = "VERTICAL_DOWN"
 	else:
+		sprite.animation = "idle"
 		state = "IDLE"
 		
 
