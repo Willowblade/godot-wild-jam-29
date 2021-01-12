@@ -20,6 +20,8 @@ onready var state = LevelState.EXPLORING
 var current_floor_player = null
 var camera_transition_target = null
 
+export var EAGLE_ZOOM = 1.2
+
 func _ready():
 	eagle.set_player(player)
 
@@ -73,7 +75,7 @@ func transition_to_eagle_flight():
 	camera.smoothing_enabled = true
 	transition_tiles(2, 0.8)
 	camera_tween.interpolate_property(camera, "zoom", null, Vector2(0.9, 0.9), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
-	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.8, 1.8), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.8, 1.8) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
 	state = LevelState.FLIGHT
@@ -117,9 +119,9 @@ func switch_state(new_state: int):
 
 func counter_scale_camera(delta, increase):
 	var current_zoom = camera.zoom.x
-	var new_zoom = max(0.6, min(1.2, current_zoom + 0.3 * delta * increase))
+	var new_zoom = max(0.6, min(2.0, current_zoom + 0.3 * delta * increase))
 	camera.zoom = Vector2(new_zoom, new_zoom)
-	eagle.sprite.scale = 2 * camera.zoom
+	eagle.sprite.scale = 2 * camera.zoom * EAGLE_ZOOM
 
 func _process_inputs(delta):
 	print(camera.position)

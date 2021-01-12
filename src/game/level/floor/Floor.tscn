@@ -997,5 +997,6 @@ points = PoolVector2Array( 0, 8, 0, 8, 16, 0, 32, 8, 16, 16 )
 mode = 1
 tile_set = SubResource( 43 )
 cell_size = Vector2( 32, 16 )
+cell_quadrant_size = 64
 format = 1
 script = ExtResource( 2 )

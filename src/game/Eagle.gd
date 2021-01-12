@@ -2,7 +2,7 @@ extends KinematicBody2D
 class_name Eagle
 
 export var ROTATION_SPEED = 2
-export var MOVEMENT_SPEED = 100
+export var MOVEMENT_SPEED = 150
 export var CIRCLE_RADIUS = 150
 export var CIRCLE_ROTATION_SPEED = 0.6
 
@@ -105,7 +105,11 @@ func _physics_process(delta):
 		return
 		
 	if state == MovementState.FREE:
-		speed = MOVEMENT_SPEED
+		if sprite.scale.x > 2:
+			speed = MOVEMENT_SPEED * sqrt(sprite.scale.x / 2)
+		else:
+			speed = MOVEMENT_SPEED * sprite.scale.x / 2
+		
 		if Input.is_action_pressed("move_left"):
 			move_right(delta)
 			

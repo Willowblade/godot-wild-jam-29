@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DesertFootStep3.ogg-353ee676330e7550a1577b7c481c6a73.oggstr"
+
+[deps]
+
+source_file="res://assets/DesertFootStep3.ogg"
+dest_files=[ "res://.import/DesertFootStep3.ogg-353ee676330e7550a1577b7c481c6a73.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
