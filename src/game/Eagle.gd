@@ -9,6 +9,7 @@ export var CIRCLE_ROTATION_SPEED = 0.6
 onready var sprite: AnimatedSprite = $Sprite
 onready var tween: Tween = $Tween
 onready var target_sprite: Sprite = $Target
+onready var shadow: AnimatedSprite = $Shadow
 
 var direction = Vector2(10, 0)
 
@@ -42,39 +43,44 @@ func update_target():
 	var fake_time = patrol_timer * CIRCLE_ROTATION_SPEED
 	target = player.position - position + radius * Vector2(cos(fake_time), sin(fake_time) / 2) 
 
-
-func set_flip(velocity: Vector2):
-	if velocity.x > 0:
-		if sprite.flip_h == false:
-			sprite.flip_h = true
-			$Shadow.flip_h = true
-
-	elif velocity.x < 0:
-		if sprite.flip_h == true:
-			sprite.flip_h = false
-			$Shadow.flip_h = false
+func get_direction(velocity: Vector2):
+	var normalized_velocity = velocity.normalized()
+	if normalized_velocity.x > sqrt(3)/2:
+		return "e"
+	elif normalized_velocity.x < -sqrt(3)/2:
+		return "w"
+	elif normalized_velocity.y > sqrt(3)/2:
+		return "s"
+	elif normalized_velocity.y < -sqrt(3)/2:
+		return "n"
+	elif normalized_velocity.x > 0 and normalized_velocity.y > 0:
+		return "se"
+	elif normalized_velocity.x > 0 and normalized_velocity.y < 0:
+		return "ne"
+	elif normalized_velocity.x < 0 and normalized_velocity.y > 0:
+		return "sw"
+	elif normalized_velocity.x < 0 and normalized_velocity.y < 0:
+		return "nw"
+			
+func set_animation(velocity: Vector2):	
+	var animation_direction = get_direction(velocity)
+	if velocity == Vector2(0, 0):
+		if sprite.playing:
+			sprite.playing = false
+			shadow.playing = false
+		sprite.frame = 1
+		shadow.frame = 1
+	else:
+		sprite.animation = animation_direction
+		shadow.animation = animation_direction
+		if !sprite.playing:
+			sprite.playing = true
+			shadow.playing = true
 
 func set_start_position():
 	patrol_timer = randf() * 2 * PI
 	update_target()
 	position = target
-			
-func set_animation(velocity: Vector2):	
-#	if velocity.x < 0:
-#		sprite.animation = "walk"
-#		if state != "HORIZONTAL_LEFT":
-#			state = "HORIZONTAL_LEFT"
-#	elif velocity.x > 0:
-#		sprite.animation = "walk"
-#		if state != "HORIZONTAL_RIGHT":
-#			state = "HORIZONTAL_RIGHT"
-#
-	if velocity.y < 0:
-		set_full_animation("up")
-	elif velocity.y > 0:
-		set_full_animation("down")
-	else:
-		set_full_animation("idle")
 		
 func set_free():
 	state = MovementState.FREE
@@ -143,7 +149,6 @@ func _physics_process(delta):
 			print("Normalizing this!!")
 			direction = target.normalized() * 10
 		
-	set_flip(direction.normalized())
 	set_animation(direction.normalized())
 	
 	var collision = move_and_collide(direction.normalized() * speed * delta)

@@ -16,48 +16,37 @@ func _ready():
 	pass
 
 
-func set_flip(velocity: Vector2):
-	if velocity.x > 0:
-		if sprite.flip_h == false:
-			sprite.flip_h = true
-
-	elif velocity.x < 0:
-		if sprite.flip_h == true:
-			sprite.flip_h = false
+func get_direction(velocity: Vector2):
+	var normalized_velocity = velocity.normalized()
+	if normalized_velocity.x > sqrt(3)/2:
+		return "e"
+	elif normalized_velocity.x < -sqrt(3)/2:
+		return "w"
+	elif normalized_velocity.y > sqrt(3)/2:
+		return "s"
+	elif normalized_velocity.y < -sqrt(3)/2:
+		return "n"
+	elif normalized_velocity.x > 0 and normalized_velocity.y > 0:
+		return "se"
+	elif normalized_velocity.x > 0 and normalized_velocity.y < 0:
+		return "ne"
+	elif normalized_velocity.x < 0 and normalized_velocity.y > 0:
+		return "sw"
+	elif normalized_velocity.x < 0 and normalized_velocity.y < 0:
+		return "nw"
 			
 func set_animation(velocity: Vector2):	
-#	if velocity.x < 0:
-#		sprite.animation = "walk"
-#		if state != "HORIZONTAL_LEFT":
-#			state = "HORIZONTAL_LEFT"
-#	elif velocity.x > 0:
-#		sprite.animation = "walk"
-#		if state != "HORIZONTAL_RIGHT":
-#			state = "HORIZONTAL_RIGHT"
-#
-	if velocity.y < 0:
-		sprite.animation = "up"
-		if state != "MOVING":
-			state = "MOVING"
-
-	elif velocity.y > 0:
-		sprite.animation = "down"
-		if state != "MOVING":
-			state = "MOVING"
-	else:
-		sprite.animation = "idle"
+	var animation_direction = get_direction(velocity)
+	if velocity == Vector2(0, 0):
 		state = "IDLE"
-		
-
-func set_direction(velocity: Vector2):
-	if velocity.x > 0:
-		direction = Vector2(1, 0)
-	elif velocity.x < 0:
-		direction = Vector2(-1, 0)
-	elif velocity.y < 0:
-		direction = Vector2(0, -1)
-	elif velocity.y > 0:
-		direction = Vector2(0, 1)
+		if sprite.playing:
+			sprite.playing = false
+		sprite.frame = 1
+	else:
+		sprite.animation = animation_direction
+		if !sprite.playing:
+			sprite.playing = true
+		state = "MOVING"		
 	
 func player_specific(delta):
 	pass
@@ -70,7 +59,6 @@ func set_still():
 			
 func _physics_process(delta):
 	player_specific(delta)
-
 	
 	var velocity = Vector2(0, 0)
 	var speed_factor = 1.0
@@ -90,13 +78,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("interact"):
 		emit_signal("interact")
 		
-		
 	if Input.is_action_just_pressed("debugging"):
-		# GameState.grow()
 		pass
 		
-	set_flip(velocity)
 	set_animation(velocity)
-	set_direction(velocity)
 	
 	move_and_slide(velocity)
