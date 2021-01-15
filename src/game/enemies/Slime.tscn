@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/game/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/characters/enemies.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 30, 30 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5.34251, 2.63037 )
+
+[node name="Slime" instance=ExtResource( 1 )]
+id = "slime"
+
+[node name="Visual" parent="." index="0"]
+position = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2( 0, -14.875 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( 1.28976, -2.77795 )
+shape = SubResource( 3 )

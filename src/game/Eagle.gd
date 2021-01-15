@@ -24,6 +24,7 @@ var state = MovementState.FOLLOW
 var patrol_timer = 0.0
 
 var player: Player = null
+var battle_zone: BattleZone = null
 
 var rotation_direction = 1
 
@@ -31,17 +32,27 @@ var speed = 0
 var target: Vector2 = Vector2(0, 0)
 var radius = 0
 
+var stats = {
+	"timeout": 5.5
+}
+
 
 func _ready():
 	pass
 
 func set_player(new_player: Player):
 	player = new_player
+	
+func set_battle_zone(new_battle_zone: BattleZone):
+	battle_zone = new_battle_zone
 
 
 func update_target():
 	var fake_time = patrol_timer * CIRCLE_ROTATION_SPEED
-	target = player.position - position + radius * Vector2(cos(fake_time), sin(fake_time) / 2) 
+	if state == MovementState.FOLLOW:
+		target = player.position - position + radius * Vector2(cos(fake_time), sin(fake_time) / 2)
+	elif state == MovementState.BATTLE:
+		target = battle_zone.position + Vector2(0, -25) - position + radius * Vector2(cos(fake_time), sin(fake_time) / 2)
 
 func get_direction(velocity: Vector2):
 	var normalized_velocity = velocity.normalized()
@@ -61,7 +72,10 @@ func get_direction(velocity: Vector2):
 		return "sw"
 	elif normalized_velocity.x < 0 and normalized_velocity.y < 0:
 		return "nw"
-			
+
+func get_charge_timeout() -> float:
+	return 8.0
+
 func set_animation(velocity: Vector2):	
 	var animation_direction = get_direction(velocity)
 	if velocity == Vector2(0, 0):
@@ -84,14 +98,20 @@ func set_start_position():
 		
 func set_free():
 	state = MovementState.FREE
-	$Shadow.hide()
+	shadow.hide()
 	tween.stop_all()
 
 func set_follow():
 	state = MovementState.FOLLOW
-	$Shadow.show()
+	shadow.show()
+	tween.stop_all()
+	
+func set_battle():
+	state = MovementState.BATTLE
+	shadow.show()
 	tween.stop_all()
 
+	
 func move_left(delta):
 	direction = direction.rotated(ROTATION_SPEED * delta)
 
@@ -103,8 +123,21 @@ func get_quarter():
 	pass
 
 func set_full_animation(animation_name):
-	$Shadow.animation = animation_name
+	shadow.animation = animation_name
 	sprite.animation = animation_name
+	
+func move_towards_target(delta):
+	target_sprite.position = target
+	$Direction.position = direction
+	# print(direction.angle_to(target - position))
+	var angle = direction.angle_to(target)
+	if angle > 0:
+		move_left(delta)
+	else:
+		move_right(delta)
+	# snap to correct direction if necessary
+	if abs(angle) < 0.01:
+		direction = target.normalized() * 10
 			
 func _physics_process(delta):
 	if player == null:
@@ -135,24 +168,17 @@ func _physics_process(delta):
 			patrol_timer += delta * rotation_direction
 			speed = sqrt(2)/2 * CIRCLE_RADIUS * CIRCLE_ROTATION_SPEED
 		update_target()
-		target_sprite.position = target
-		$Direction.position = direction
-		print(direction.angle_to(target))
-		# print(direction.angle_to(target - position))
-		var angle = direction.angle_to(target)
-		if angle > 0:
-			move_left(delta)
-		else:
-			move_right(delta)
-		# snap to correct direction if necessary
-		if abs(angle) < 0.01:
-			print("Normalizing this!!")
-			direction = target.normalized() * 10
-		
+		move_towards_target(delta)
+	elif state == MovementState.BATTLE:
+		radius = CIRCLE_RADIUS * 1.2
+		speed = sqrt(2)/2 * radius * CIRCLE_ROTATION_SPEED
+		patrol_timer += delta * rotation_direction
+		update_target()
+		move_towards_target(delta)
+			
 	set_animation(direction.normalized())
 	
 	var collision = move_and_collide(direction.normalized() * speed * delta)
 	if collision != null:
-		print("COLLIDING!")
 		move_right(delta)
 	

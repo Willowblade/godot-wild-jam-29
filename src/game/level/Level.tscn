@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/level/floor/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://src/game/level/Level.gd" type="Script" id=4]
 [ext_resource path="res://src/game/level/Yurt.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/game/Eagle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/game/battle/BattleZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/game/enemies/Slime.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/graphics/ui/selected.png" type="Texture" id=9]
+[ext_resource path="res://src/game/level/BattleStatus.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2143.04, 37.5396 )
@@ -70,6 +74,12 @@ position = Vector2( -1.77991, 457.149 )
 door_type = 1
 door_color = 3
 
+[node name="Slime" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 193.102, -5.79085 )
+
+[node name="Slime2" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 116.913, 20.194 )
+
 [node name="Boundary" type="StaticBody2D" parent="."]
 collision_layer = 5
 collision_mask = 5
@@ -96,3 +106,33 @@ shape = SubResource( 1 )
 
 [node name="Eagle" parent="." instance=ExtResource( 6 )]
 position = Vector2( 187.759, -161.93 )
+
+[node name="Battles" type="Node2D" parent="."]
+
+[node name="BattleZone" parent="Battles" instance=ExtResource( 7 )]
+position = Vector2( 153.266, 17.8582 )
+
+[node name="PlayerPosition" parent="Battles/BattleZone" index="0"]
+position = Vector2( 43.9836, 26.7058 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/BattleZone"]
+position = Vector2( -15.434, 8.18948 )
+polygon = PoolVector2Array( -103.187, 5.90662, 52.7687, -75.2383, 163.662, -17.859, -2.70822, 68.5877 )
+
+[node name="TargetSelector" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 9 )
+
+[node name="BattleStatus" parent="." instance=ExtResource( 10 )]
+
+[node name="DamageLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 40, 0 )
+rect_scale = Vector2( 0.5, 0.5 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="Battles/BattleZone"]

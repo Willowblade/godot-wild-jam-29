@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/battle/BattleZone.gd" type="Script" id=1]
+
+[node name="BattleZone" type="Area2D" groups=[
+"battle_zone",
+]]
+script = ExtResource( 1 )
+
+[node name="PlayerPosition" type="Position2D" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

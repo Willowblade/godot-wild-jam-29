@@ -12,10 +12,6 @@ func _ready():
 		var tile_name = tile_set.tile_get_name(id)
 		name_to_id_mapping[tile_name] = id
 		id_to_name_mapping[id] = tile_name
-	print(name_to_id_mapping)
-	print(id_to_name_mapping)
-	print(collision_mask)
-	print(collision_layer)
 	
 func add_border(cell: Vector2, direction: String):
 	if not floor_borders.has(cell):

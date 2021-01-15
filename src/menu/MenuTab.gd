@@ -2,7 +2,7 @@ tool
 extends MarginContainer
 class_name class_menu_tab
 
-enum TABS {MAIN = 0, SETTINGS = 1, MISSION = 2, ORPHAN = 3}
+enum TABS {MAIN = 0, SETTINGS = 1}
 export(TABS) var tab_type := TABS.MAIN setget set_tab_type
 
 # warning-ignore:unused_signal

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Mongolian Battle Track V3.ogg-b1279780ee6dcb2a3a256704c2576d0e.oggstr"
+
+[deps]
+
+source_file="res://assets/Mongolian Battle Track V3.ogg"
+dest_files=[ "res://.import/Mongolian Battle Track V3.ogg-b1279780ee6dcb2a3a256704c2576d0e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,20 +1,47 @@
 extends KinematicBody2D
 class_name Player
 
-onready var sprite: AnimatedSprite = $Sprite
+onready var visual: Node2D = $Visual
+onready var sprite: AnimatedSprite = $Visual/Sprite
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 export var MOVEMENT_SPEED: float = 50.0
 
 signal interact
+signal damage_taken(player)
+signal death(player)
 
 var direction = Vector2(1, 0)
 
+var dead = false
+
+signal updated_stats
+
+var stats = {
+	"stamina": 30,
+	"health": 50,
+	"timeout": 3.5
+}
 
 var state = "IDLE"
 
-func _ready():
-	pass
+func trigger_damage_taken():
+	emit_signal("damage_taken", self, visual.position)
 
+func _ready():
+	connect("updated_stats", GameFlow.overlays.hud, "on_player_updated_stats")
+	emit_signal("updated_stats", stats)
+
+func take_damage(damage_amount: int):
+	stats.health = max(0, stats.health - damage_amount)
+	emit_signal("updated_stats", stats)
+	if stats.health <= 0:
+		dead = true
+		emit_signal("death")
+
+func perform_action(stamina_amount: int):
+	stats.stamina = max(0, stats.stamina - stamina_amount)
+	emit_signal("updated_stats", stats)
 
 func get_direction(velocity: Vector2):
 	var normalized_velocity = velocity.normalized()
@@ -35,14 +62,17 @@ func get_direction(velocity: Vector2):
 	elif normalized_velocity.x < 0 and normalized_velocity.y < 0:
 		return "nw"
 			
+func get_charge_timeout() -> float:
+	return stats.timeout
+
 func set_animation(velocity: Vector2):	
-	var animation_direction = get_direction(velocity)
 	if velocity == Vector2(0, 0):
 		state = "IDLE"
 		if sprite.playing:
 			sprite.playing = false
 		sprite.frame = 1
 	else:
+		var animation_direction = get_direction(velocity)
 		sprite.animation = animation_direction
 		if !sprite.playing:
 			sprite.playing = true
@@ -50,6 +80,11 @@ func set_animation(velocity: Vector2):
 	
 func player_specific(delta):
 	pass
+	
+func die():
+	print("Dieing!")
+	animation_player.play("death")
+	yield(animation_player, "animation_finished")
 
 func set_moving():
 	set_physics_process(true)

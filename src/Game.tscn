@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Game.gd" type="Script" id=3]
 [ext_resource path="res://src/game/level/Level.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/UI/BattleInterface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/UI/GameOverUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/DialogueView.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Control"]
@@ -30,10 +33,18 @@ __meta__ = {
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
-[node name="PauseUI" parent="UICanvas" instance=ExtResource( 1 )]
+[node name="DialogueOverlay" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
 
-[node name="DialogueOverlay" parent="UICanvas" instance=ExtResource( 11 )]
+[node name="HUD" parent="UICanvas" instance=ExtResource( 5 )]
+
+[node name="BattleInterface" parent="UICanvas" instance=ExtResource( 6 )]
+visible = false
+
+[node name="GameOverUI" parent="UICanvas" instance=ExtResource( 7 )]
+visible = false
+
+[node name="PauseUI" parent="UICanvas" instance=ExtResource( 1 )]
 visible = false
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]

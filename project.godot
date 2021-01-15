@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "BattleStatus",
+"language": "GDScript",
+"path": "res://src/game/level/BattleStatus.gd"
+}, {
+"base": "Area2D",
+"class": "BattleZone",
+"language": "GDScript",
+"path": "res://src/game/battle/BattleZone.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Eagle",
 "language": "GDScript",
 "path": "res://src/game/Eagle.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/game/Enemy.gd"
 }, {
 "base": "Reference",
 "class": "JSONBeautifier",
@@ -50,7 +65,10 @@ _global_script_classes=[ {
 "path": "res://src/autoload/state/Upgrade.gd"
 } ]
 _global_script_class_icons={
+"BattleStatus": "",
+"BattleZone": "",
 "Eagle": "",
+"Enemy": "",
 "JSONBeautifier": "",
 "Player": "",
 "Yurt": "",
@@ -72,12 +90,13 @@ config/icon="res://icon.png"
 ConfigData="*res://src/autoload/ConfigData.tscn"
 Flow="*res://src/autoload/Flow.tscn"
 State="*res://src/autoload/State.tscn"
-LevelFlow="*res://src/autoload/LevelFlow.tscn"
 AudioEngine="*res://src/audio/AudioEngine.tscn"
+GameFlow="*res://src/autoload/GameFlow.tscn"
 
 [display]
 
-window/size/height=576
+window/size/width=960
+window/size/height=540
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
