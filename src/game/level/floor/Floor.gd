@@ -103,14 +103,14 @@ func clean():
 			elif !sw_exists:
 				if used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]].begins_with("floor"):
 					set_cellv(used_cell, name_to_id_mapping["floor_half_left_obstructed"])
-				elif used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]] == "slope_sw":
+				elif used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]].begins_with("slope_sw"):
 					set_cellv(used_cell, name_to_id_mapping["floor_half_left_obstructed_slope"])
 				else:
 					set_cellv(used_cell, name_to_id_mapping["floor_half_left"])
 			elif !se_exists:
 				if used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]].begins_with("floor"):
 					set_cellv(used_cell, name_to_id_mapping["floor_half_right_obstructed"])
-				elif used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]] == "slope_se":
+				elif used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]].begins_with("slope_se"):
 					set_cellv(used_cell, name_to_id_mapping["floor_half_right_obstructed_slope"])
 				else:
 					set_cellv(used_cell, name_to_id_mapping["floor_half_right"])
