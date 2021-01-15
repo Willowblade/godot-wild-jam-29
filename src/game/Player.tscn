@@ -53,12 +53,9 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "die"
-} ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -274,7 +271,7 @@ shape = SubResource( 1 )
 position = Vector2( 0.5, -15 )
 frames = ExtResource( 1 )
 animation = "nw"
-frame = 3
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

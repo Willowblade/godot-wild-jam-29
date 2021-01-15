@@ -1,18 +1,24 @@
+tool
 extends TileMap
 
 
 var name_to_id_mapping = {}
 var id_to_name_mapping = {}
-
 var floor_borders = {}
 
 func _ready():
+	create_tile_mappings()
+	
+func create_tile_mappings():
+	name_to_id_mapping = {}
+	id_to_name_mapping = {}
 	var ids = tile_set.get_tiles_ids()
 	for id in ids:
 		var tile_name = tile_set.tile_get_name(id)
 		name_to_id_mapping[tile_name] = id
 		id_to_name_mapping[id] = tile_name
 	
+
 func add_border(cell: Vector2, direction: String):
 	if not floor_borders.has(cell):
 		floor_borders[cell] = {
@@ -35,6 +41,25 @@ func activate_borders():
 		elif bordering_directions.ne:
 			set_cellv(floor_border, name_to_id_mapping["collision_ne"])
 			
+func remove_prefix(prefix: String):
+	for cellv in get_used_cells():
+		var tile_name: String = id_to_name_mapping[get_cellv(cellv)]
+		if tile_name.begins_with(prefix):
+			print("Removing with prefix, ", prefix, " ", cellv)
+			set_cellv(cellv, -1)
+
+func remove_borders():
+	remove_prefix("collision")
+		
+func add_from_upper(upper_layer_cellvs: Array):
+	print("Adding from upper ", upper_layer_cellvs)
+	remove_prefix("floor_under")
+	var used_cells = get_used_cells()
+	for cellv in upper_layer_cellvs:
+		if not used_cells.has(cellv):
+			print("Adding floor under ", cellv)
+			set_cellv(cellv, name_to_id_mapping["floor_under"]) 
+			
 func activate():
 #	show()
 	collision_layer = 1
@@ -46,6 +71,8 @@ func deactivate():
 #	hide()
 	
 func clean():
+	remove_borders()
+	floor_borders = {}
 	var used_cells = {}
 	for cellv in get_used_cells():
 		used_cells[cellv] = get_cellv(cellv)
@@ -60,6 +87,7 @@ func clean():
 		var ne_exists = used_cells.has(ne)
 		var sw_exists = used_cells.has(sw)
 		var se_exists = used_cells.has(se)
+				
 		if cell_name.begins_with("floor"):
 			if !sw_exists:
 				add_border(sw, "sw")
