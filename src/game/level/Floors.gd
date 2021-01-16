@@ -82,11 +82,7 @@ func get_tile_floor(tile_position: Vector2):
 func _process(delta):
 	if Engine.editor_hint:
 		if Input.is_action_just_pressed("ui_home"):
-			print("Updating!")
 			for floor_ in get_children():
-				print(floor_.name)
 				floor_.create_tile_mappings()
 			cleanup()
-		if Input.is_action_just_pressed("ui_end"):
-			print("Updating with enddd!")
 			

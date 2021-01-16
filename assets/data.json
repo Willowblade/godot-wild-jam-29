@@ -1,2 +1,194 @@
 {
+    "upgrades": {
+        "grip_lessons": {
+            "target": "player",
+            "description": "With an improved grip technique, you feel more powerful! You can now also throw enemies!",
+            "effects": {
+                "strength": 0.2,
+                "moves": ["throw"]
+            }
+        },
+        "cold_showers": {
+            "target": "player",
+            "description": "Nothing as revitalizing as a cold shower! You feel invigorated! Your health and stamina have improved greatly.",
+            "effects": {
+                "max_health": 15,
+                "max_stamina": 10
+            }
+        },
+        "shaman_blessing": {
+            "target": "player",
+            "description": "The blessing of the shaman runs through your body, and in a flash of insight you learn the sacred Heavenly Slam technique.",
+            "effects": {
+                "moves": ["slam"]
+            }
+        },
+        "eagle_training_scroll": {
+            "target": "eagle",
+            "description": "The blessing of the shaman runs through your body, and in a flash of insight you learn the sacred Heavenly Slam technique.",
+            "effects": {
+                "strength": 0.2,
+                "moves": ["slam"]
+            }
+        }
+    },
+    "player": {
+        "name": "Bataar",
+        "level": 1,
+        "experience": 0,
+        "base_stats": {
+            "max_health": 40,
+            "max_stamina": 20,
+            "strength": 1.0,
+            "defense": 1.0,
+            "moves": ["slap"],
+            "timeout": 3.5
+        }
+    },
+    "eagle": {
+        "name": "Bataar",
+        "level": 1,
+        "experience": 0,
+        "base_stats": {
+            "max_health": 999,
+            "max_stamina": 999,
+            "strength": 1.0,
+            "defense": 1.0,
+            "moves": ["rend"],
+            "timeout": 5.0
+        }
+    },
+    "moves": {
+        "slap": {
+            "name": "Mongolian Slap™",
+            "description": "Not sure what makes it mongolian, but they own it",
+            "cost": 0,
+            "damage": 10
+        },
+        "throw": {
+            "name": "Throw",
+            "description": "Throws your opponent up in the air, making them fall. Hurts...",
+            "cost": 5,
+            "damage": 15
+        },
+        "slam": {
+            "name": "Heavenly Slam",
+            "description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
+            "cost": 10,
+            "damage": 20
+        },
+        "loremaster": {
+            "name": "Storytime",
+            "description": "Tell your adversary all about the history you've uncovered so far, making them sympathise with you",
+            "cost": 8,
+            "damage": 25,
+            "sfx": "male_dialogue1"
+        },
+        "rend": {
+            "name": "Rend Slam",
+            "description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
+            "cost": 10,
+            "damage": 12,
+            "animation": "slam",
+            "sfx": "eagle_screech1"
+        }
+    },
+    "enemies": {
+        "slime": {
+            "name": "Slime",
+            "description": "Slimes are a pest in this desert, I think there's a reward for eradicating all of them",
+            "stats": {
+                "timeout": 4.5,
+                "max_health": 20,
+                "strength": 0.5,
+                "defense": 0.7,
+                "moves": [
+                    {
+                        "name": "slap",
+                        "chance": 0.7
+                    }, {
+                        "name": "throw",
+                        "chance": 0.3
+                    }
+                ]
+            }
+        }
+    },
+    "interactive": {
+        "small_pots": {
+            "descriptions": [
+                "I wonder who lives here? They are clearly short on water..",
+                "Blood isn't my thing. But we don't always have a choice."
+            ]
+        },
+        "white_bucket": {
+            "descriptions": [
+                "That.. Is a lot of Kumis. Who would of thought, fermented mare's milk could be so tasty!",
+                "Ah, Kumis. I think I'm better off not getting drunk right now."
+            ]
+        },
+        "blue_bucket": {
+            "descriptions": [
+                "It looks like I know where to go if I get thirsty."
+            ]
+        },
+        "barrel": {
+            "descriptions": [
+                "Hm, I wonder what's in here?"
+            ]
+        },
+        "center_post": {
+            "descriptions": [
+                "Wait a second.. What's this doing here? Kinda sus."
+            ]
+        },
+        "empty_box": {
+            "descriptions": [
+                "Everyone seems to be running low on resources these days."
+            ]
+        },
+        "radish_box": {
+            "descriptions": [
+                "Mmm, wild garlic! These are pretty rare!"
+            ]
+        },
+        "beet_box": {
+            "descriptions": [
+                "That's enough dried meat to last a year!"
+            ]
+        },
+        "white_box": {
+            "descriptions": [
+                "Cheese curds. Won't be running out of that any time soon.."
+            ]
+        },
+        "bed": {
+            "descriptions": [
+                "Just a bed. I can sleep here."
+            ],
+            "save_point": true
+        },
+        "broken_bed": {
+            "descriptions": [
+                "It looks like noone has lived here in a long time. Sleeping here will be painful."
+            ],
+            "save_point": true
+        },
+        "large_cactus": {
+            "descriptions": [
+                "Saguaro cacti have delicious fruit!"
+            ]
+        },
+        "saxual": {
+            "descriptions": [
+                "A Saxual Tree. Pretty much the only wood you'll find out here in the Gobi.",
+                "When I get that feeling, I want Saxual healing."
+            ]
+        },
+        "small_cactus": {
+            "descriptions": [
+                "A Barrel Cactus. They can actually live to over 100 years old."
+            ]
+        }
+    }
 }

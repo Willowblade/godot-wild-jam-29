@@ -7,6 +7,13 @@ enum LevelState {
 	TRANSITION,
 }
 
+enum LocationState {
+	INSIDE,
+	OUTSIDE
+}
+
+const ZOOM_PER_FLOOR = 1.08
+
 onready var player: Player = $YSort/Player
 onready var floors: Node2D = $Floors
 onready var camera: Camera2D = $YSort/Player/Camera
@@ -19,6 +26,7 @@ onready var camera_tween: Tween = $CameraTween
 onready var target_selector: Sprite = $TargetSelector
 
 onready var state = LevelState.EXPLORING
+onready var location_state = LocationState.OUTSIDE
 
 onready var damage_label = $DamageLabel
 
@@ -26,10 +34,18 @@ var current_floor_player = null
 var camera_transition_target = null
 var current_battle_zone: BattleZone = null
 
+var player_interactables = []
+
 export var EAGLE_ZOOM = 1.2
 
+var location = null
+
+var yurts = {}
+var yurt_interiors = {}
+var dungeons = {}
+
 func _ready():
-	eagle.set_player(player)
+	AudioEngine.play_background_music("main2")
 
 	GameFlow.overlays.battle.connect("move_chosen", self, "_on_attack_move_chosen")
 	GameFlow.overlays.battle.connect("target_enemy", self, "_on_target_enemy")
@@ -41,6 +57,32 @@ func _ready():
 
 	player.connect("damage_taken", self, "_on_target_take_damage")
 	# player.connect("death", self, "_on_target_death")
+
+	for yurt in get_tree().get_nodes_in_group("yurt"):
+		yurts[yurt.id] = yurt
+
+	for yurt_interior in get_tree().get_nodes_in_group("yurt_interior"):
+		if yurt_interior.id == "":
+			push_error("Yurt has no valid id " + yurt_interior.name)
+		yurt_interiors[yurt_interior.id] = yurt_interior
+
+	for yurt_id in yurts:
+		var yurt = yurts[yurt_id]
+		var yurt_interior = yurt_interiors[yurt_id]
+		yurt.match_yurt_interior(yurt_interior)
+		yurt_interior.match_yurt(self, yurt)
+
+	var spawn_location = State.player.location
+
+	if spawn_location.location == "overworld":
+		player.position = spawn_location.position
+	elif spawn_location.location == "yurt":
+		player.position = yurts[spawn_location.id].position + yurts[spawn_location.id].player_position.position
+	
+	player.set_animation(Vector2(0, 1))
+	player.set_animation(Vector2(0, 0))
+	eagle.set_player(player)
+	eagle.set_start_position()
 
 
 func _on_character_attack_ready(character):
@@ -54,11 +96,16 @@ func _on_character_attack_ready(character):
 
 
 func eagle_attack():
-	battle_status.performed_move = {
-		"definition": {
-			"damage": 8
-		}
-	}
+	var eagle_moves = State.player.get_eagle_stats().moves
+	# chooses the most likely eagle attack
+	battle_status.performer = eagle
+	var eagle_move_most_damage_value = 0
+	for move in eagle_moves:
+		var damage = Flow.get_move_value(move, "damage", 0)
+		if damage > eagle_move_most_damage_value:
+			eagle_move_most_damage_value = damage
+			battle_status.performed_move = move
+
 	# todo this might need a cleanup at some point
 	eagle.set_physics_process(false)
 	battle_status.stop_charging()
@@ -77,12 +124,13 @@ func eagle_attack():
 	tween.interpolate_property(eagle.shadow, "position", null, Vector2(22, 22), duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	eagle.set_physics_process(true)
 	tween.interpolate_property(eagle.shadow, "position", null, Vector2(44, 44), max(1 - duration, 0.5), Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	# TODO define some eagle moves and enemy reacts, maybe add claw effect too? Some blood particles...
 	if should_flip:
 		enemy.scale = Vector2(-1, 1)
-	enemy.play_animation("throw")
+	enemy.play_animation(Flow.get_move_value(battle_status.performed_move, "animation", battle_status.performed_move))
 	yield(enemy.animation_player, "animation_finished")
 	if enemy.dead:
 		_on_target_death(enemy)
@@ -91,17 +139,23 @@ func eagle_attack():
 
 
 func enemy_attack(enemy: Enemy):
-	print("Enemy attacking!")
-	battle_status.performed_move = {
-		"definition": {
-			"damage": 30
-		}
-	}
+	battle_status.performer = enemy
+	var random_enemy_move_counter = 0
+	var random_value = randf()
+	for move in Flow.get_enemy_value(enemy.id, "stats", {}).moves:
+		var chance = move.get("chance", 1.0)
+		if random_value < random_enemy_move_counter + chance:
+			battle_status.performed_move = move.name
+			break
+		else:
+			random_enemy_move_counter += chance
+	
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
 	var enemy_start_position = enemy.position + Vector2()
 	var target = player.position + Vector2(-6, -8)
 	enemy.sprite.speed_scale = 2.0
+	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	var duration = enemy.position.distance_to(target) / player.MOVEMENT_SPEED / 2
 	tween.interpolate_property(enemy, "position", null, target, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
@@ -110,12 +164,11 @@ func enemy_attack(enemy: Enemy):
 	tween.interpolate_property(enemy, "position", null, target + Vector2(0, 4), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
-	player.animation_player.play("throw")
+	player.animation_player.play(Flow.get_move_value(battle_status.performed_move, "animation", battle_status.performed_move))
 	tween.interpolate_property(enemy, "position", null, target, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(player.animation_player, "animation_finished")
 	if player.dead:
-		print("Whatwhat")
 		_on_target_death(player)
 		yield(player.die(), "completed")
 		update_battle()
@@ -127,7 +180,7 @@ func enemy_attack(enemy: Enemy):
 	update_battle()
 
 func _on_player_entered_battle_zone(battle_zone: BattleZone):
-	
+	AudioEngine.play_background_music("battle3")
 	print("Starting battle")
 	if battle_zone.enemies.size() == 0:
 		print("No enemies here, not doing anything")
@@ -137,22 +190,22 @@ func _on_player_entered_battle_zone(battle_zone: BattleZone):
 
 	current_battle_zone = battle_zone
 	switch_state(LevelState.BATTLE)
-	print(battle_zone.enemies)
 
 func _on_attack_move_chosen(move, target):
-	battle_status.performed_move = move
-	print("Attack move chosen!!")
-	player.perform_action(move.definition.cost)
+	battle_status.performed_move = move.move
+	battle_status.performer = player
+	player.perform_action(move.cost)
 	GameFlow.overlays.battle.pause()
 	target_selector.hide()
 
 	var enemy = target.target
 
 	yield(move_player_to_enemy(target.target), "completed")
+	AudioEngine.play_effect(Flow.get_move_value(move.move, "sfx", move.move))
 	tween.interpolate_property(player, "position", null, player.position - Vector2(0, 6), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
-	enemy.play_animation(move.move)
+	enemy.play_animation(Flow.get_move_value(move.move, "animation", move.move))
 	tween.interpolate_property(player, "position", null, player.position + Vector2(0, 6), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(enemy.animation_player, "animation_finished")
@@ -167,11 +220,14 @@ func update_battle():
 		switch_state(LevelState.EXPLORING)
 		GameFlow.overlays.hud.set_explore_mode()
 		GameFlow.overlays.battle.stop()
+		AudioEngine.play_background_music("main2")
+		current_battle_zone.battle_completed()
 	elif player.dead:
 		# big TODO
 		set_process(false)
 		battle_status.stop_charging()
 		GameFlow.overlays.game_over.show()
+		AudioEngine.play_background_music("menu")
 	else:
 		battle_status.start_charging()
 
@@ -191,12 +247,16 @@ func move_player_to_enemy(enemy: Enemy):
 func move_player_to_battle_zone():
 	var duration = player.position.distance_to(current_battle_zone.position + current_battle_zone.player_position.position) / player.MOVEMENT_SPEED / 2
 	player.sprite.speed_scale = 2.0
+	AudioEngine.set_walking(false)
+	AudioEngine.custom.walking_timeout /= 2
 	player.set_animation(current_battle_zone.position + current_battle_zone.player_position.position - player.position)
 	tween.interpolate_property(player, "position", null, current_battle_zone.position + current_battle_zone.player_position.position, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
 	player.sprite.speed_scale = 1.0
 	player.set_animation(current_battle_zone.position - player.position)
+	AudioEngine.set_walking(false)
+	AudioEngine.custom.walking_timeout *= 2
 
 func show_damage_popup(damage_amount, damage_position):
 	damage_label.text = str(damage_amount)
@@ -208,14 +268,27 @@ func show_damage_popup(damage_amount, damage_position):
 func _on_target_death(target):
 	# TODO use death animation...
 	if target is Enemy:
+		current_battle_zone.remove_enemy(target)
 		GameFlow.overlays.battle.on_enemy_death(target)
 		battle_status.remove_enemy(target)
 		target.die()
 		
 func _on_target_take_damage(target, target_position):
-	var damage = battle_status.performed_move.definition.damage
-	target.take_damage(damage)
-	show_damage_popup(damage, target.position + target.visual.position + Vector2(0, -8).rotated(target.visual.rotation))
+	var damage = Flow.get_move_value(battle_status.performed_move, "damage", 0)
+	if battle_status.performer is Enemy:
+		damage *= Flow.get_enemy_value(battle_status.performer.id, "stats", {}).strength
+	elif battle_status.performer is Eagle:
+		damage *= State.player.get_eagle_stats().strength
+	elif battle_status.performer is Player:
+		damage *= State.player.get_stats().strength
+	if target is Enemy:
+		damage /= Flow.get_enemy_value(target.id, "stats", {}).defense
+		AudioEngine.play_effect("person_hurt" + str((randi() % 2) + 1))
+	elif target is Player:
+		damage /= State.player.get_stats().defense
+		AudioEngine.play_effect("monster_hurt" + str((randi() % 2) + 1))
+	target.take_damage(int(damage))
+	show_damage_popup(int(damage), target.position + target.visual.position + Vector2(0, -8).rotated(target.visual.rotation))
 
 func _on_target_enemy(target):
 	if target == null:
@@ -227,17 +300,17 @@ func _on_target_enemy(target):
 func _process(delta):
 	_process_inputs(delta)
 
-	var floor_player = floors.get_tile_floor(player.position)
-	if floor_player != current_floor_player:
-		current_floor_player = floor_player
-		floors.refresh(current_floor_player)
-		
-		transition_tiles(current_floor_player, 0.5)
+	if state == LevelState.EXPLORING and location_state == LocationState.OUTSIDE:
+		var floor_player = floors.get_tile_floor(player.position)
+		if floor_player != current_floor_player:
+			current_floor_player = floor_player
+			floors.refresh(current_floor_player)
 			
-		var new_zoom = Vector2(0.5, 0.5) / pow(1.1, current_floor_player)
-		print(new_zoom)
-		tween.interpolate_property(camera, "zoom", null, new_zoom, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-		tween.start()
+			transition_tiles(current_floor_player, 0.5)
+				
+			var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+			tween.interpolate_property(camera, "zoom", null, new_zoom, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+			tween.start()
 		
 func transition_tiles(floor_level, duration):
 	var floors_below = floors.get_floors_below(floor_level)
@@ -245,11 +318,9 @@ func transition_tiles(floor_level, duration):
 	var floors_above = floors.get_floors_above(floor_level)
 	var i = 2
 	for floor_below in floors_below:
-		print(floor_below.name)
 		tween.interpolate_property(floor_below, "modulate", null, Color(1 - 0.04 * i, 1 - 0.04 * i, 1 - 0.04 * i), duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 		i += 1
 	for floor_above in floors_above:
-		print(floor_above.name)
 		tween.interpolate_property(floor_above, "modulate", null, Color(1 , 1, 1 ), duration, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 		
 
@@ -266,6 +337,7 @@ func transition_to_eagle_flight():
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
 	eagle.set_physics_process(true)
+	AudioEngine.play_effect("eagle_screech2")
 	player.remove_child(camera)
 	camera.position = Vector2(0, 0)
 	eagle.add_child(camera)
@@ -283,23 +355,22 @@ func transition_to_player_from_battle():
 	
 	camera_tween.stop_all()
 	camera.position = Vector2(0, 0)
-	eagle.set_physics_process(false)
 
 	# add_child(camera)
 	camera.smoothing_enabled = false
 	camera_tween.interpolate_property(camera, "position", null, player.position - current_battle_zone.position, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
-	eagle.set_physics_process(true)
 	current_battle_zone.remove_child(camera)
 	camera.position = Vector2(0, 0)
 	player.add_child(camera)
 	camera.smoothing_enabled = true
-	var new_zoom = Vector2(0.5, 0.5) / pow(1.1, current_floor_player)
+	var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
 	camera_tween.interpolate_property(camera, "zoom", null, new_zoom, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
 	state = LevelState.EXPLORING
+	current_battle_zone = null
 
 
 func transition_to_player_from_flight():
@@ -312,6 +383,7 @@ func transition_to_player_from_flight():
 
 	# add_child(camera)
 	camera.smoothing_enabled = false
+	AudioEngine.play_effect("eagle_screech1")
 	camera_tween.interpolate_property(camera, "position", null, player.position - eagle.position, 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
@@ -320,7 +392,7 @@ func transition_to_player_from_flight():
 	camera.position = Vector2(0, 0)
 	player.add_child(camera)
 	camera.smoothing_enabled = true
-	var new_zoom = Vector2(0.5, 0.5) / pow(1.1, current_floor_player)
+	var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
 	camera_tween.interpolate_property(camera, "zoom", null, new_zoom, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.0, 1.0), 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	transition_tiles(current_floor_player, 0.5)
@@ -337,18 +409,14 @@ func transition_to_battle_zone_from_player():
 	
 	# add_child(camera)
 	camera.smoothing_enabled = false
-	eagle.set_physics_process(false)
 	player.remove_child(camera)
 	
 	add_child(camera)
 	camera.position = player.position
 
-	move_player_to_battle_zone()
-		
-	camera_tween.interpolate_property(camera, "position", null, current_battle_zone.position, 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	camera_tween.interpolate_property(camera, "position", null, current_battle_zone.position, 0.2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	camera_tween.start()
-	yield(camera_tween, "tween_completed")
-	eagle.set_physics_process(true)
+	yield(move_player_to_battle_zone(), "completed")
 	remove_child(camera)
 	camera.position = Vector2(0, 0)
 	current_battle_zone.add_child(camera)
@@ -359,6 +427,7 @@ func transition_to_battle_zone_from_player():
 func switch_state(new_state: int):
 	if new_state == LevelState.FLIGHT:
 		player.set_still()
+		player.set_animation(Vector2())
 		yield(transition_to_eagle_flight(), "completed")
 		eagle.set_free()
 	elif new_state == LevelState.EXPLORING:
@@ -391,23 +460,92 @@ func counter_scale_camera(delta, increase):
 	camera.zoom = Vector2(new_zoom, new_zoom)
 	eagle.sprite.scale = 2 * camera.zoom * EAGLE_ZOOM
 
+func add_player(player: Player, player_position: Vector2):
+	var current_parent = player.get_parent()
+	current_parent.remove_child(player)
+	$YSort.add_child(player)
+	player.position = player_position
+
 func _process_inputs(delta):
 	if state == LevelState.EXPLORING:
 		if Input.is_action_just_pressed("switch"):
-			print("Switch pressed!")
-			switch_state(LevelState.FLIGHT)
+			if location_state == LocationState.OUTSIDE:
+				switch_state(LevelState.FLIGHT)
+			else:
+				# TODO play no es possible audio effect
+				pass
+		elif Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("confirm"):
+			if player.collider_under_raycast is InteractableItem:
+				print("We're interacting with ", player.collider_under_raycast, " ", player.collider_under_raycast.id)
+				var descriptions = Flow.get_interactive_value(player.collider_under_raycast.id, "descriptions", ["EMPTY_DESCRIPTION"])
+				var description = descriptions[randi() % descriptions.size()]
+				player.set_animation(Vector2(0, 0))
+				AudioEngine.play_effect("item_interact")
+				var save_point = Flow.get_interactive_value(player.collider_under_raycast.id, "save_point", false)
+				if save_point:
+					state = LevelState.TRANSITION
+					player.set_still()
+					yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+					
+					Flow.save_game()
+					if State.player.location != null and State.player.location.location == "yurt":
+						var yurt = yurts[State.player.location.id]
+						add_player(player, yurt.position + yurt.player_position.position)
+						var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+						camera.zoom = new_zoom
+						location_state = LocationState.OUTSIDE
+						player.set_animation(Vector2(0, 1))
+						player.set_animation(Vector2(0, 0))
+						player.refresh_stats()
+					yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+					# TODO move player to wake up outside yurt
+					player.set_moving()
+					state = LevelState.EXPLORING
+			elif player.collider_under_raycast is InteractableDoor:
+				state = LevelState.TRANSITION
+				player.set_still()
+				player.set_animation(Vector2(0, 0))
+				var door = player.collider_under_raycast
+				print("Moving to target", door.target.name)
+				AudioEngine.play_effect("door_open")
+				yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+				door.target.add_player(player, door.target_position)
+				if location_state == LocationState.INSIDE:
+					var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+					camera.zoom = new_zoom
+					location_state = LocationState.OUTSIDE
+					eagle.set_process(true)
+				elif location_state == LocationState.OUTSIDE:
+					camera.zoom = Vector2(0.33, 0.33)
+					location_state = LocationState.INSIDE
+					eagle.set_process(false)
+				AudioEngine.play_effect("door_close")
+				yield(get_tree().create_timer(0.5), "timeout")
+				yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+				player.set_moving()
+				if door.target.is_in_group("yurt_interior"):
+					State.player.location = {
+						"location": "yurt",
+						"id": door.target.id,
+					}
+				elif door.target == self:
+					State.player.location = {
+						"location": "overworld",
+						"position": player.position,
+					}
+				else:
+					# TODO get the eagle here?
+					State.player.location = {
+						"location": null,
+						"position": Vector2(0, 0)
+					}
+
+				state = LevelState.EXPLORING
 
 	elif state == LevelState.FLIGHT:
 		if Input.is_action_just_pressed("switch"):
-			print("Switch pressed")
 			switch_state(LevelState.EXPLORING)
 		elif Input.is_action_pressed("move_up"):
-			print("Moving up")
 			counter_scale_camera(delta, 1)
 		elif Input.is_action_pressed("move_down"):
-			print("Moving down")
 			counter_scale_camera(delta, -1)
-		elif Input.is_action_pressed("move_right"):
-			print("Moving right")
-		elif Input.is_action_pressed("move_left"):
-			print("Moving left")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/UI/BattleInterface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/GameOverUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/UI/Transition.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/DialogueView.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Control"]
@@ -17,32 +18,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_left = 16.0
-margin_top = 103.0
-margin_right = 524.0
-margin_bottom = 300.0
-rect_scale = Vector2( 2, 2 )
-text = "UNDER CONSTRUCTION!
-
-Work in Progress!"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UICanvas" instance=ExtResource( 5 )]
+mouse_filter = 2
+
+[node name="Transition" parent="UICanvas" instance=ExtResource( 8 )]
 
 [node name="DialogueOverlay" parent="UICanvas" instance=ExtResource( 11 )]
 visible = false
-
-[node name="HUD" parent="UICanvas" instance=ExtResource( 5 )]
+mouse_filter = 2
 
 [node name="BattleInterface" parent="UICanvas" instance=ExtResource( 6 )]
 visible = false
 
 [node name="GameOverUI" parent="UICanvas" instance=ExtResource( 7 )]
 visible = false
+mouse_filter = 2
 
 [node name="PauseUI" parent="UICanvas" instance=ExtResource( 1 )]
 visible = false

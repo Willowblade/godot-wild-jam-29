@@ -17,7 +17,8 @@ var eagle_point := Vector2(0, 0)
 onready var stats = {
 	"health": 20,
 	"timeout": 1.5,
-	"damage": 0.8,
+	"strength": 0.8,
+	"moves": []
 }
 
 var dead = false
@@ -34,6 +35,19 @@ func _ready():
 	selector_point = Vector2(-texture.get_width() / 2 - 5, - texture.get_height() / 2) - sprite.position
 	eagle_point = sprite.position + Vector2(0, -texture.get_height()/4)
 
+	reset_stats()
+
+func reset_stats():
+	# we can do this because we're not upgrading enemies
+	var max_stats = Flow.get_enemy_value(id, "stats", {})
+	print('max stats')
+	print(max_stats)
+	stats.health = max_stats.get("max_health")
+	stats.timeout = max_stats.get("timeout")
+	stats.strength = max_stats.get("strength")
+	stats.moves = max_stats.get("moves")
+
+
 func play_animation(animation_name: String):
 	animation_player.play(animation_name)
 
@@ -44,6 +58,7 @@ func take_damage(damage_amount: int):
 		emit_signal("death", self)
 
 func get_charge_timeout() -> float:
+	print(stats)
 	return stats.timeout
 
 func die():

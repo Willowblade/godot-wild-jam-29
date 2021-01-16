@@ -29,6 +29,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Enemy.gd"
 }, {
+"base": "StaticBody2D",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://src/game/level/Interactable.gd"
+}, {
+"base": "Interactable",
+"class": "InteractableDoor",
+"language": "GDScript",
+"path": "res://src/game/level/InteractableDoor.gd"
+}, {
+"base": "Interactable",
+"class": "InteractableItem",
+"language": "GDScript",
+"path": "res://src/game/level/InteractableItem.gd"
+}, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
@@ -43,6 +58,11 @@ _global_script_classes=[ {
 "class": "Yurt",
 "language": "GDScript",
 "path": "res://src/game/level/Yurt.gd"
+}, {
+"base": "Reference",
+"class": "class_battle",
+"language": "GDScript",
+"path": "res://src/autoload/state/Battle.gd"
 }, {
 "base": "MarginContainer",
 "class": "class_menu_tab",
@@ -69,9 +89,13 @@ _global_script_class_icons={
 "BattleZone": "",
 "Eagle": "",
 "Enemy": "",
+"Interactable": "",
+"InteractableDoor": "",
+"InteractableItem": "",
 "JSONBeautifier": "",
 "Player": "",
 "Yurt": "",
+"class_battle": "",
 "class_menu_tab": "",
 "class_pause_tab": "",
 "class_player": "",
@@ -139,5 +163,5 @@ translations=PoolStringArray( "res://assets/locale/en.po", "res://assets/locale/
 
 quality/driver/driver_name="GLES2"
 quality/2d/use_nvidia_rect_flicker_workaround=true
-environment/default_clear_color=Color( 0.670588, 0.533333, 0.294118, 1 )
+environment/default_clear_color=Color( 0.113725, 0.105882, 0.243137, 1 )
 environment/default_environment="res://default_env.tres"

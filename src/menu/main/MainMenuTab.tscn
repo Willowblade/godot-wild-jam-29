@@ -17,8 +17,8 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 992.0
-margin_bottom = 544.0
+margin_right = 928.0
+margin_bottom = 508.0
 custom_constants/separation = 24
 alignment = 1
 __meta__ = {
@@ -56,9 +56,9 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 32, 0 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 416.0
-margin_right = 544.0
-margin_bottom = 430.0
+margin_left = 384.0
+margin_right = 512.0
+margin_bottom = 438.0
 size_flags_horizontal = 4
 size_flags_vertical = 3
 custom_constants/separation = 16
@@ -67,68 +67,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 169.0
+[node name="NewButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 155.0
 margin_right = 128.0
-margin_bottom = 189.0
+margin_bottom = 175.0
 rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 3
-text = "PLAY"
+text = "NEW"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+margin_top = 191.0
+margin_right = 128.0
+margin_bottom = 211.0
+rect_min_size = Vector2( 128, 0 )
+text = "LOAD"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 205.0
+margin_top = 227.0
 margin_right = 128.0
-margin_bottom = 225.0
+margin_bottom = 247.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 3
 text = "SETTINGS"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 241.0
+margin_top = 263.0
 margin_right = 128.0
-margin_bottom = 261.0
+margin_bottom = 283.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 3
 text = "QUIT"
 
 [node name="StatusLabel" type="Label" parent="VBoxContainer"]
-margin_top = 454.0
-margin_right = 960.0
-margin_bottom = 468.0
+margin_top = 462.0
+margin_right = 896.0
+margin_bottom = 476.0
 text = "Loaded..."
 align = 1
 valign = 1
-
-[node name="StateHBox" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 492.0
-margin_right = 960.0
-margin_bottom = 512.0
-custom_constants/separation = 64
-alignment = 1
-
-[node name="NewButton" type="Button" parent="VBoxContainer/StateHBox"]
-margin_left = 224.0
-margin_right = 352.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 128, 0 )
-text = "NEW"
-
-[node name="SaveButton" type="Button" parent="VBoxContainer/StateHBox"]
-margin_left = 416.0
-margin_right = 544.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 128, 0 )
-text = "SAVE"
-
-[node name="LoadButton" type="Button" parent="VBoxContainer/StateHBox"]
-margin_left = 608.0
-margin_right = 736.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 128, 0 )
-text = "LOAD"
-[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/PlayButton" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/NewButton" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/LoadButton" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/StateHBox/NewButton" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/StateHBox/SaveButton" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_entered" from="VBoxContainer/StateHBox/LoadButton" to="." method="_on_button_mouse_entered"]

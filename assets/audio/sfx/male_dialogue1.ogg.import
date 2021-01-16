@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/male_dialogue1.ogg-0176a5b8c58691f89fdd9b3cb09e2dcf.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/male_dialogue1.ogg"
+dest_files=[ "res://.import/male_dialogue1.ogg-0176a5b8c58691f89fdd9b3cb09e2dcf.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

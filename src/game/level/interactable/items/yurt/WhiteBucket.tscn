@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/level/YurtItem.tscn" type="PackedScene" id=1]
+
+[node name="WhiteBucket" instance=ExtResource( 1 )]
+id = "white_bucket"
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0.25, -1.83036 )
+region_rect = Rect2( 39, 76, 17, 17 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+position = Vector2( 0, 11.2568 )
+polygon = PoolVector2Array( -15.4675, -8.89993, 0.689339, -1.48369, 16.3164, -8.63507, 0.0271759, -17.2432 )

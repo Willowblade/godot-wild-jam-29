@@ -261,6 +261,6 @@ script = ExtResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 1 )
 anims/loremaster = SubResource( 2 )
-anims/punish = SubResource( 3 )
+anims/slam = SubResource( 3 )
 anims/slap = SubResource( 4 )
 anims/throw = SubResource( 5 )

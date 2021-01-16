@@ -74,7 +74,7 @@ func get_direction(velocity: Vector2):
 		return "nw"
 
 func get_charge_timeout() -> float:
-	return 8.0
+	return State.player.get_eagle_stats().timeout
 
 func set_animation(velocity: Vector2):	
 	var animation_direction = get_direction(velocity)
@@ -129,7 +129,6 @@ func set_full_animation(animation_name):
 func move_towards_target(delta):
 	target_sprite.position = target
 	$Direction.position = direction
-	# print(direction.angle_to(target - position))
 	var angle = direction.angle_to(target)
 	if angle > 0:
 		move_left(delta)

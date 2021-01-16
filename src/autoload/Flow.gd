@@ -23,7 +23,11 @@ var is_in_editor_mode := false
 var verbose_mode := true
 
 var upgrades_data := {}
-var players_data := {}
+var player_data := {}
+var eagle_data := {}
+var moves_data := {}
+var enemies_data := {}
+var interactives_data := {}
 
 var _game_flow := {
 	"menu": {
@@ -140,15 +144,36 @@ func get_upgrade_value(id : String, key : String, default):
 	else:
 		return default
 
-func get_player_value(id : String, key : String, default):
-	if players_data.has(id):
-		var data : Dictionary = players_data[id]
+func get_player_value(key : String, default):
+	return player_data.get(key, default)
+
+func get_eagle_value(key : String, default):
+	return eagle_data.get(key, default)
+
+func get_enemy_value(id : String, key : String, default):
+	if enemies_data.has(id):
+		var data : Dictionary = enemies_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_interactive_value(id : String, key : String, default):
+	if interactives_data.has(id):
+		var data : Dictionary = interactives_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_move_value(id : String, key : String, default):
+	if moves_data.has(id):
+		var data : Dictionary = moves_data[id]
 		return data.get(key, default)
 	else:
 		return default
 
 func new_game() -> void:
 	_state_loader.load_stateJSON()
+	go_to_game()
 
 func save_game() -> void:
 	print("Saving game context to '{0}'".format([Flow.USER_SAVE_PATH]))
@@ -156,6 +181,7 @@ func save_game() -> void:
 
 func load_game():
 	_state_loader.load_stateJSON(Flow.USER_SAVE_PATH)
+	go_to_game()
 
 static func load_JSON(path : String) -> Dictionary:
 # Load a JSON-file, convert it to a dictionary and return it.

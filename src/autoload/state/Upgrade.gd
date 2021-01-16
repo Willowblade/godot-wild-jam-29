@@ -2,7 +2,6 @@ extends Reference
 class_name class_upgrade
 
 var id := ""
-var player_id := ""
 
 var context : Dictionary setget set_context, get_context
 func set_context(value : Dictionary) -> void:
@@ -16,8 +15,6 @@ func get_context() -> Dictionary:
 	var _context := {}
 
 	_context.id = id
-	if not player_id.empty():
-		_context.player_id = player_id
 
 	return _context
 
@@ -33,3 +30,7 @@ func get_description() -> String:
 var effect : Dictionary setget , get_effect
 func get_effect() -> Dictionary:
 	return Flow.get_upgrade_value(id, "effect", {})
+
+var target : Dictionary setget , get_target
+func get_target() -> Dictionary:
+	return Flow.get_upgrade_value(id, "target", {})

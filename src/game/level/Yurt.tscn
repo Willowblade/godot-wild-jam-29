@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/graphics/level/yurt.png" type="Texture" id=1]
 [ext_resource path="res://src/game/level/Yurt.gd" type="Script" id=2]
 [ext_resource path="res://assets/graphics/level/yurt-doors.png" type="Texture" id=3]
+[ext_resource path="res://src/game/level/InteractableDoor.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.7961
@@ -10,6 +11,9 @@ height = 36.0993
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 32.2676 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 11.8405 )
 
 [node name="Yurt" type="StaticBody2D" groups=[
 "yurt",
@@ -35,3 +39,13 @@ shape = SubResource( 1 )
 position = Vector2( -0.0109253, -9.84961 )
 rotation = 1.57079
 shape = SubResource( 2 )
+
+[node name="InteractableDoor" parent="." instance=ExtResource( 4 )]
+z_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableDoor"]
+position = Vector2( 0, -11.0905 )
+shape = SubResource( 3 )
+
+[node name="PlayerPosition" type="Position2D" parent="."]
+position = Vector2( -0.0513763, 10.6092 )

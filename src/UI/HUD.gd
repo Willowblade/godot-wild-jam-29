@@ -21,9 +21,11 @@ func _on_updated_charges(chargers):
 			burg_action_timer.value = int(charger.progress / charger.threshold * 100)
 
 func on_player_updated_stats(updated_stats):
+	var player_stats = State.player.get_stats()
+
 	# TODO get max player stat from game data (calculation plus upgrades)
-	health_value.text = str(updated_stats.health) + "/" + str(50)
-	stamina_value.text = str(updated_stats.stamina) + "/" + str(30)
+	health_value.text = str(updated_stats.health) + "/" + str(player_stats.max_health)
+	stamina_value.text = str(updated_stats.stamina) + "/" + str(player_stats.max_stamina)
 
 func set_battle_mode():
 	bataar_action_timer_container.show()

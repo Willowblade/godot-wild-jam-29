@@ -172,10 +172,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.401, 0.8 ),
-"transitions": PoolRealArray( 0.101532, 1, 1.62451, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.8 ),
+"transitions": PoolRealArray( 0.101532, 1, 1.62451, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -11.7464 ), Vector2( 0, -5 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 12 ), Vector2( 0, 5 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Visual:rotation_degrees")
@@ -187,7 +187,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -15.3972, 0.0 ]
+"values": [ 0.0, 15.0, 0.0 ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
@@ -266,17 +266,23 @@ rotation = 1.57079
 shape = SubResource( 1 )
 
 [node name="Visual" type="Node2D" parent="."]
+scale = Vector2( 0.9, 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Visual"]
 position = Vector2( 0.5, -15 )
 frames = ExtResource( 1 )
 animation = "nw"
-frame = 2
+frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/death = SubResource( 2 )
 anims/loremaster = SubResource( 3 )
-anims/punish = SubResource( 4 )
+anims/slam = SubResource( 4 )
 anims/slap = SubResource( 5 )
 anims/throw = SubResource( 6 )
+
+[node name="RayCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 12 )
+collision_mask = 2

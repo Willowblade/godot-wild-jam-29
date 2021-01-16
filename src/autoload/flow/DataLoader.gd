@@ -12,15 +12,11 @@ func load_dataJSON() -> int:
 			push_error("Failed to open the data settings at '{0}' for loading purposes.".format([Flow.DATA_PATH]))
 		else:
 			Flow.upgrades_data = data.get("upgrades", {})
-			Flow.orphans_data = data.get("orphans", {})
-
-
-			Flow.allies_data = data.get("allies", {})
+			Flow.player_data = data.get("player", {})
+			Flow.eagle_data = data.get("eagle", {})
+			Flow.moves_data = data.get("moves", {})
 			Flow.enemies_data = data.get("enemies", {})
-
-			Flow.missions_data = data.get("missions", [])
-
-			Flow.perks_data = data.get("perks", {})
+			Flow.interactives_data = data.get("interactive", {})
 	
 	else:
 		push_error("Essential file '{0}' does not exist, check its existence!".format([Flow.DATA_PATH]))

@@ -19,46 +19,6 @@ enum SelectionState {
 	SELECT_TARGET,
 }
 
-var move_definitions = {
-	"slap": {
-		"name": "Mongolian Slap™",
-		"description": "Not sure what makes it mongolian, but they own it",
-		"cost": 0,
-		"damage": 10,
-	},
-	"throw": {
-		"name": "Throw",
-		"description": "Throws your opponent up in the air, making them fall. Hurts...",
-		"cost": 5,
-		"damage": 15
-	},
-	"punish": {
-		"name": "Divine Punish",
-		"description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
-		"cost": 10,
-		"damage": 20
-	},
-	"loremaster": {
-		"name": "Storytime",
-		"description": "Tell your adversary all about the history you've uncovered so far, making them sympathise with you",
-		"cost": 8,
-		"damage": 25
-	}
-}
-
-var enemy_definitions = {
-	"slime": {
-		"name": "Slime",
-		"description": "Slimes are a pest in this desert, I think there's a reward for eradicating all of them",
-		"health": 20,
-		"moves": [
-			"slap",
-			"throw"
-		]
-	}
-}
-
-var unlocked_moves = ["slap", "throw", "punish", "loremaster"]
 
 var targets_list: Array = []
 var moves_list: Array = []
@@ -111,7 +71,7 @@ func set_battle_zone(battle_zone):
 	
 	for enemy in current_battle_zone.enemies:
 		var selectable = selectables.targets[i]
-		var enemy_definition = enemy_definitions[enemy.id]
+		var enemy_definition = Flow.get_enemy_value(enemy.id, "stats", {})
 		# sets all metadata correct for the showing of the targets_list
 		if enemy.id in name_count:
 			name_count[enemy.id] += 1
@@ -122,7 +82,8 @@ func set_battle_zone(battle_zone):
 			"target": enemy,
 			"id": enemy.id,
 			"count": name_count[enemy.id],
-			"name": enemy_definition.name,
+			"name": Flow.get_enemy_value(enemy.id, "name", "PLACEHOLDER_NAME"),
+			"description": Flow.get_enemy_value(enemy.id, "description", "PLACEHOLDER_NAME"),
 			"selectable": selectable,
 		})
 
@@ -187,14 +148,15 @@ func update_targets():
 func generate_moves():
 	moves_list = []
 	var i = 0
-	for move in unlocked_moves:
+	for move in State.player.get_stats().moves:
 		var selectable = selectables.moves[i]
 		
 		moves_list.append({
 			"index": i,
 			"move": move,
-			"definition": move_definitions[move],
-			"name": move_definitions[move].name,
+			"name": Flow.get_move_value(move, "name", "PLACEHOLDER_NAME"),
+			"cost": Flow.get_move_value(move, "cost", 100),
+			"description": Flow.get_move_value(move, "description", "PLACEHOLDER_DESCRIPTION"),
 			"selectable": selectable,
 		})
 		
@@ -217,7 +179,7 @@ func update_moves():
 			else:
 				move.selectable.set_selected(false)
 			move.selectable.set_label_name(move.name)
-			move.selectable.set_cost(move_definitions[move.move].cost)
+			move.selectable.set_cost(move.cost)
 			visible_moves.append(move.selectable)
 			
 	var hidden_selectables = []
@@ -255,7 +217,8 @@ func set_move_page(index: int):
 		if move.index == index:
 			selected_move = move
 	page.moves = index / page_size
-	description.bbcode_text = move_definitions[selected_move.move].description
+
+	description.bbcode_text = selected_move.description
 	emit_signal("target_enemy", null)
 	update_moves()
 
@@ -268,7 +231,8 @@ func set_target_page(index: int):
 			selected_target = target
 			print("selected_target = ", selected_target)
 	page.target = index / page_size
-	description.bbcode_text = enemy_definitions[selected_target.id].description
+	var enemy_definitions = {}
+	description.bbcode_text = selected_target.description
 	emit_signal("target_enemy", selected_target)
 	update_targets()
 
@@ -296,7 +260,7 @@ func _process(delta):
 		if state == SelectionState.SELECT_MOVE:
 			go_to_target_select()
 		elif state == SelectionState.SELECT_TARGET:
-			if selected_move.definition.cost > player.stats.stamina:
+			if selected_move.cost > player.stats.stamina:
 				print("No good! Insufficient stamina...")
 			else:
 				emit_signal("move_chosen", selected_move, selected_target)

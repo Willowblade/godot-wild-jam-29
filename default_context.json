@@ -1,2 +1,10 @@
 {
+    "player": {
+        "location": {
+            "location": "yurt",
+            "id": "1"
+        }
+    },
+    "upgrades": [],
+    "battles": []
 }

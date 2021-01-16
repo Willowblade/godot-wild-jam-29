@@ -3,6 +3,8 @@ class_name Yurt
 
 onready var door = $Door
 onready var sprite = $Sprite
+onready var player_position = $PlayerPosition
+onready var interactable_door = $InteractableDoor
 
 enum DOOR_TYPES {
 	ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT
@@ -12,6 +14,7 @@ enum COLORS {
 	RED, BLUE, AQUA, GREEN, YELLOW, ORANGE, PURPLE, WHITE, GOLD
 }
 
+export var id = ""
 export (DOOR_TYPES) var door_type = DOOR_TYPES.ONE
 export (COLORS) var door_color = COLORS.RED 
 
@@ -46,8 +49,13 @@ const colors_to_colors = {
 	COLORS.GOLD: Color(Color.goldenrod),
 }
 
+func match_yurt_interior(yurt_interior):
+	interactable_door.target_position = yurt_interior.player_position.position
+	interactable_door.target = yurt_interior
 
 func _ready():
+	if id == "":
+		push_error("Yurt without id, this will lead to errors! " + str(name))
 	door.region_rect = types_to_rects[door_type]
 	door.modulate = colors_to_colors[door_color]
 

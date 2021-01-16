@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/level/DesertItem.tscn" type="PackedScene" id=1]
+
+[node name="Saxual" instance=ExtResource( 1 )]
+id = "saxual"
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -17.4243 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+position = Vector2( 0, 3.57569 )
+polygon = PoolVector2Array( -16.3075, -2.84318, -0.0183029, 2.3217, 15.2115, -2.84318, -0.226051, -10.1203 )

@@ -3,6 +3,8 @@ class_name Player
 
 onready var visual: Node2D = $Visual
 onready var sprite: AnimatedSprite = $Visual/Sprite
+onready var raycast: RayCast2D = $RayCast
+
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 export var MOVEMENT_SPEED: float = 50.0
@@ -17,10 +19,10 @@ var dead = false
 
 signal updated_stats
 
+var collider_under_raycast = []
+
+
 var stats = {
-	"stamina": 30,
-	"health": 50,
-	"timeout": 3.5
 }
 
 var state = "IDLE"
@@ -30,6 +32,12 @@ func trigger_damage_taken():
 
 func _ready():
 	connect("updated_stats", GameFlow.overlays.hud, "on_player_updated_stats")
+	refresh_stats()
+
+func refresh_stats():
+	var player_stats = State.player.get_stats()
+	stats.health = player_stats.max_health
+	stats.stamina = player_stats.max_stamina
 	emit_signal("updated_stats", stats)
 
 func take_damage(damage_amount: int):
@@ -63,26 +71,28 @@ func get_direction(velocity: Vector2):
 		return "nw"
 			
 func get_charge_timeout() -> float:
-	return stats.timeout
+	return State.player.get_stats().timeout
 
-func set_animation(velocity: Vector2):	
+func set_animation(velocity: Vector2):
 	if velocity == Vector2(0, 0):
 		state = "IDLE"
+		AudioEngine.set_walking(false)
 		if sprite.playing:
 			sprite.playing = false
 		sprite.frame = 1
 	else:
+		raycast.cast_to = velocity.normalized() * 12
 		var animation_direction = get_direction(velocity)
 		sprite.animation = animation_direction
 		if !sprite.playing:
 			sprite.playing = true
+		AudioEngine.set_walking(true)
 		state = "MOVING"		
 	
 func player_specific(delta):
 	pass
 	
 func die():
-	print("Dieing!")
 	animation_player.play("death")
 	yield(animation_player, "animation_finished")
 
@@ -93,6 +103,7 @@ func set_still():
 	set_physics_process(false)
 			
 func _physics_process(delta):
+	collider_under_raycast = raycast.get_collider()
 	player_specific(delta)
 	
 	var velocity = Vector2(0, 0)

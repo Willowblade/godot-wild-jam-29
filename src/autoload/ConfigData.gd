@@ -13,7 +13,7 @@ var mute_sfx := false setget set_mute_sfx
 var locale := "en" setget set_locale
 
 ## COMMON CONFIG ###############################################################
-var skip_menu := true
+var skip_menu := false
 var verbose_mode := true
 
 func set_master_volume(value : float):

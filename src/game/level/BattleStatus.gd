@@ -7,6 +7,7 @@ signal character_ready(character)
 var chargers = []
 
 var performed_move = null
+var performer = null
 
 var number_of_enemies = 0
 
@@ -49,7 +50,6 @@ func _process(delta):
 	emit_signal("updated_charge", chargers)
 	for charger in chargers:
 		if charger.progress > charger.threshold:
-			print("Character ", charger.character, " is ready for its attack!")
 			charger.progress = 0
 			emit_signal("character_ready", charger.character)
 			return

@@ -17,7 +17,7 @@
             ]
         },
         {
-            "action": "toggle_mode",
+            "action": "interact",
             "events": [
                 {
                     "scancode": "E",
