@@ -98,8 +98,14 @@ func end():
 
 func start_dialogue_bit():
 	var current_dialogue = dialogue[dialogue_index]
-	set_speaker(current_dialogue.get("speaker", "bataar"))
+	var speaker = current_dialogue.get("speaker", "bataar")
+	set_speaker(speaker)
 	animate_speaker(current_dialogue.get("speaker", "bataar"), current_dialogue.get("animation", "default"))
+	var audio = current_dialogue.get("audio", "male_explaining")
+	if speaker == "bataar":
+		audio = current_dialogue.get("audio", "bataar_talking")
+	if audio != "none":
+		AudioEngine.play_dialogue_audio(audio)
 	text_label.bbcode_enabled = true
 	text_label.bbcode_text = current_dialogue.text
 	text_label.percent_visible = 0

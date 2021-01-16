@@ -49,12 +49,24 @@ const sfx = {
 	"item_interact": "res://assets/audio/sfx/item_interact.ogg",
 	"item_open": "res://assets/audio/sfx/item_open.ogg",
 
-	"male_dialogue1": "res://assets/audio/sfx/male_dialogue1.ogg",
-	"male_dialogue2": "res://assets/audio/sfx/male_dialogue2.ogg",
-	"male_dialogue3": "res://assets/audio/sfx/male_dialogue3.ogg",
-	"male_dialogue4": "res://assets/audio/sfx/male_dialogue4.ogg",
-	"male_dialogue5": "res://assets/audio/sfx/male_dialogue5.ogg",
+	"bataar_talking": "res://assets/audio/sfx/male_dialogue1.ogg",
+	"bataar_explaining": "res://assets/audio/sfx/male_dialogue2.ogg",
+	"bataar_mocking": "res://assets/audio/sfx/male_dialogue3.ogg",
+	"bataar_correcting": "res://assets/audio/sfx/male_dialogue4.ogg",
+	"bataar_whatever": "res://assets/audio/sfx/male_dialogue5.ogg",
 	
+	"male_talking": "res://assets/audio/sfx/male_dialogue1.ogg",
+	"male_explaining": "res://assets/audio/sfx/male_dialogue2.ogg",
+	"male_mocking": "res://assets/audio/sfx/male_dialogue3.ogg",
+	"male_correcting": "res://assets/audio/sfx/male_dialogue4.ogg",
+	"male_whatever": "res://assets/audio/sfx/male_dialogue5.ogg",
+
+	"female_talking": "res://assets/audio/sfx/male_dialogue1.ogg",
+	"female_explaining": "res://assets/audio/sfx/male_dialogue2.ogg",
+	"female_mocking": "res://assets/audio/sfx/male_dialogue3.ogg",
+	"female_correcting": "res://assets/audio/sfx/male_dialogue4.ogg",
+	"female_whatever": "res://assets/audio/sfx/male_dialogue5.ogg",
+
 	"monster_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
 	"monster_hurt2": "res://assets/audio/sfx/EnemyHitThump2.ogg",
 	"person_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
@@ -62,8 +74,9 @@ const sfx = {
 }
 
 
-onready var background_player: AudioStreamPlayer = get_node("BackgroundPlayer")
-onready var effects: Node = get_node("Effects")
+onready var background_player: AudioStreamPlayer = $BackgroundPlayer
+onready var dialogue_player: AudioStreamPlayer = $DialoguePlayer
+onready var effects: Node = $Effects
 
 
 func convert_scale_to_db(scale: float):
@@ -112,14 +125,27 @@ func play_background_music(track_name: String):
 			background_audio = track_path
 			current_background_player.stream = load(track_path)
 			current_background_player.play()
+			
+func play_dialogue_audio(track_name: String):
+	var track_path = sfx[track_name]
+	dialogue_player.stop()
+	var base_pitch = 1.2
+	var dialogue_player_stream = load(track_path)
+	if track_name.begins_with("male"):
+		dialogue_player.pitch_scale = 0.8 * base_pitch
+	if track_name.begins_with("bataar"):
+		dialogue_player.pitch_scale = 1.0 * base_pitch
+	elif track_name.begins_with("female"):
+		dialogue_player.pitch_scale = 1.2 * base_pitch
+	dialogue_player_stream.loop = false
+	dialogue_player.stream = dialogue_player_stream
+	dialogue_player.play()
 
 func stop_background_music():
 	"""Stops the background music track"""
 	if background_player.playing:
 		background_player.stop()
-		background_audio = null
-		
-		
+		background_audio = null		
 
 var custom = {
 	"walking": false,

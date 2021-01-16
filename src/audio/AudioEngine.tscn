@@ -13,7 +13,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ -80.0, 0.0 ]
@@ -25,7 +25,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -80.0 ]
@@ -40,7 +40,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -80.0 ]
@@ -52,7 +52,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ -80.0, 0.0 ]
@@ -67,7 +67,12 @@ MAX_SIMULTANEOUS_EFFECTS = 20
 autoplay = true
 bus = "Music"
 
+[node name="DialoguePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+bus = "Music"
+
 [node name="SecondBackgroundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
 autoplay = true
 bus = "Music"
 

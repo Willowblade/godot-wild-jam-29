@@ -184,7 +184,7 @@ rotation = 4.15233
 battle_id = "copy"
 
 [node name="PlayerPosition" parent="Battles/CopyBattle" index="0"]
-position = Vector2( -14.2733, -60.518 )
+position = Vector2( -24.6946, -20.6296 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/CopyBattle"]
 position = Vector2( -15.434, 8.18948 )

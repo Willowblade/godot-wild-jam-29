@@ -23,7 +23,6 @@ func _ready():
 			collision_layer = 0
 			collision_mask = 0
 
-	
 func get_conversation():
 	var conversations = Flow.get_npc_value(id, "conversations", {})
 	var conversation_keys: Array = conversations.keys()

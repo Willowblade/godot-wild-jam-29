@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/graphics/characters/character.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/DialogueView.gd" type="Script" id=5]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "bataar_angry"
 tracks/0/type = "value"
 tracks/0/path = NodePath("BataarSpeaker:position")
@@ -54,8 +54,7 @@ tracks/3/keys = {
 "values": [ 0.0, 15.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "bataar_speak"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("BataarSpeaker:rotation_degrees")
 tracks/0/interp = 1
@@ -105,7 +104,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "other_angry"
 tracks/0/type = "value"
 tracks/0/path = NodePath("OtherSpeaker:position")
@@ -156,8 +155,7 @@ tracks/3/keys = {
 "values": [ 0.0, -15.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "other_speak"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("OtherSpeaker:rotation_degrees")
 tracks/0/interp = 1
@@ -338,10 +336,10 @@ region_enabled = true
 region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/bataar_angry = SubResource( 3 )
-anims/bataar_speak = SubResource( 1 )
-anims/other_angry = SubResource( 4 )
-anims/other_speak = SubResource( 2 )
+anims/bataar_angry = SubResource( 1 )
+anims/bataar_speak = SubResource( 2 )
+anims/other_angry = SubResource( 3 )
+anims/other_speak = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -284,7 +284,8 @@
                         },
                         {
                             "speaker": "copy",
-                            "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes"
+                            "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes",
+                            "audio": "female_explaining",
                         },
                         {
                             "speaker": "bataar",
@@ -309,17 +310,20 @@
                         {
                             "speaker": "bataar",
                             "text": "Still here?",
-                            "animation": "angry"
+                            "animation": "angry",
+                            "audio": "bataar_mocking"
                         },
                         {
                             "speaker": "copy",
                             "text": "Still here?",
-                            "animation": "angry"
+                            "animation": "angry",
+                            "audio": "male_mocking"
                         },
                         {
                             "speaker": "bataar",
                             "text": "You. Me. Now.",
-                            "animation": "none"
+                            "animation": "none",
+                            "audio": "none"
                         }
                     ],
                     "conditions": ["copy:talked"],

@@ -121,6 +121,10 @@ run/main_scene="res://src/Menu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
+[audio]
+
+output_latency.web=15
+
 [autoload]
 
 ConfigData="*res://src/autoload/ConfigData.tscn"
@@ -174,6 +178,6 @@ translations=PoolStringArray( "res://assets/locale/en.po", "res://assets/locale/
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/2d/use_nvidia_rect_flicker_workaround=true
 environment/default_clear_color=Color( 0.113725, 0.105882, 0.243137, 1 )
 environment/default_environment="res://default_env.tres"
-quality/2d/use_nvidia_rect_flicker_workaround=true
