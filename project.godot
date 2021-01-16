@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/Enemy.gd"
 }, {
+"base": "Control",
+"class": "GamePopup",
+"language": "GDScript",
+"path": "res://src/UI/Popup.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Interactable",
 "language": "GDScript",
@@ -43,6 +48,11 @@ _global_script_classes=[ {
 "class": "InteractableItem",
 "language": "GDScript",
 "path": "res://src/game/level/InteractableItem.gd"
+}, {
+"base": "Interactable",
+"class": "InteractableNPC",
+"language": "GDScript",
+"path": "res://src/game/level/InteractableNPC.gd"
 }, {
 "base": "Reference",
 "class": "JSONBeautifier",
@@ -89,9 +99,11 @@ _global_script_class_icons={
 "BattleZone": "",
 "Eagle": "",
 "Enemy": "",
+"GamePopup": "",
 "Interactable": "",
 "InteractableDoor": "",
 "InteractableItem": "",
+"InteractableNPC": "",
 "JSONBeautifier": "",
 "Player": "",
 "Yurt": "",

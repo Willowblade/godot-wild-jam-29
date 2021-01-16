@@ -17,6 +17,7 @@ func match_yurt(level, yurt):
 	
 func add_player(player: Player, player_position: Vector2):
 	var current_parent = player.get_parent()
+
 	current_parent.remove_child(player)
 	$YSort.add_child(player)
 	player.position = player_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/UI/BattleInterface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/UI/GameOverUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/Transition.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/UI/Popups.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/UI/InteractionOverlay.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/DialogueView.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Control"]
@@ -35,6 +37,11 @@ visible = false
 [node name="GameOverUI" parent="UICanvas" instance=ExtResource( 7 )]
 visible = false
 mouse_filter = 2
+
+[node name="Popups" parent="UICanvas" instance=ExtResource( 9 )]
+
+[node name="InteractionOverlay" parent="UICanvas" instance=ExtResource( 10 )]
+visible = false
 
 [node name="PauseUI" parent="UICanvas" instance=ExtResource( 1 )]
 visible = false

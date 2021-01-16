@@ -17,7 +17,9 @@ func load_dataJSON() -> int:
 			Flow.moves_data = data.get("moves", {})
 			Flow.enemies_data = data.get("enemies", {})
 			Flow.interactives_data = data.get("interactive", {})
-	
+			Flow.npcs_data = data.get("npcs", {})
+			Flow.battles_data = data.get("battles", {})
+
 	else:
 		push_error("Essential file '{0}' does not exist, check its existence!".format([Flow.DATA_PATH]))
 		return ERR_FILE_CORRUPT

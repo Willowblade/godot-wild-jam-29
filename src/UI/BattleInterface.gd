@@ -242,6 +242,15 @@ func go_to_target_select():
 	set_target_page(selected_target.index)
 
 func _process(delta):
+	if state == SelectionState.SELECT_MOVE:
+		# description.bbcode_text = selected_move.description
+		moves.show()
+		targets.hide()
+	elif state == SelectionState.SELECT_TARGET:
+		# moves.hide()
+		# description.bbcode_text = selected_target.description
+		targets.show()
+		
 	if Input.is_action_just_pressed("move_down"):
 		if state == SelectionState.SELECT_MOVE:
 			var new_index = (selected_move.index + 1) % moves_list.size()
@@ -256,7 +265,15 @@ func _process(delta):
 		elif state == SelectionState.SELECT_TARGET:
 			var new_index = (selected_target.index - 1) % targets_list.size()
 			set_target_page(new_index)
-	elif Input.is_action_just_pressed("confirm") or Input.is_action_just_pressed("move_right"):
+	if Input.is_action_just_pressed("move_right"):
+		if state == SelectionState.SELECT_TARGET:
+			var new_index = (selected_target.index + 1) % targets_list.size()
+			set_target_page(new_index)
+	elif Input.is_action_just_pressed("move_left"):
+		if state == SelectionState.SELECT_TARGET:
+			var new_index = (selected_target.index - 1) % targets_list.size()
+			set_target_page(new_index)
+	elif Input.is_action_just_pressed("confirm"):
 		if state == SelectionState.SELECT_MOVE:
 			go_to_target_select()
 		elif state == SelectionState.SELECT_TARGET:
@@ -264,7 +281,7 @@ func _process(delta):
 				print("No good! Insufficient stamina...")
 			else:
 				emit_signal("move_chosen", selected_move, selected_target)
-	elif Input.is_action_just_pressed("return") or Input.is_action_just_pressed("move_left"):
+	elif Input.is_action_just_pressed("return"):
 		if state == SelectionState.SELECT_TARGET:
 			state = SelectionState.SELECT_MOVE
 			set_move_page(selected_move.index)
@@ -280,6 +297,7 @@ func pause():
 func resume():
 	show()
 	state = SelectionState.SELECT_MOVE
+	targets.hide()
 #	reset_move()
 	set_process(true)
 	

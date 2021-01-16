@@ -49,3 +49,9 @@ shape = SubResource( 3 )
 
 [node name="PlayerPosition" type="Position2D" parent="."]
 position = Vector2( -0.0513763, 10.6092 )
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area"]
+polygon = PoolVector2Array( -92.4195, 39.1511, 0.475571, 67.9935, 91.8723, 45.8935, 106.855, -24.9015, 53.6655, -82.2118, -63.2025, -79.9643, -112.647, -24.1524 )
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]

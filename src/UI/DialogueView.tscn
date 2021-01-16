@@ -1,27 +1,264 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://assets/graphics/characters/character.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/DialogueView.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=3]
+resource_name = "bataar_angry"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BataarSpeaker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.21, 0.3, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -100.6, 372.879 ), Vector2( -89.6681, 339.243 ), Vector2( -89.6681, 351.016 ), Vector2( -89.6681, 339.243 ), Vector2( -89.6681, 351.016 ), Vector2( -100.6, 372.879 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BataarSpeaker:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.21, 0.3, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.1066, -4.95135, 15.1066, -4.95135, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("OtherSpeaker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 77.6787, 373.396 ), Vector2( 150, 371.714 ), Vector2( 130.655, 371.714 ), Vector2( 77.6787, 373.396 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("OtherSpeaker:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 15.0, 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "bataar_speak"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BataarSpeaker:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, 0.0, -10.0, 0.0, 10.0, 0.0, -10.0, 0.0, 10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OtherSpeaker:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 77.6787, 373.396 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BataarSpeaker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -100.6, 372.879 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("OtherSpeaker:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "other_angry"
+tracks/0/type = "value"
+tracks/0/path = NodePath("OtherSpeaker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 77.6703, 372.879 ), Vector2( 60, 339.243 ), Vector2( 60, 351.015 ), Vector2( 60, 339.243 ), Vector2( 60, 351.015 ), Vector2( 77, 372.879 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OtherSpeaker:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.21, 0.3, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 5.0, -15.0, 5.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BataarSpeaker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -100, 373.396 ), Vector2( -150, 371.714 ), Vector2( -130, 371.714 ), Vector2( -100, 373.396 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BataarSpeaker:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0, 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "other_speak"
+tracks/0/type = "value"
+tracks/0/path = NodePath("OtherSpeaker:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, 0.0, -10.0, 0.0, 10.0, 0.0, -10.0, 0.0, 10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BataarSpeaker:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -100.6, 372.879 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("OtherSpeaker:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 77.6787, 373.396 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BataarSpeaker:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [node name="DialogueView" type="Control"]
 pause_mode = 2
-anchor_right = 1.0
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -270.0
+margin_right = 480.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 960, 540 )
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LeftSpeaker" type="TextureRect" parent="."]
+margin_left = -328.699
+margin_top = 259.603
+margin_right = -109.699
+margin_bottom = 507.603
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightSpeaker" type="TextureRect" parent="."]
+margin_left = 104.572
+margin_top = 248.379
+margin_right = 323.572
+margin_bottom = 496.379
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -212.0
+margin_top = -164.0
+margin_right = 212.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
@@ -29,61 +266,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Underlayer" type="TextureRect" parent="VBoxContainer"]
-margin_top = 576.0
-margin_right = 1024.0
-margin_bottom = 576.0
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 13.0
+margin_right = 424.0
+margin_bottom = 164.0
+custom_constants/margin_bottom = 20
 
-[node name="Text" type="Label" parent="VBoxContainer/Underlayer"]
-anchor_top = 0.00353546
-anchor_bottom = 0.00353546
-margin_left = 443.025
-margin_top = 56.3186
-margin_right = 981.025
-margin_bottom = 172.319
-rect_pivot_offset = Vector2( -557.674, -280.686 )
-text = "Let's fuck these guys up!"
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+margin_right = 424.0
+margin_bottom = 131.0
 
-[node name="PressEnter" type="Label" parent="VBoxContainer/Underlayer"]
-anchor_top = 0.00353546
-anchor_bottom = 0.00353546
-margin_left = 486.0
-margin_top = 167.237
-margin_right = 1008.0
-margin_bottom = 190.237
-rect_pivot_offset = Vector2( -557.674, -280.686 )
-text = "Press Enter to continue"
-align = 2
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 417.0
+margin_bottom = 124.0
 
-[node name="Speaker" type="Label" parent="VBoxContainer/Underlayer"]
-margin_left = 440.947
-margin_top = 16.9207
-margin_right = 702.947
-margin_bottom = 59.9207
-text = "Hun"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_right = 410.0
+margin_bottom = 23.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 4
 
-[node name="Portrait" type="TextureRect" parent="VBoxContainer/Underlayer"]
-margin_left = -212.75
-margin_top = -507.419
-margin_right = 496.25
-margin_bottom = 438.581
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Speaker" type="Label" parent="VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 405.0
+margin_bottom = 19.0
+text = "SPEAKER"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 410.0
+margin_bottom = 117.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="Text" type="RichTextLabel" parent="VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 405.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 400, 80 )
+bbcode_enabled = true
+bbcode_text = "This is a dialogue text"
+text = "This is a dialogue text"
+
+[node name="BataarSpeaker" type="Node2D" parent="."]
+position = Vector2( -100, 373.396 )
+
+[node name="Sprite" type="Sprite" parent="BataarSpeaker"]
+position = Vector2( -3.96588, -50.2717 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
+
+[node name="OtherSpeaker" type="Node2D" parent="."]
+position = Vector2( 76.1591, 372.879 )
+
+[node name="Copy" type="Sprite" parent="OtherSpeaker"]
+position = Vector2( 4.29999, -49.054 )
+rotation = 3.14159
+scale = Vector2( 4, -4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bataar_angry = SubResource( 3 )
+anims/bataar_speak = SubResource( 1 )
+anims/other_angry = SubResource( 4 )
+anims/other_speak = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Tween" type="Tween" parent="."]

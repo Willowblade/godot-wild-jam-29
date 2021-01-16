@@ -59,3 +59,6 @@ func _ready():
 	door.region_rect = types_to_rects[door_type]
 	door.modulate = colors_to_colors[door_color]
 
+func _on_area_body_entered(body):
+	if body is Player:
+		GameFlow.overlays.popup.show_popup_custom(colors_to_names.get(door_color, "nonyabusiness").capitalize() + " yurt", Vector2(0, 40), "yurt", 2.5)

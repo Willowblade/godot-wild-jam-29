@@ -21,11 +21,6 @@ extents = Vector2( 5.34251, 2.63037 )
 [node name="Slime" instance=ExtResource( 1 )]
 id = "slime"
 
-[node name="Visual" parent="." index="0"]
-position = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-
 [node name="Sprite" parent="Visual" index="0"]
 position = Vector2( 0, -14.875 )
 frames = SubResource( 2 )

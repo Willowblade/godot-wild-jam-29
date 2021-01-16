@@ -28,6 +28,8 @@ var eagle_data := {}
 var moves_data := {}
 var enemies_data := {}
 var interactives_data := {}
+var npcs_data := {}
+var battles_data := {}
 
 var _game_flow := {
 	"menu": {
@@ -160,6 +162,20 @@ func get_enemy_value(id : String, key : String, default):
 func get_interactive_value(id : String, key : String, default):
 	if interactives_data.has(id):
 		var data : Dictionary = interactives_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_npc_value(id : String, key : String, default):
+	if npcs_data.has(id):
+		var data : Dictionary = npcs_data[id]
+		return data.get(key, default)
+	else:
+		return default
+
+func get_battle_value(id : String, key : String, default):
+	if battles_data.has(id):
+		var data : Dictionary = battles_data[id]
 		return data.get(key, default)
 	else:
 		return default

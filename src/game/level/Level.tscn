@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/game/level/floor/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://src/game/level/interactable/items/yurt/WhiteBox.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/game/level/interactable/items/yurt/EmptyBox.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/game/level/interactable/items/yurt/BlueBucket.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/game/level/interactable/npc/Copy.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/game/enemies/Copy.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2143.04, 37.5396 )
@@ -63,9 +65,11 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Yurt1" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -225.568, -89.78 )
+position = Vector2( -236.715, -112.566 )
 id = "1"
-door_color = 5
+
+[node name="Sprite" parent="YSort/Yurt1" index="0"]
+modulate = Color( 0.890196, 0.427451, 0.427451, 1 )
 
 [node name="InteractableDoor" parent="YSort/Yurt1" index="4"]
 collision_layer = 2
@@ -126,6 +130,14 @@ position = Vector2( -192.217, -23.026 )
 collision_layer = 3
 collision_mask = 3
 
+[node name="Copy" parent="YSort" instance=ExtResource( 23 )]
+position = Vector2( -113.571, -64.4049 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="Enemy" parent="YSort" instance=ExtResource( 24 )]
+position = Vector2( -95.9175, -72.9549 )
+
 [node name="Boundary" type="StaticBody2D" parent="."]
 collision_layer = 5
 collision_mask = 5
@@ -155,15 +167,29 @@ position = Vector2( 187.759, -161.93 )
 
 [node name="Battles" type="Node2D" parent="."]
 
-[node name="BattleZone" parent="Battles" instance=ExtResource( 7 )]
+[node name="SlimeBattle" parent="Battles" instance=ExtResource( 7 )]
 position = Vector2( 153.266, 17.8582 )
+battle_id = "slime"
 
-[node name="PlayerPosition" parent="Battles/BattleZone" index="0"]
-position = Vector2( 43.9836, 26.7058 )
+[node name="PlayerPosition" parent="Battles/SlimeBattle" index="0"]
+position = Vector2( 12.0208, 45.9619 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/BattleZone"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/SlimeBattle"]
 position = Vector2( -15.434, 8.18948 )
 polygon = PoolVector2Array( -103.187, 5.90662, 52.7687, -75.2383, 163.662, -17.859, -2.70822, 68.5877 )
+
+[node name="CopyBattle" parent="Battles" instance=ExtResource( 7 )]
+position = Vector2( -108.271, -50.4591 )
+rotation = 4.15233
+battle_id = "copy"
+
+[node name="PlayerPosition" parent="Battles/CopyBattle" index="0"]
+position = Vector2( -14.2733, -60.518 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/CopyBattle"]
+position = Vector2( -15.434, 8.18948 )
+rotation = 0.190133
+polygon = PoolVector2Array( -33.6877, -15.4572, 79.7777, -87.6345, 109.144, -11.2366, -1.05427, 74.2468 )
 
 [node name="TargetSelector" type="Sprite" parent="."]
 visible = false
@@ -250,7 +276,9 @@ scale = Vector2( -1, 1 )
 
 [editable path="YSort/Yurt1"]
 
-[editable path="Battles/BattleZone"]
+[editable path="Battles/SlimeBattle"]
+
+[editable path="Battles/CopyBattle"]
 
 [editable path="Interiors/YurtInterior1"]
 

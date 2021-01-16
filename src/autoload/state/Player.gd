@@ -8,11 +8,14 @@ var location := {
 	"position": Vector2(0, 0),
 }
 
+var conditions = []
+
 var context : Dictionary setget set_context, get_context
 func set_context(value : Dictionary) -> void:
 	level = value.get("level", 1)
 	experience = value.get("experience", 0)
 	location = value.get("location", 0)
+	conditions = value.get("conditions", [])
 
 func get_context() -> Dictionary:
 	var _context := {}
@@ -20,6 +23,7 @@ func get_context() -> Dictionary:
 	_context.level = level
 	_context.experience = experience
 	_context.location = location
+	_context.conditions = conditions
 
 	return _context
 	
@@ -28,13 +32,21 @@ func get_player_level_effect(level_index: int) -> Dictionary:
 		"health": int(6 * (1 + level_index / 3)),
 		"stamina": int(4 * (1 + level_index / 2)),
 		"strength": 0.1,
-		"defense": -0.08
+		"defense": +0.08
 	}
 	
 func get_eagle_level_effect(level_index: int) -> Dictionary:
 	return {
 		"strength": 0.15,
 	}
+
+func add_condition(condition: String):
+	if conditions.has(condition):
+		return
+	conditions.append(condition)
+
+func has_condition(condition: String):
+	return conditions.has(condition)
 	
 func get_level_effects() -> Array:
 	var upgrades = []

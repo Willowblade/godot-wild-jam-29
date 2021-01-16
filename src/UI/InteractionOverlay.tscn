@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/UI/InteractionOverlay.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/textures/red_crate.png" type="Texture" id=2]
+
+[node name="InteractionOverlay" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -270.0
+margin_right = 480.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 960, 540 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.545098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -197.0
+margin_top = -62.0
+margin_right = 197.0
+margin_bottom = 62.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+visible = false
+margin_left = 157.0
+margin_top = 10.0
+margin_right = 357.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_horizontal = 4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 7.0
+margin_right = 394.0
+margin_bottom = 117.0
+custom_constants/margin_top = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+margin_right = 394.0
+margin_bottom = 110.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 387.0
+margin_bottom = 103.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 372.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 350, 80 )

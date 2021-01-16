@@ -112,6 +112,25 @@
                     }
                 ]
             }
+        },
+        "copy": {
+            "name": "Bataar???",
+            "description": "You're not sure why you're fighting your alter image?",
+            "stats": {
+                "timeout": 4.5,
+                "max_health": 30,
+                "strength": 1.0,
+                "defense": 1.0,
+                "moves": [
+                    {
+                        "name": "slap",
+                        "chance": 0.7
+                    }, {
+                        "name": "throw",
+                        "chance": 0.3
+                    }
+                ]
+            }
         }
     },
     "interactive": {
@@ -189,6 +208,134 @@
             "descriptions": [
                 "A Barrel Cactus. They can actually live to over 100 years old."
             ]
+        }
+    },
+    "battles": {
+        "copy": {
+            "triggered": true,
+            "triggers": [
+                {
+                    "show": "copy"
+                },
+                {
+                    "conversation": {
+                        "move": {
+                            "location": "npc",
+                            "npc": "copy"
+                        },
+                        "dialogue": [
+                            {
+                                "speaker": "bataar",
+                                "text": "You here again?"
+                            },
+                            {
+                                "speaker": "copy",
+                                "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes"
+                            },
+                            {
+                                "speaker": "bataar",
+                                "text": "Right... I'll be leaving",
+                                
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "slime": {
+            "triggers": [
+                {
+                    "show": "copy"
+                },
+                {
+                    "conversation": {
+                        "move": {
+                            "location": "npc",
+                            "npc": "copy"
+                        },
+                        "dialogue": [
+                            {
+                                "speaker": "copy",
+                                "text": "How did you like the fight with those slimes?!"
+                            },
+                            {
+                                "speaker": "bataar",
+                                "text": "Pfft! Easy!"
+                                
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "npcs": {
+        "copy": {
+            "conditions": {
+                "exist": [],
+                "death": []
+            },
+            "conversations": {
+                "start": {
+                    "dialogue": [
+                        {
+                            "speaker": "bataar",
+                            "text": "Ah, what do we have here? A perfect copy of me?"
+                        },
+                        {
+                            "speaker": "copy",
+                            "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes"
+                        },
+                        {
+                            "speaker": "bataar",
+                            "text": "Right... I'll be leaving",
+                            
+                        }
+                    ],
+                    "conditions": [],
+                    "triggers": [
+                        {
+                            "condition": "copy:talked"
+                        },
+                        {
+                            "interact": {
+                                "description": "Your copy looks annoyed..."
+                            }
+                        }
+                    ]
+                },
+                "after": {
+                    "dialogue": [
+                        {
+                            "speaker": "bataar",
+                            "text": "Still here?",
+                            "animation": "angry"
+                        },
+                        {
+                            "speaker": "copy",
+                            "text": "Still here?",
+                            "animation": "angry"
+                        },
+                        {
+                            "speaker": "bataar",
+                            "text": "You. Me. Now.",
+                            "animation": "none"
+                        }
+                    ],
+                    "conditions": ["copy:talked"],
+                    "triggers": [
+                        {
+                            "condition": "copy:hidden"
+                        },
+                        {
+                            "hide": "copy"
+                        },
+                        {
+                            "battle": "copy"
+                        }
+                    ]
+                }
+            }
         }
     }
 }

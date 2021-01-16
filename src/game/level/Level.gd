@@ -42,9 +42,11 @@ var location = null
 
 var yurts = {}
 var yurt_interiors = {}
+var battle_zones = {}
 var dungeons = {}
 
 func _ready():
+	camera.smoothing_enabled = true
 	AudioEngine.play_background_music("main2")
 
 	GameFlow.overlays.battle.connect("move_chosen", self, "_on_attack_move_chosen")
@@ -54,7 +56,7 @@ func _ready():
 
 	for battle_zone in get_tree().get_nodes_in_group("battle_zone"):
 		battle_zone.connect("player_entered", self, "_on_player_entered_battle_zone")
-
+		battle_zones[battle_zone.battle_id] = battle_zone
 	player.connect("damage_taken", self, "_on_target_take_damage")
 	# player.connect("death", self, "_on_target_death")
 
@@ -136,7 +138,6 @@ func eagle_attack():
 		_on_target_death(enemy)
 	enemy.scale = Vector2(1, 1)
 	update_battle()
-
 
 func enemy_attack(enemy: Enemy):
 	battle_status.performer = enemy
@@ -222,6 +223,9 @@ func update_battle():
 		GameFlow.overlays.battle.stop()
 		AudioEngine.play_background_music("main2")
 		current_battle_zone.battle_completed()
+		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
+		for trigger in triggers:
+			handle_trigger(trigger)
 	elif player.dead:
 		# big TODO
 		set_process(false)
@@ -466,6 +470,161 @@ func add_player(player: Player, player_position: Vector2):
 	$YSort.add_child(player)
 	player.position = player_position
 
+func handle_trigger(trigger: Dictionary):
+	if "condition" in trigger:
+		State.player.add_condition(trigger.condition)
+	elif "battle" in trigger:
+		state = LevelState.TRANSITION
+		player.set_still()
+		current_battle_zone = battle_zones[trigger.battle]
+		var completed =  State.get_battle_by_id(trigger.battle)
+		if completed != null and completed.completed:
+			GameFlow.overlays.popup.show_popup("BUG: Already won this battle!")
+			print("Already won this battle!")
+			player.set_moving()
+			state = LevelState.EXPLORING
+			return
+		yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
+		player.position = current_battle_zone.position + current_battle_zone.player_position.position
+		camera_tween.stop_all()
+		tween.stop_all()
+		camera.position = Vector2(0, 0)
+		player.remove_child(camera)
+		current_battle_zone.add_child(camera)
+		eagle.set_battle_zone(current_battle_zone)
+		eagle.set_start_position()
+		eagle.set_battle()
+		AudioEngine.play_background_music("battle3")
+		GameFlow.overlays.battle.set_player(player)
+		GameFlow.overlays.battle.set_battle_zone(current_battle_zone)
+		GameFlow.overlays.battle.start()
+		GameFlow.overlays.hud.set_battle_mode()
+		state = LevelState.BATTLE
+		current_battle_zone.trigger_start()
+		for enemy in current_battle_zone.enemies:
+			enemy.connect("damage_taken", self, "_on_target_take_damage")	
+		yield(GameFlow.overlays.transition.transition_to_clear(0.8), "completed")
+
+		battle_status.set_chargers([player, eagle] + current_battle_zone.enemies)
+		battle_status.start_charging()
+
+	elif "hide" in trigger:
+		yield(get_tree().create_timer(1.0), "timeout")
+		for npc in get_tree().get_nodes_in_group("npc"):
+			if npc.id == trigger.hide:
+				npc.hide()
+				npc.collision_layer = 0
+				npc.collision_mask = 0
+	elif "show" in trigger:
+		yield(get_tree().create_timer(1.0), "timeout")
+		for npc in get_tree().get_nodes_in_group("npc"):
+			if npc.id == trigger.show:
+				npc.show()
+				npc.collision_layer = 1
+				npc.collision_mask = 1
+	elif "conversation" in trigger:
+		if "move" in trigger.conversation:
+			state = LevelState.TRANSITION
+			yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
+			if trigger.conversation.move.location == "npc":
+				var found = false
+				for npc in get_tree().get_nodes_in_group("npc"):
+					if npc.id == trigger.conversation.move.npc:
+						player.position = npc.position + Vector2(-8, 8)
+						player.set_animation(Vector2(1, -1))
+						found = true
+				if !found:
+					GameFlow.overlays.popup.show_popup("Couldn't find target " + trigger.conversation.move.npc)
+			yield(GameFlow.overlays.transition.transition_to_clear(0.5), "completed")
+			show_dialogue(trigger.conversation, trigger.conversation.get("triggers", []))
+	elif "interact" in trigger:
+		show_interact(trigger.interact.description, trigger.interact.get("triggers", []))
+
+func show_dialogue(conversation: Dictionary, triggers: Array):
+	print("We got conversation", conversation)
+	player.set_still()
+	player.set_animation(Vector2(0, 0))
+	state = LevelState.TRANSITION
+	GameFlow.overlays.dialogue.set_conversation(conversation)
+	yield(GameFlow.overlays.dialogue, "finished")
+	yield(get_tree().create_timer(0.2), "timeout")
+	player.set_moving()
+	state = LevelState.EXPLORING
+	for trigger in triggers:
+		handle_trigger(trigger)
+
+func use_door(door):
+	print("Moving to target", door.target.name)
+	AudioEngine.play_effect("door_open")
+	yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+	door.target.add_player(player, door.target_position)
+	if location_state == LocationState.INSIDE:
+		var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+		camera.zoom = new_zoom
+		location_state = LocationState.OUTSIDE
+		eagle.set_process(true)
+	elif location_state == LocationState.OUTSIDE:
+		camera.zoom = Vector2(0.33, 0.33)
+		location_state = LocationState.INSIDE
+		eagle.set_process(false)
+	AudioEngine.play_effect("door_close")
+	camera.smoothing_enabled = false
+	yield(get_tree().create_timer(0.5), "timeout")
+	camera.smoothing_enabled = true
+	yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+	player.set_moving()
+	if door.target.is_in_group("yurt_interior"):
+		State.player.location = {
+			"location": "yurt",
+			"id": door.target.id,
+		}
+	elif door.target == self:
+		State.player.location = {
+			"location": "overworld",
+			"position": player.position,
+		}
+	else:
+		# TODO get the eagle here?
+		State.player.location = {
+			"location": null,
+			"position": Vector2(0, 0)
+		}
+
+	state = LevelState.EXPLORING
+
+func show_interact(description: String, triggers: Array):
+	player.set_animation(Vector2(0, 0))
+	player.set_still()
+	AudioEngine.play_effect("item_interact")
+	state = LevelState.TRANSITION
+	GameFlow.overlays.text.show_text(description)
+	yield(GameFlow.overlays.text, "finished")
+	yield(get_tree().create_timer(0.2), "timeout")
+	player.set_moving()
+	state = LevelState.EXPLORING
+	var save_point = Flow.get_interactive_value(player.collider_under_raycast.id, "save_point", false)
+	if save_point:
+		state = LevelState.TRANSITION
+		player.set_still()
+		yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+		
+		Flow.save_game()
+		if State.player.location != null and State.player.location.location == "yurt":
+			var yurt = yurts[State.player.location.id]
+			add_player(player, yurt.position + yurt.player_position.position)
+			var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+			camera.zoom = new_zoom
+			location_state = LocationState.OUTSIDE
+			player.set_animation(Vector2(0, 1))
+			player.set_animation(Vector2(0, 0))
+			player.refresh_stats()
+		yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+		# TODO move player to wake up outside yurt
+		player.set_moving()
+		state = LevelState.EXPLORING
+	for trigger in triggers:
+		handle_trigger(trigger)
+
 func _process_inputs(delta):
 	if state == LevelState.EXPLORING:
 		if Input.is_action_just_pressed("switch"):
@@ -479,68 +638,20 @@ func _process_inputs(delta):
 				print("We're interacting with ", player.collider_under_raycast, " ", player.collider_under_raycast.id)
 				var descriptions = Flow.get_interactive_value(player.collider_under_raycast.id, "descriptions", ["EMPTY_DESCRIPTION"])
 				var description = descriptions[randi() % descriptions.size()]
-				player.set_animation(Vector2(0, 0))
-				AudioEngine.play_effect("item_interact")
-				var save_point = Flow.get_interactive_value(player.collider_under_raycast.id, "save_point", false)
-				if save_point:
-					state = LevelState.TRANSITION
-					player.set_still()
-					yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
-					
-					Flow.save_game()
-					if State.player.location != null and State.player.location.location == "yurt":
-						var yurt = yurts[State.player.location.id]
-						add_player(player, yurt.position + yurt.player_position.position)
-						var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
-						camera.zoom = new_zoom
-						location_state = LocationState.OUTSIDE
-						player.set_animation(Vector2(0, 1))
-						player.set_animation(Vector2(0, 0))
-						player.refresh_stats()
-					yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
-					# TODO move player to wake up outside yurt
-					player.set_moving()
-					state = LevelState.EXPLORING
+				var triggers = Flow.get_interactive_value(player.collider_under_raycast.id, "triggers", [])
+				show_interact(description, triggers)
+			if player.collider_under_raycast is InteractableNPC:
+				print("We're interacting with ", player.collider_under_raycast, " ", player.collider_under_raycast.id)
+				var conversation = player.collider_under_raycast.get_conversation()
+				var triggers = conversation.get("triggers", [])
+				show_dialogue(conversation, triggers)
+				
 			elif player.collider_under_raycast is InteractableDoor:
 				state = LevelState.TRANSITION
 				player.set_still()
 				player.set_animation(Vector2(0, 0))
 				var door = player.collider_under_raycast
-				print("Moving to target", door.target.name)
-				AudioEngine.play_effect("door_open")
-				yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
-				door.target.add_player(player, door.target_position)
-				if location_state == LocationState.INSIDE:
-					var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
-					camera.zoom = new_zoom
-					location_state = LocationState.OUTSIDE
-					eagle.set_process(true)
-				elif location_state == LocationState.OUTSIDE:
-					camera.zoom = Vector2(0.33, 0.33)
-					location_state = LocationState.INSIDE
-					eagle.set_process(false)
-				AudioEngine.play_effect("door_close")
-				yield(get_tree().create_timer(0.5), "timeout")
-				yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
-				player.set_moving()
-				if door.target.is_in_group("yurt_interior"):
-					State.player.location = {
-						"location": "yurt",
-						"id": door.target.id,
-					}
-				elif door.target == self:
-					State.player.location = {
-						"location": "overworld",
-						"position": player.position,
-					}
-				else:
-					# TODO get the eagle here?
-					State.player.location = {
-						"location": null,
-						"position": Vector2(0, 0)
-					}
-
-				state = LevelState.EXPLORING
+				use_door(door)
 
 	elif state == LevelState.FLIGHT:
 		if Input.is_action_just_pressed("switch"):
