@@ -53,13 +53,14 @@ func perform_action(stamina_amount: int):
 
 func get_direction(velocity: Vector2):
 	var normalized_velocity = velocity.normalized()
-	if normalized_velocity.x > sqrt(3)/2:
+	print(normalized_velocity)
+	if normalized_velocity.x == 1:
 		return "e"
-	elif normalized_velocity.x < -sqrt(3)/2:
+	elif normalized_velocity.x == - 1:
 		return "w"
-	elif normalized_velocity.y > sqrt(3)/2:
+	elif normalized_velocity.y == 1:
 		return "s"
-	elif normalized_velocity.y < -sqrt(3)/2:
+	elif normalized_velocity.y == -1:
 		return "n"
 	elif normalized_velocity.x > 0 and normalized_velocity.y > 0:
 		return "se"

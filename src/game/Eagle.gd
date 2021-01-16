@@ -56,13 +56,13 @@ func update_target():
 
 func get_direction(velocity: Vector2):
 	var normalized_velocity = velocity.normalized()
-	if normalized_velocity.x > sqrt(3)/2:
+	if normalized_velocity.x > sqrt(3.1)/2:
 		return "e"
-	elif normalized_velocity.x < -sqrt(3)/2:
+	elif normalized_velocity.x < -sqrt(3.1)/2:
 		return "w"
-	elif normalized_velocity.y > sqrt(3)/2:
+	elif normalized_velocity.y > sqrt(3.1)/2:
 		return "s"
-	elif normalized_velocity.y < -sqrt(3)/2:
+	elif normalized_velocity.y < -sqrt(3.1)/2:
 		return "n"
 	elif normalized_velocity.x > 0 and normalized_velocity.y > 0:
 		return "se"
