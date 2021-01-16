@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/EagleViewScreech.ogg-ad26d30353bc79b36c99d89332d66ef0.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/EagleViewScreech.ogg"
+dest_files=[ "res://.import/EagleViewScreech.ogg-ad26d30353bc79b36c99d89332d66ef0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

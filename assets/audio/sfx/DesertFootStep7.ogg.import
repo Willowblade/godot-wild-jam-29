@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DesertFootStep7.ogg-1c5c445533a3f38171adcad1b25984cb.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/DesertFootStep7.ogg"
+dest_files=[ "res://.import/DesertFootStep7.ogg-1c5c445533a3f38171adcad1b25984cb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
