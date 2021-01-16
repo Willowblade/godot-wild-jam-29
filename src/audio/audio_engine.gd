@@ -43,7 +43,8 @@ const sfx = {
 	"footstep4": "res://assets/audio/sfx/footstep4.ogg",
 
 	"slam": "res://assets/audio/sfx/heavenly_slam.ogg",
-	"slap": "res://assets/audio/sfx/slap.ogg",
+	"slap": "res://assets/audio/sfx/EnemyHitThump2.ogg",
+	"tengrislap": "res://assets/audio/sfx/slap.ogg",
 	"throw": "res://assets/audio/sfx/throw.ogg",
 
 	"item_interact": "res://assets/audio/sfx/item_interact.ogg",

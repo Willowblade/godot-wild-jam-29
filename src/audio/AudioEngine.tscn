@@ -69,7 +69,7 @@ bus = "Music"
 
 [node name="DialoguePlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -6.0
-bus = "Music"
+bus = "SFX"
 
 [node name="SecondBackgroundPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -80.0
