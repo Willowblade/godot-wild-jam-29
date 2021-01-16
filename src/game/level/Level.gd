@@ -460,7 +460,7 @@ func switch_state(new_state: int):
 
 func counter_scale_camera(delta, increase):
 	var current_zoom = camera.zoom.x
-	var new_zoom = max(0.6, min(2.0, current_zoom + 0.3 * delta * increase))
+	var new_zoom = max(0.6, min(1.4, current_zoom + 0.3 * delta * increase))
 	camera.zoom = Vector2(new_zoom, new_zoom)
 	eagle.sprite.scale = 2 * camera.zoom * EAGLE_ZOOM
 
