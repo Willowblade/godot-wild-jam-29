@@ -285,11 +285,11 @@
                         {
                             "speaker": "copy",
                             "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes",
-                            "audio": "female_explaining",
+                            "audio": "female_mumble_1"
                         },
                         {
                             "speaker": "bataar",
-                            "text": "Right... I'll be leaving",
+                            "text": "Right... I'll be leaving"
                             
                         }
                     ],

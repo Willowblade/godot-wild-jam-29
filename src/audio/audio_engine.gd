@@ -67,6 +67,10 @@ const sfx = {
 	"female_correcting": "res://assets/audio/sfx/male_dialogue4.ogg",
 	"female_whatever": "res://assets/audio/sfx/male_dialogue5.ogg",
 
+	"female_mumble_1": "res://assets/audio/sfx/female_mumble_1_louder.ogg",
+	"female_mumble_2": "res://assets/audio/sfx/female_mumble_2_louder.ogg",
+	"female_mumble_3": "res://assets/audio/sfx/female_mumble_3_louder.ogg",
+
 	"monster_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
 	"monster_hurt2": "res://assets/audio/sfx/EnemyHitThump2.ogg",
 	"person_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
@@ -130,13 +134,17 @@ func play_dialogue_audio(track_name: String):
 	var track_path = sfx[track_name]
 	dialogue_player.stop()
 	var base_pitch = 1.2
+	dialogue_player.volume_db = -6
 	var dialogue_player_stream = load(track_path)
 	if track_name.begins_with("male"):
 		dialogue_player.pitch_scale = 0.8 * base_pitch
 	if track_name.begins_with("bataar"):
 		dialogue_player.pitch_scale = 1.0 * base_pitch
+	elif track_name.begins_with("female_mumble"):
+		dialogue_player.volume_db = 0
+		dialogue_player.pitch_scale = 1.0
 	elif track_name.begins_with("female"):
-		dialogue_player.pitch_scale = 1.2 * base_pitch
+		dialogue_player.pitch_scale = 1.3 * base_pitch
 	dialogue_player_stream.loop = false
 	dialogue_player.stream = dialogue_player_stream
 	dialogue_player.play()
