@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/EnemyHitThump2.ogg-c62d969bc1c4fca294ea955b85283bab.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/EnemyHitThump2.ogg"
+dest_files=[ "res://.import/EnemyHitThump2.ogg-c62d969bc1c4fca294ea955b85283bab.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

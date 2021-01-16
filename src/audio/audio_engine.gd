@@ -55,10 +55,10 @@ const sfx = {
 	"male_dialogue4": "res://assets/audio/sfx/male_dialogue4.ogg",
 	"male_dialogue5": "res://assets/audio/sfx/male_dialogue5.ogg",
 	
-	"monster_hurt1": "res://assets/audio/sfx/monster_hurt1.ogg",
-	"monster_hurt2": "res://assets/audio/sfx/monster_hurt2.ogg",
-	"person_hurt1": "res://assets/audio/sfx/person_hurt1.ogg",
-	"person_hurt2": "res://assets/audio/sfx/person_hurt2.ogg",
+	"monster_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
+	"monster_hurt2": "res://assets/audio/sfx/EnemyHitThump2.ogg",
+	"person_hurt1": "res://assets/audio/sfx/EnemyHitThump2.ogg",
+	"person_hurt2": "res://assets/audio/sfx/EnemyHitThump2.ogg",
 }
 
 
