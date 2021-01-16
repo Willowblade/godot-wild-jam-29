@@ -110,10 +110,10 @@ func _physics_process(delta):
 	var speed_factor = 1.0
 	
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= MOVEMENT_SPEED * speed_factor
+		velocity.x -= 2 * MOVEMENT_SPEED * speed_factor
 		
 	if Input.is_action_pressed("move_right"):
-		velocity.x += MOVEMENT_SPEED * speed_factor
+		velocity.x += 2 * MOVEMENT_SPEED * speed_factor
 		
 	if Input.is_action_pressed("move_down"):
 		velocity.y += MOVEMENT_SPEED * speed_factor
@@ -129,4 +129,8 @@ func _physics_process(delta):
 		
 	set_animation(velocity)
 	
+	if abs(velocity.x) > 0 and abs(velocity.y) > 0:
+		velocity = velocity.normalized() * MOVEMENT_SPEED * speed_factor * sqrt(2)
+	elif abs(velocity.x) > 0:
+		velocity = velocity.normalized() * MOVEMENT_SPEED * speed_factor * sqrt(2)
 	move_and_slide(velocity)

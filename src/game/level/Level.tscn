@@ -65,7 +65,7 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Yurt1" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -236.715, -112.566 )
+position = Vector2( -261.621, -123.189 )
 id = "1"
 
 [node name="Sprite" parent="YSort/Yurt1" index="0"]
@@ -76,26 +76,50 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Yurt2" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -1031.39, -313.737 )
+position = Vector2( 1963.99, 1309.43 )
 id = "2"
 door_type = 1
 door_color = 3
 
 [node name="Yurt3" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -29.7799, -774.851 )
+position = Vector2( 2506.42, 1547.77 )
 id = "3"
 door_type = 1
 door_color = 3
 
 [node name="Yurt4" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 1090.22, -94.8513 )
+position = Vector2( 3076.46, 1843.34 )
 id = "4"
 door_type = 1
 door_color = 3
 
 [node name="Yurt5" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -1.77991, 457.149 )
+position = Vector2( 3666.36, 2160.4 )
 id = "5"
+door_type = 1
+door_color = 3
+
+[node name="Yurt6" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 4241.61, 2508.74 )
+id = "6"
+door_type = 1
+door_color = 3
+
+[node name="Yurt7" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 4705.13, 2851.62 )
+id = "7"
+door_type = 1
+door_color = 3
+
+[node name="Yurt8" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 5162.3, 3134.18 )
+id = "8"
+door_type = 1
+door_color = 3
+
+[node name="Yurt9" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 5809.96, 3542.14 )
+id = "9"
 door_type = 1
 door_color = 3
 
@@ -180,16 +204,14 @@ polygon = PoolVector2Array( -103.187, 5.90662, 52.7687, -75.2383, 163.662, -17.8
 
 [node name="CopyBattle" parent="Battles" instance=ExtResource( 7 )]
 position = Vector2( -108.271, -50.4591 )
-rotation = 4.15233
 battle_id = "copy"
 
 [node name="PlayerPosition" parent="Battles/CopyBattle" index="0"]
-position = Vector2( -24.6946, -20.6296 )
+position = Vector2( -54.278, 26.5962 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/CopyBattle"]
 position = Vector2( -15.434, 8.18948 )
-rotation = 0.190133
-polygon = PoolVector2Array( -33.6877, -15.4572, 79.7777, -87.6345, 109.144, -11.2366, -1.05427, 74.2468 )
+polygon = PoolVector2Array( -66.5708, -11.3479, 37.2565, -79.9481, 127.576, -34.3912, 6.00237, 37.9172 )
 
 [node name="TargetSelector" type="Sprite" parent="."]
 visible = false
@@ -210,7 +232,7 @@ __meta__ = {
 [node name="Interiors" type="Node2D" parent="."]
 
 [node name="YurtInterior1" parent="Interiors" instance=ExtResource( 11 )]
-position = Vector2( 1037.85, 962.487 )
+position = Vector2( 1303.1, 1307.65 )
 id = "1"
 
 [node name="BrokenBed" parent="Interiors/YurtInterior1/YSort" index="0" instance=ExtResource( 15 )]
@@ -227,14 +249,14 @@ position = Vector2( -32.4241, -42.5742 )
 position = Vector2( 29.4828, -20.9182 )
 
 [node name="YurtInterior2" parent="Interiors" instance=ExtResource( 11 )]
-position = Vector2( 1248.13, 870.418 )
+position = Vector2( 1780.02, 1529.6 )
 id = "2"
 
 [node name="Bed" parent="Interiors/YurtInterior2/YSort" index="0" instance=ExtResource( 16 )]
 position = Vector2( -27.2197, -32.832 )
 
 [node name="YurtInterior3" parent="Interiors" instance=ExtResource( 11 )]
-position = Vector2( 1450.55, 781.086 )
+position = Vector2( 2310.36, 1762.12 )
 id = "3"
 
 [node name="Bed" parent="Interiors/YurtInterior3/YSort" index="0" instance=ExtResource( 16 )]
@@ -247,7 +269,7 @@ position = Vector2( -14.2705, -40.433 )
 position = Vector2( -36.1688, -30.2887 )
 
 [node name="YurtInterior4" parent="Interiors" instance=ExtResource( 11 )]
-position = Vector2( 1636.28, 684.255 )
+position = Vector2( 2851.89, 2041.43 )
 id = "4"
 
 [node name="Bed" parent="Interiors/YurtInterior4/YSort" index="0" instance=ExtResource( 16 )]
@@ -264,13 +286,53 @@ position = Vector2( 10.5, -46.5 )
 position = Vector2( 38.25, -18.5 )
 
 [node name="YurtInterior5" parent="Interiors" instance=ExtResource( 11 )]
-position = Vector2( 1822, 581.073 )
+position = Vector2( 3449.08, 2361.78 )
 id = "5"
 
-[node name="BrokenBed" parent="Interiors/YurtInterior5/YSort" index="0" instance=ExtResource( 15 )]
+[node name="Bed" parent="Interiors/YurtInterior5/YSort" index="0" instance=ExtResource( 16 )]
+position = Vector2( 29.73, -32.1086 )
+scale = Vector2( -1, 1 )
+
+[node name="YurtInterior6" parent="Interiors" instance=ExtResource( 11 )]
+position = Vector2( 4005.97, 2694.4 )
+id = "6"
+
+[node name="Bed" parent="Interiors/YurtInterior6/YSort" index="0" instance=ExtResource( 16 )]
+position = Vector2( 29.73, -32.1086 )
+scale = Vector2( -1, 1 )
+
+[node name="YurtInterior7" parent="Interiors" instance=ExtResource( 11 )]
+position = Vector2( 4507.42, 3016.94 )
+id = "7"
+
+[node name="Bed" parent="Interiors/YurtInterior7/YSort" index="0" instance=ExtResource( 16 )]
+position = Vector2( 29.73, -32.1086 )
+scale = Vector2( -1, 1 )
+
+[node name="YurtInterior8" parent="Interiors" instance=ExtResource( 11 )]
+position = Vector2( 4958.47, 3334.44 )
+id = "8"
+
+[node name="Bed" parent="Interiors/YurtInterior8/YSort" index="0" instance=ExtResource( 16 )]
+position = Vector2( 29.73, -32.1086 )
+scale = Vector2( -1, 1 )
+
+[node name="YurtInterior9" parent="Interiors" instance=ExtResource( 11 )]
+position = Vector2( 5558.19, 3722.49 )
+id = "8"
+
+[node name="BrokenBed" parent="Interiors/YurtInterior9/YSort" index="0" instance=ExtResource( 15 )]
 position = Vector2( -29.9662, -32.0262 )
 
-[node name="Bed" parent="Interiors/YurtInterior5/YSort" index="1" instance=ExtResource( 16 )]
+[node name="Bed" parent="Interiors/YurtInterior9/YSort" index="1" instance=ExtResource( 16 )]
+position = Vector2( 29.73, -32.1086 )
+scale = Vector2( -1, 1 )
+
+[node name="YurtInterior10" parent="Interiors" instance=ExtResource( 11 )]
+position = Vector2( 5558.19, 3722.49 )
+id = "9"
+
+[node name="Bed" parent="Interiors/YurtInterior10/YSort" index="0" instance=ExtResource( 16 )]
 position = Vector2( 29.73, -32.1086 )
 scale = Vector2( -1, 1 )
 
@@ -289,3 +351,13 @@ scale = Vector2( -1, 1 )
 [editable path="Interiors/YurtInterior4"]
 
 [editable path="Interiors/YurtInterior5"]
+
+[editable path="Interiors/YurtInterior6"]
+
+[editable path="Interiors/YurtInterior7"]
+
+[editable path="Interiors/YurtInterior8"]
+
+[editable path="Interiors/YurtInterior9"]
+
+[editable path="Interiors/YurtInterior10"]
