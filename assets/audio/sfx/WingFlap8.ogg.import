@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/WingFlap8.ogg-ba3966e999c85d65b56b16b30c0ab1ff.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/WingFlap8.ogg"
+dest_files=[ "res://.import/WingFlap8.ogg-ba3966e999c85d65b56b16b30c0ab1ff.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
