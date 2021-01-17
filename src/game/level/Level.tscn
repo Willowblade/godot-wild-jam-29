@@ -2013,6 +2013,7 @@ position = Vector2( -17.4567, 12.0531 )
 polygon = PoolVector2Array( -124.567, -19.3962, 52.7687, -75.2383, 163.662, -17.859, 102.613, 97.757 )
 
 [node name="TargetSelector" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 9 )
 offset = Vector2( 8, -4 )
 

@@ -240,12 +240,12 @@ func eagle_attack():
 	tween.interpolate_property(eagle.shadow, "position", null, Vector2(44, 44), max(1 - duration, 0.5), Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	# TODO define some eagle moves and enemy reacts, maybe add claw effect too? Some blood particles...
 	if should_flip:
-		enemy.scale = Vector2(-1, 1)
+		enemy.scale.x = -enemy.original_scale.x
 	enemy.play_animation(Flow.get_move_value(battle_status.performed_move, "animation", battle_status.performed_move))
 	yield(enemy.animation_player, "animation_finished")
 	if enemy.dead:
 		_on_target_death(enemy)
-	enemy.scale = Vector2(1, 1)
+		enemy.scale.x = enemy.original_scale.x
 	update_battle()
 
 func enemy_attack(enemy: Enemy):
