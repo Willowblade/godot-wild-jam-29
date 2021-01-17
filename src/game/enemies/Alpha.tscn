@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/game/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/characters/Animals.tres" type="SpriteFrames" id=2]
+
+[node name="Alpha" instance=ExtResource( 1 )]
+id = "alpha"
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2( 0, -15.7145 )
+frames = ExtResource( 2 )
