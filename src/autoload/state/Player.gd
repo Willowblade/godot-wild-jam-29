@@ -48,27 +48,27 @@ func add_condition(condition: String):
 func has_condition(condition: String):
 	return conditions.has(condition)
 	
-func get_level():
-	if experience > 600:
+func get_level(experience_calc: int):
+	if experience_calc > 600:
 		return 9
-	elif experience > 470:
+	elif experience_calc > 470:
 		return 8
-	elif experience > 350:
+	elif experience_calc > 350:
 		return 7
-	elif experience > 250:
+	elif experience_calc > 250:
 		return 6
-	elif experience > 170:
+	elif experience_calc > 170:
 		return 5
-	elif experience > 100:
+	elif experience_calc > 100:
 		return 4
-	elif experience > 50:
+	elif experience_calc > 50:
 		return 3
-	elif experience > 20:
+	elif experience_calc > 20:
 		return 2
 	return 1
 	
 func get_level_effects() -> Array:
-	var actual_level = get_level()
+	var actual_level = get_level(experience)
 	var upgrades = []
 	for i in range(1, level):
 		upgrades.append({

@@ -159,7 +159,8 @@
                         "chance": 1.0
                     }
                 ]
-            }
+            },
+            "xp": 6
         },
         "wolf": {
             "name": "Wolf",
@@ -175,7 +176,8 @@
                         "chance": 1.0
                     }
                 ]
-            }
+            },
+            "xp": 10
         },
         "alpha": {
             "name": "Alpha Wolf",
@@ -191,7 +193,8 @@
                         "chance": 1.0
                     }
                 ]
-            }
+            },
+            "xp": 30
         },
         "copy": {
             "name": "Bataar???",
@@ -210,7 +213,8 @@
                         "chance": 0.3
                     }
                 ]
-            }
+            },
+            "xp": 15
         },
         "bolkhi": {
             "name": "Bolkhi",
@@ -229,7 +233,8 @@
                         "chance": 0.3
                     }
                 ]
-            }
+            },
+            "xp": 15
         }
     },
     "interactive": {
