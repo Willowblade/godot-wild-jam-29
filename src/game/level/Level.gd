@@ -341,7 +341,7 @@ func update_battle():
 		
 		var experience = current_battle_zone.total_experience
 		var message = "You gained " + str(experience) + " experience! "
-		if State.player.get_level(State.player.experience + experience) != State.player.get_level(experience):
+		if State.player.get_level(State.player.experience + experience) != State.player.get_level(State.player.experience):
 			message += "You leveled up to level " + str(State.player.get_level(State.player.experience + experience)) + "! Not only does this make you wrestle harder, it also makes you feel better."
 		State.player.experience += experience
 		player.refresh_stats()
