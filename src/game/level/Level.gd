@@ -341,11 +341,13 @@ func update_battle():
 		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
 		
 		var experience = current_battle_zone.total_experience
+		var leveled_up = State.player.get_level(State.player.experience + experience) != State.player.get_level(State.player.experience)
 		var message = "You gained " + str(experience) + " experience! "
-		if State.player.get_level(State.player.experience + experience) != State.player.get_level(State.player.experience):
-			message += "You leveled up to level " + str(State.player.get_level(State.player.experience + experience)) + "! Not only does this make you wrestle harder, it also makes you feel better."
 		State.player.experience += experience
-		player.refresh_stats()
+		if leveled_up:
+			message += "You leveled up to level " + str(State.player.get_level(State.player.experience + experience)) + "! Not only does this make you wrestle harder, it also makes you feel better."
+			player.refresh_stats()
+
 		GameFlow.overlays.hud.set_explore_mode()
 		GameFlow.overlays.battle.stop()
 		battle_status.stop_charging()
