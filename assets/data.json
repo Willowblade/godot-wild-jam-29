@@ -851,18 +851,13 @@
                         },
                         {
                             "speaker": "bataar",
-                            "text": "What path..?"
+                            "text": "I will go, immediately. Thank you."
                         }
                     ],
                     "conditions": [],
                     "triggers": [
                         {
                             "condition": "shaman:talked"
-                        },
-                        {
-                            "interact": {
-                                "description": "Your copy looks annoyed..."
-                            }
                         }
                     ]
                 },
@@ -887,6 +882,10 @@
                             "speaker": "shaman",
                             "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
                             "audio": "female_explaining"
+                        },
+                        {
+                            "speaker": "bataar",
+                            "text": "I will go, immediately. Thank you."
                         }
                     ],
                     "conditions": ["shaman:talked"],
