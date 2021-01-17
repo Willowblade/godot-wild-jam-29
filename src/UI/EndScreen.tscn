@@ -26,9 +26,9 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/CenterContainer"]
-margin_left = 229.0
+margin_left = 230.0
 margin_top = 120.0
-margin_right = 729.0
+margin_right = 730.0
 margin_bottom = 420.0
 rect_min_size = Vector2( 500, 300 )
 size_flags_horizontal = 3
@@ -37,7 +37,7 @@ bbcode_enabled = true
 bbcode_text = "[center]
 Bataar and Bolkhi went on to join the Mongol Empire.
 
-Led by none other than Genghis Kahn.
+Led by none other than Genghis Khan.
 
 The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
 
@@ -50,7 +50,7 @@ Laurent Van Acker - Programming
 text = "
 Bataar and Bolkhi went on to join the Mongol Empire.
 
-Led by none other than Genghis Kahn.
+Led by none other than Genghis Khan.
 
 The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
 

@@ -43,7 +43,7 @@
         },
         "od_blessing": {
             "target": "player",
-            "description": "The blessing of Od runs through you, and you feel more powerful.",
+            "description": "The blessing of Öd runs through you, and you feel more powerful.",
             "effects": {
                 "strength": 0.2,
                 "defense": 0.1,
@@ -54,7 +54,7 @@
         },
         "kok_blessing": {
             "target": "player",
-            "description": "The blessing of Kok runs through your body, you feel the air's blessing in every pulse. You feel indestructable",
+            "description": "The blessing of Kök runs through your body, you feel the air's blessing in every pulse. You feel indestructable",
             "effects": {
                 "strength": 0.3,
                 "defense": 0.2,
@@ -870,12 +870,12 @@
                         },
                         {
                             "speaker": "shaman",
-                            "text": "To the North West, you will find the cave shrine of Od Tengri.",
+                            "text": "To the North West, you will find the cave shrine of Öd Tengri.",
                             "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
-                            "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
+                            "text": "And to the North, you will find the final cave shrine of Kök Tengri.",
                             "audio": "female_explaining"
                         },
                         {
@@ -904,12 +904,12 @@
                         },
                         {
                             "speaker": "shaman",
-                            "text": "To the North West, you will find the cave shrine of Od Tengri.",
+                            "text": "To the North West, you will find the cave shrine of Öd Tengri.",
                             "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
-                            "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
+                            "text": "And to the North, you will find the final cave shrine of Kök Tengri.",
                             "audio": "female_explaining"
                         },
                         {
@@ -1098,7 +1098,7 @@
                         },
                         {
                             "speaker": "bataar",
-                            "text": "Thank you for your wise words Od Tengri."
+                            "text": "Thank you for your wise words Öd Tengri."
                         }
                     ],
                     "conditions": ["boz:talked"],
@@ -1206,7 +1206,7 @@
                         },
                         {
                             "speaker": "bataar",
-                            "text": "To be a part of something greater then myself."
+                            "text": "To be a part of something greater than myself."
                         },
                         {
                             "speaker": "kok",

@@ -20,9 +20,9 @@ func add_player(player: Player, player_position: Vector2):
 
 func popup():
 	if name == "ThirdCave":
-		GameFlow.overlays.popup.show_popup_custom("Entered Shrine of Kok Tengri", Vector2(0, 40), "yurt", 2.5)
+		GameFlow.overlays.popup.show_popup_custom("Entered Shrine of Kök Tengri", Vector2(0, 40), "yurt", 2.5)
 	elif name == "FirstCave":
 		GameFlow.overlays.popup.show_popup_custom("Entered Shrine of Boz Tengri", Vector2(0, 40), "yurt", 2.5)
 	elif name == "SecondCave":
-		GameFlow.overlays.popup.show_popup_custom("Entered Shrine of Od Tengri", Vector2(0, 40), "yurt", 2.5)
+		GameFlow.overlays.popup.show_popup_custom("Entered Shrine of Öd Tengri", Vector2(0, 40), "yurt", 2.5)
 					

@@ -754,8 +754,7 @@ func use_door(door):
 	print("Moving to target", door.target.name)
 	if State.player.location.location != "cave":
 		AudioEngine.play_effect("door_open")
-	yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
-	door.target.add_player(player, door.target_position)
+	yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
 	if location_state == LocationState.INSIDE:
 		var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
 		camera.zoom = new_zoom
@@ -772,9 +771,10 @@ func use_door(door):
 		AudioEngine.play_effect("door_close")
 
 	camera.smoothing_enabled = false
-	yield(get_tree().create_timer(0.5), "timeout")
+	door.target.add_player(player, door.target_position)
+	yield(get_tree().create_timer(0.35), "timeout")
 	camera.smoothing_enabled = true
-	yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+	yield(GameFlow.overlays.transition.transition_to_clear(0.5), "completed")
 	player.set_moving()
 	if door.target.is_in_group("yurt_interior"):
 		State.player.location = {

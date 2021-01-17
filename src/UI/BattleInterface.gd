@@ -104,6 +104,11 @@ func on_enemy_death(enemy: Enemy):
 	for target in targets_list:
 		if target.target == enemy:
 			targets_list.erase(target)
+			if target == selected_target:
+				if targets_list.empty():
+					pass
+				else:
+					selected_target = targets_list[0]
 	if targets_list.empty():
 		print("Battle is over!")
 		# TODO
@@ -237,7 +242,7 @@ func set_target_page(index: int):
 
 func go_to_target_select():
 	state = SelectionState.SELECT_TARGET
-	targets.show()		
+	targets.show()
 	set_target_page(selected_target.index)
 
 func _process(delta):
