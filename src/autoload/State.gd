@@ -26,10 +26,6 @@ func load_state_from_context(context : Dictionary):
 		add_battle_from_context(battle_context)
 
 	add_player_from_context(context.get("player", {}))
-
-	for i in range(9):
-		print(i)
-		print(player.)
 		
 func save_state_to_context() -> Dictionary:
 	var context := {}
