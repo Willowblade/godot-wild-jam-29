@@ -17,7 +17,7 @@ position = Vector2( -135.67, -105.963 )
 id = "kok_tengri"
 
 [node name="PlayerPosition" parent="." index="3"]
-position = Vector2( 31.3302, 9.92823 )
+position = Vector2( -449.136, -110.851 )
 
 [node name="Door" parent="." index="4"]
 position = Vector2( -477.823, -122.23 )

@@ -211,6 +211,9 @@ func eagle_attack():
 			eagle_move_most_damage_value = damage
 			battle_status.performed_move = move
 
+	GameFlow.overlays.popup.show_popup("Burg used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
+
+
 	# todo this might need a cleanup at some point
 	eagle.set_physics_process(false)
 	battle_status.stop_charging()
@@ -253,17 +256,19 @@ func enemy_attack(enemy: Enemy):
 			break
 		else:
 			random_enemy_move_counter += chance
+
+	GameFlow.overlays.popup.show_popup(enemy.name + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
 	
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
 	var enemy_start_position = enemy.position + Vector2()
 	var target = player.position + Vector2(-6, -8)
 	enemy.sprite.speed_scale = 2.0
-	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	var duration = enemy.position.distance_to(target) / player.MOVEMENT_SPEED / 2
 	tween.interpolate_property(enemy, "position", null, target, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	enemy.sprite.speed_scale = 1.0
 	tween.interpolate_property(enemy, "position", null, target + Vector2(0, 4), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
