@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/UI/BeginScreen.gd" type="Script" id=2]
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/CenterContainer"]
+margin_left = 230.0
+margin_top = 170.0
+margin_right = 730.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 500, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[center]
+Bataar and Bolkhi went on to join the Mongol Empire.
+
+Led by none other than Genghis Kahn.
+
+The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
+[/center]"
+text = "
+Bataar and Bolkhi went on to join the Mongol Empire.
+
+Led by none other than Genghis Kahn.
+
+The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
+"
+
+[node name="Tween" type="Tween" parent="."]

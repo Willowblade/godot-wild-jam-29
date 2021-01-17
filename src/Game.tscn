@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/UI/PauseUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Canvas.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://src/UI/InteractionOverlay.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/UI/DialogueView.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/theme.tres" type="Theme" id=12]
+[ext_resource path="res://src/UI/BeginScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/UI/EndScreen.tscn" type="PackedScene" id=14]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
@@ -50,6 +52,12 @@ theme = ExtResource( 12 )
 [node name="InteractionOverlay" parent="UICanvas" instance=ExtResource( 10 )]
 visible = false
 theme = ExtResource( 12 )
+
+[node name="BeginScreen" parent="UICanvas" instance=ExtResource( 13 )]
+visible = false
+
+[node name="EndScreen" parent="UICanvas" instance=ExtResource( 14 )]
+visible = false
 
 [node name="PauseUI" parent="UICanvas" instance=ExtResource( 1 )]
 visible = false
