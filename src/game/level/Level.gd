@@ -544,8 +544,8 @@ func transition_to_player_from_flight():
 func transition_to_battle_zone_from_player():
 	state = LevelState.TRANSITION
 	
-	camera_tween.stop_all()
-	tween.stop_all()
+	camera_tween.remove_all()
+	tween.remove_all()
 	camera.position = Vector2(0, 0)
 	
 	# add_child(camera)
@@ -557,7 +557,8 @@ func transition_to_battle_zone_from_player():
 
 	camera_tween.interpolate_property(camera, "position", null, current_battle_zone.position, 0.2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	camera_tween.start()
-	yield(move_player_to_battle_zone(), "completed")
+	move_player_to_battle_zone()
+	yield(camera_tween, "tween_all_completed")
 	remove_child(camera)
 	camera.position = Vector2(0, 0)
 	current_battle_zone.add_child(camera)
