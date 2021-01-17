@@ -337,6 +337,7 @@ region_enabled = true
 region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
 
 [node name="Buddy" type="Sprite" parent="OtherSpeaker"]
+visible = false
 position = Vector2( 4.29999, -49.054 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
@@ -345,11 +346,11 @@ region_rect = Rect2( 103, 61, 19, 31 )
 
 [node name="God" type="Sprite" parent="OtherSpeaker"]
 visible = false
-position = Vector2( 4.29999, -49.054 )
+position = Vector2( 4.29999, -61.3244 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 7, 55, 20, 41 )
+region_rect = Rect2( 295, 244, 20, 39 )
 
 [node name="Shaman" type="Sprite" parent="OtherSpeaker"]
 visible = false
