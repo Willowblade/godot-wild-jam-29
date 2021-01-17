@@ -1729,10 +1729,6 @@ position = Vector2( 622.91, 296.517 )
 position = Vector2( 611.892, 219.643 )
 id = "bolkhi2"
 
-[node name="Wolf" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -768, -456 )
-scale = Vector2( -1, 1 )
-
 [node name="Wolf2" parent="YSort" instance=ExtResource( 29 )]
 position = Vector2( -464, -184 )
 scale = Vector2( -1, 1 )
@@ -1754,7 +1750,7 @@ position = Vector2( -496, -520 )
 position = Vector2( -1168, -328 )
 
 [node name="Wolf10" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -704, -424 )
+position = Vector2( -706.973, -448.676 )
 scale = Vector2( -1, 1 )
 
 [node name="Wolf6" parent="YSort" instance=ExtResource( 29 )]
@@ -1817,7 +1813,7 @@ scale = Vector2( -1, 1 )
 position = Vector2( 447.625, -264 )
 
 [node name="Alpha" parent="YSort" instance=ExtResource( 28 )]
-position = Vector2( -720, -448 )
+position = Vector2( -735.46, -460.784 )
 scale = Vector2( -1, 1 )
 
 [node name="CaveEntrance" parent="YSort" instance=ExtResource( 27 )]
@@ -1953,10 +1949,10 @@ position = Vector2( -17.4567, 12.0531 )
 polygon = PoolVector2Array( -142.608, 44.3439, 87.9402, -105.697, 167.825, -78.7885, -34.7102, 148.199, -82.4718, 87.1071 )
 
 [node name="SecondBolkhi10" parent="Battles" instance=ExtResource( 7 )]
-position = Vector2( -754.305, -437.236 )
+position = Vector2( -754.008, -437.236 )
 
 [node name="PlayerPosition" parent="Battles/SecondBolkhi10" index="0"]
-position = Vector2( -42.0206, 50.543 )
+position = Vector2( -32.6767, 29.1856 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/SecondBolkhi10"]
 position = Vector2( -17.4567, 12.0531 )

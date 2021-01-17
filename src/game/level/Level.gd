@@ -163,6 +163,14 @@ func game_start_sequence():
 			},
 			{
 				"speaker": "copy",
+				"text": "Sleep and heal in yurts.",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Sleep and heal in yurts.",
+			},
+			{
+				"speaker": "copy",
 				"text": "Use the Tab key to use your eagle to navigate the desert",
 			},
 			{
