@@ -7,7 +7,7 @@ onready var raycast: RayCast2D = $RayCast
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-export var MOVEMENT_SPEED: float = 300.0
+export var MOVEMENT_SPEED: float = 50.0
 
 signal interact
 signal damage_taken(player)
@@ -161,6 +161,9 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("debugging"):
 		pass
+
+	if Input.is_action_just_pressed("sprint"):
+		velocity *= 6
 		
 	set_animation_when_moving(velocity)
 	
