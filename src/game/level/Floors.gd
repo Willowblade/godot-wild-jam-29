@@ -26,23 +26,24 @@ func cleanup():
 		for tile in floor_.get_used_cells():
 			floor_to_tiles[floor_].tiles[tile] = null
 		i += 1
-	
-	var all_tiles_on_top = {}
-	i = 0
-	for reversed_floor_ in reversed_floors:
-		reversed_floor_.remove_borders()
-		reversed_floor_.add_from_upper(all_tiles_on_top.keys())
-		var all_tiles_on_top_keys = all_tiles_on_top.keys()
 		
-		# we don't need to do this for the lowest floor
-		if reversed_floor_ == floors[0]:
-			continue
+	if Engine.editor_hint:
+		var all_tiles_on_top = {}
+		i = 0
+		for reversed_floor_ in reversed_floors:
+			reversed_floor_.remove_borders()
+			reversed_floor_.add_from_upper(all_tiles_on_top.keys())
+			var all_tiles_on_top_keys = all_tiles_on_top.keys()
 			
-		all_tiles_on_top = {}
-		for tile in reversed_floor_.get_used_cells():
-			all_tiles_on_top[tile] = null
-		i += 1
-		
+			# we don't need to do this for the lowest floor
+			if reversed_floor_ == floors[0]:
+				continue
+				
+			all_tiles_on_top = {}
+			for tile in reversed_floor_.get_used_cells():
+				all_tiles_on_top[tile] = null
+			i += 1
+			
 	for floor_ in floors:
 		floor_.clean()
 		floor_.activate_borders()

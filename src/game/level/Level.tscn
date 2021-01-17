@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/game/level/floor/Floor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/Player.tscn" type="PackedScene" id=2]
@@ -30,6 +30,9 @@
 [ext_resource path="res://src/game/enemies/Alpha.tscn" type="PackedScene" id=28]
 [ext_resource path="res://src/game/enemies/Wolf.tscn" type="PackedScene" id=29]
 [ext_resource path="res://src/game/enemies/Snake.tscn" type="PackedScene" id=30]
+[ext_resource path="res://src/game/level/caves/FirstCave.tscn" type="PackedScene" id=31]
+[ext_resource path="res://src/game/level/caves/SecondCave.tscn" type="PackedScene" id=32]
+[ext_resource path="res://src/game/level/caves/ThirdCave.tscn" type="PackedScene" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2143.04, 37.5396 )
@@ -219,7 +222,7 @@ position = Vector2( 2201.65, 584 )
 position = Vector2( 784, 312 )
 
 [node name="Wolf" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( 136, 184 )
+position = Vector2( 75.8959, 173.393 )
 
 [node name="Wolf2" parent="YSort" instance=ExtResource( 29 )]
 position = Vector2( -552, -104 )
@@ -228,22 +231,22 @@ position = Vector2( -552, -104 )
 position = Vector2( -288, -696 )
 
 [node name="Wolf5" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -496, -360 )
+position = Vector2( -556.182, -379.176 )
 
 [node name="Wolf7" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -464, -536 )
+position = Vector2( -441.716, -545.25 )
 
 [node name="Wolf8" parent="YSort" instance=ExtResource( 29 )]
 position = Vector2( -496, -520 )
 
 [node name="Wolf9" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -752, -544 )
+position = Vector2( -822.888, -553.172 )
 
 [node name="Wolf10" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -672, -536 )
+position = Vector2( -778.008, -573.126 )
 
 [node name="Wolf6" parent="YSort" instance=ExtResource( 29 )]
-position = Vector2( -1040, -96 )
+position = Vector2( -1057.86, -107.509 )
 
 [node name="Wolf4" parent="YSort" instance=ExtResource( 29 )]
 position = Vector2( -208, -688 )
@@ -294,16 +297,19 @@ position = Vector2( 96, -624 )
 position = Vector2( 448, -264 )
 
 [node name="Alpha" parent="YSort" instance=ExtResource( 28 )]
-position = Vector2( 88, 184 )
+position = Vector2( 39.2096, 186.121 )
 
 [node name="CaveEntrance" parent="YSort" instance=ExtResource( 27 )]
 position = Vector2( -392, -16 )
+id = "1"
 
 [node name="CaveEntrance2" parent="YSort" instance=ExtResource( 27 )]
 position = Vector2( -200, -944 )
+id = "2"
 
 [node name="CaveEntrance3" parent="YSort" instance=ExtResource( 27 )]
 position = Vector2( -664, -648 )
+id = "3"
 
 [node name="Boundary" type="StaticBody2D" parent="."]
 collision_layer = 5
@@ -480,6 +486,15 @@ id = "9"
 [node name="Bed" parent="Interiors/YurtInterior10/YSort" index="0" instance=ExtResource( 16 )]
 position = Vector2( 33.8105, -50.4899 )
 scale = Vector2( -1, 1 )
+
+[node name="FirstCave" parent="Interiors" instance=ExtResource( 31 )]
+position = Vector2( -2628.74, 863.546 )
+
+[node name="SecondCave" parent="Interiors" instance=ExtResource( 32 )]
+position = Vector2( -1729.18, 1400.71 )
+
+[node name="ThirdCave" parent="Interiors" instance=ExtResource( 33 )]
+position = Vector2( -3220.5, 1555.5 )
 
 [editable path="YSort/Yurt1"]
 

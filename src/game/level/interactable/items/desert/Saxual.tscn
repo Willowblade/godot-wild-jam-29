@@ -10,4 +10,4 @@ position = Vector2( 0, -17.4243 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 position = Vector2( 0, 3.57569 )
-polygon = PoolVector2Array( -16.3075, -2.84318, -0.0183029, 2.3217, 15.2115, -2.84318, -0.226051, -10.1203 )
+polygon = PoolVector2Array( -20.9427, -3.50527, 0.246597, 3.64611, 19.0521, -3.10797, -0.150703, -11.8485 )
