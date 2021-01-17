@@ -118,11 +118,11 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Yurt1" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 510.66, 351.652 )
+position = Vector2( 494.151, 365.917 )
 id = "1"
 
 [node name="Sprite" parent="YSort/Yurt1" index="0"]
-modulate = Color( 0.890196, 0.427451, 0.427451, 1 )
+modulate = Color( 0.980392, 0.807843, 0.807843, 1 )
 
 [node name="InteractableDoor" parent="YSort/Yurt1" index="4"]
 collision_layer = 2

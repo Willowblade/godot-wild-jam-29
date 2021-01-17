@@ -1267,11 +1267,17 @@
                                         "dialogue": [
                                             {
                                                 "speaker": "copy",
-                                                "text": "Wake up! You're daydreaming again!"
+                                                "text": "Wake up! You're daydreaming again!",
+                                                "animation": "angry"
                                             },
                                             {
                                                 "speaker": "bataar",
                                                 "text": "Wait, was it all a dream?"
+                                            },
+                                            {
+                                                "speaker": "copy",
+                                                "text": "Always has been.",
+                                                "audio": "bataar_mocking"
                                             }
                                         ]
                                     }
