@@ -1286,59 +1286,6 @@
                         }
                     ]
                 },
-                "start_dumb": {  
-                    "dialogue": [
-                        {
-                            "speaker": "bataar",
-                            "text": "I had come to seek your council.. Oh wise God of the Gods."
-                        },
-                        
-                        {
-                            "speaker": "kok",
-                            "text": "And change it!",
-                            "audio": "none",
-                            "animation": "angry"
-                        }
-                    ],
-                    "conditions": ["od:talked", "boz:talked"],
-                    "triggers": [
-                        {
-                            "condition": "kok:talked"
-                        },
-                        {
-                            "upgrade": "kok_blessing",
-                            "triggers": [
-                                {
-                                    "condition": "bolkhi:hidden"
-                                },
-                                {
-                                    "hide": "bolkhi"
-                                },
-                                {
-                                    "show": "bolkhi2"
-                                },
-                                {
-                                    "conversation": {
-                                        "move": {
-                                            "location": "npc",
-                                            "npc": "bolkhi"
-                                        },
-                                        "dialogue": [
-                                            {
-                                                "speaker": "copy",
-                                                "text": "Wake up! You're daydreaming again!"
-                                            },
-                                            {
-                                                "speaker": "bataar",
-                                                "text": "Wait, was it all a dream?"
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
                 "after": {
                     "dialogue": [
                         {
