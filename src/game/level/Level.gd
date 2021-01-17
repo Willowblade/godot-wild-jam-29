@@ -51,7 +51,7 @@ var previous_interactables = null
 
 func _ready():
 	AudioEngine.play_ambiance()
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 	AudioEngine.play_background_music("main2")
 
 	GameFlow.overlays.battle.connect("move_chosen", self, "_on_attack_move_chosen")
@@ -497,7 +497,7 @@ func transition_to_eagle_flight():
 	player.remove_child(camera)
 	camera.position = Vector2(0, 0)
 	eagle.add_child(camera)
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 	transition_tiles(2, 0.8)
 	camera_tween.interpolate_property(camera, "zoom", null, Vector2(0.8, 0.8), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.6, 1.6) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
@@ -522,7 +522,7 @@ func transition_to_player_from_battle():
 	current_battle_zone.remove_child(camera)
 	camera.position = Vector2(0, 0)
 	player.add_child(camera)
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 	var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
 	camera_tween.interpolate_property(camera, "zoom", null, new_zoom, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.start()
@@ -550,7 +550,7 @@ func transition_to_player_from_flight():
 	eagle.remove_child(camera)
 	camera.position = Vector2(0, 0)
 	player.add_child(camera)
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 	var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
 	camera_tween.interpolate_property(camera, "zoom", null, new_zoom, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.0, 1.0), 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN)
@@ -580,7 +580,7 @@ func transition_to_battle_zone_from_player():
 	remove_child(camera)
 	camera.position = Vector2(0, 0)
 	current_battle_zone.add_child(camera)
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 		
 	state = LevelState.BATTLE
 
@@ -726,7 +726,7 @@ func handle_trigger(trigger: Dictionary):
 						player.position = npc.position + Vector2(-8, 8)
 						player.set_animation(Vector2(1, -1))
 						yield(get_tree().create_timer(0.5), "timeout")
-						camera.smoothing_enabled = true
+						camera.smoothing_enabled = false
 						found = true
 				if !found:
 					GameFlow.overlays.popup.show_popup("Couldn't find target " + trigger.conversation.move.npc)
@@ -773,7 +773,7 @@ func use_door(door):
 	camera.smoothing_enabled = false
 	door.target.add_player(player, door.target_position)
 	yield(get_tree().create_timer(0.35), "timeout")
-	camera.smoothing_enabled = true
+	camera.smoothing_enabled = false
 	yield(GameFlow.overlays.transition.transition_to_clear(0.5), "completed")
 	player.set_moving()
 	if door.target.is_in_group("yurt_interior"):
