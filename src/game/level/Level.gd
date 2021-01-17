@@ -548,16 +548,31 @@ func handle_trigger(trigger: Dictionary):
 				npc.show()
 				npc.collision_layer = 3
 				npc.collision_mask = 3
+	elif "upgrade" in trigger:
+		var upgrade_description = Flow.get_upgrade_value(trigger.upgrade, "description", "No DESC")
+		State.add_new_upgrade(trigger.upgrade)
+		player.refresh_stats()
+		show_interact(upgrade_description, trigger.get("triggers", []))
 	elif "conversation" in trigger:
 		if "move" in trigger.conversation:
 			state = LevelState.TRANSITION
 			yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
+			# hack for last teleport
+			if location_state == LocationState.INSIDE:
+				add_player(player, Vector2(0, 0))
+				var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+				camera.zoom = new_zoom
+				location_state = LocationState.OUTSIDE
+				eagle.set_process(true)
 			if trigger.conversation.move.location == "npc":
 				var found = false
 				for npc in get_tree().get_nodes_in_group("npc"):
 					if npc.id == trigger.conversation.move.npc:
+						camera.smoothing_enabled = false
 						player.position = npc.position + Vector2(-8, 8)
 						player.set_animation(Vector2(1, -1))
+						yield(get_tree().create_timer(0.5), "timeout")
+						camera.smoothing_enabled = true
 						found = true
 				if !found:
 					GameFlow.overlays.popup.show_popup("Couldn't find target " + trigger.conversation.move.npc)

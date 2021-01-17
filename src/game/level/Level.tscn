@@ -118,7 +118,7 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Yurt1" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( -797.38, -460.235 )
+position = Vector2( 510.66, 351.652 )
 id = "1"
 
 [node name="Sprite" parent="YSort/Yurt1" index="0"]
@@ -313,7 +313,7 @@ id = "3"
 position = Vector2( 653.296, 279.571 )
 
 [node name="Bokhi2" parent="YSort" instance=ExtResource( 34 )]
-position = Vector2( 585.449, 198.787 )
+position = Vector2( 569.893, 206.212 )
 
 [node name="BolkhiV2" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( -1827.86, -1463.69 )
@@ -363,7 +363,7 @@ position = Vector2( 532.047, 222.281 )
 battle_id = "bolkhi2"
 
 [node name="PlayerPosition" parent="Battles/SecondBolkhi" index="0"]
-position = Vector2( -55.8586, 30.0994 )
+position = Vector2( -36.7767, 19.9972 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/SecondBolkhi"]
 position = Vector2( -17.9567, 11.5531 )

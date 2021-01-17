@@ -544,8 +544,8 @@
                                 "text": "WOOOOOO!!! Lets gooooo!"
                             }
                         ],
-                        "triggers": {
-                            "conversation": {
+                        "triggers": [
+                            {"conversation": {
                                 "move": {
                                     "location": "npc",
                                     "npc": "bolkhi3"
@@ -598,8 +598,11 @@
                                 ]
                             }
                         }
+                        ]
+                            
+                        }
                     }
-                }
+                
             ]
         }
     },
@@ -678,7 +681,7 @@
         "bolkhi": {
             "conditions": {
                 "exist": [],
-                "death": ["bolky:hidden"]
+                "death": ["bolkhi:hidden"]
             },
             "conversations": {
                 "start": {
@@ -1247,6 +1250,15 @@
                             "upgrade": "kok_blessing",
                             "triggers": [
                                 {
+                                    "condition": "bolkhi:hidden"
+                                },
+                                {
+                                    "hide": "bolkhi"
+                                },
+                                {
+                                    "show": "bolkhi2"
+                                },
+                                {
                                     "conversation": {
                                         "move": {
                                             "location": "npc",
@@ -1254,22 +1266,65 @@
                                         },
                                         "dialogue": [
                                             {
-                                                "speaker": "bataar",
-                                                "text": "You here again?"
+                                                "speaker": "copy",
+                                                "text": "Wake up! You're daydreaming again!"
                                             },
+                                            {
+                                                "speaker": "bataar",
+                                                "text": "Wait, was it all a dream?"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "start_dumb": {  
+                    "dialogue": [
+                        {
+                            "speaker": "bataar",
+                            "text": "I had come to seek your council.. Oh wise God of the Gods."
+                        },
+                        
+                        {
+                            "speaker": "kok",
+                            "text": "And change it!",
+                            "audio": "none",
+                            "animation": "angry"
+                        }
+                    ],
+                    "conditions": ["od:talked", "boz:talked"],
+                    "triggers": [
+                        {
+                            "condition": "kok:talked"
+                        },
+                        {
+                            "upgrade": "kok_blessing",
+                            "triggers": [
+                                {
+                                    "condition": "bolkhi:hidden"
+                                },
+                                {
+                                    "hide": "bolkhi"
+                                },
+                                {
+                                    "show": "bolkhi2"
+                                },
+                                {
+                                    "conversation": {
+                                        "move": {
+                                            "location": "npc",
+                                            "npc": "bolkhi"
+                                        },
+                                        "dialogue": [
                                             {
                                                 "speaker": "copy",
-                                                "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes"
+                                                "text": "Wake up! You're daydreaming again!"
                                             },
                                             {
                                                 "speaker": "bataar",
-                                                "text": "Right... I'll be leaving"
-                                                
-                                            }
-                                        ],
-                                        "triggers": [
-                                            {
-                                                "battle": "bolkhi2"
+                                                "text": "Wait, was it all a dream?"
                                             }
                                         ]
                                     }
