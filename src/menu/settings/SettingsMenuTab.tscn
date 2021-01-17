@@ -9,7 +9,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 32
-custom_constants/margin_top = 32
+custom_constants/margin_top = 200
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
 script = ExtResource( 2 )
@@ -18,9 +18,16 @@ __meta__ = {
 }
 tab_type = 1
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 32.0
+margin_top = 200.0
+margin_right = 928.0
+margin_bottom = 508.0
+color = Color( 0, 0, 0, 0.760784 )
+
 [node name="BackContainer" type="VBoxContainer" parent="."]
 margin_left = 32.0
-margin_top = 32.0
+margin_top = 200.0
 margin_right = 928.0
 margin_bottom = 508.0
 mouse_filter = 2
@@ -34,7 +41,7 @@ text = "BACK"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 32.0
-margin_top = 32.0
+margin_top = 200.0
 margin_right = 928.0
 margin_bottom = 508.0
 mouse_filter = 2
@@ -75,7 +82,7 @@ text = "~"
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 896.0
-margin_bottom = 476.0
+margin_bottom = 308.0
 mouse_filter = 2
 size_flags_vertical = 3
 __meta__ = {
@@ -84,7 +91,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 896.0
-margin_bottom = 452.0
+margin_bottom = 284.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -92,9 +99,9 @@ custom_constants/separation = 16
 alignment = 1
 
 [node name="AudioContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 123.0
+margin_top = 39.0
 margin_right = 896.0
-margin_bottom = 313.0
+margin_bottom = 229.0
 mouse_filter = 2
 custom_constants/separation = 16
 
@@ -243,9 +250,9 @@ text = "MUTE_SFX"
 align = 1
 
 [node name="LocaleContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 329.0
+margin_top = 245.0
 margin_right = 896.0
-margin_bottom = 329.0
+margin_bottom = 245.0
 mouse_filter = 2
 custom_constants/separation = 16
 

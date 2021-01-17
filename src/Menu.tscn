@@ -32,7 +32,7 @@ margin_bottom = -6.0
 
 [node name="SettingsMenuTab" parent="TabContainer" instance=ExtResource( 4 )]
 visible = false
-margin_left = 4.0
-margin_top = 8.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
