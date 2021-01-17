@@ -141,7 +141,7 @@ func play_background_music(track_name: String):
 func play_dialogue_audio(track_name: String):
 	var track_path = sfx[track_name]
 	dialogue_player.stop()
-	var base_pitch = 1.2
+	var base_pitch = 1.1 + 0.3 * randf()
 	dialogue_player.volume_db = -6
 	var dialogue_player_stream = load(track_path)
 	if track_name.begins_with("male"):
