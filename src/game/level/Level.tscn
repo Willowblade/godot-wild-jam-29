@@ -210,11 +210,10 @@ collision_mask = 3
 position = Vector2( 2184, 592.55 )
 
 [node name="Bolkhi" parent="YSort" instance=ExtResource( 25 )]
-position = Vector2( 511.04, 299.681 )
-scale = Vector2( -1, 1 )
+position = Vector2( 622.91, 296.517 )
 
 [node name="Bolkhi2" parent="YSort" instance=ExtResource( 25 )]
-position = Vector2( 622.607, 221.23 )
+position = Vector2( 611.892, 219.643 )
 id = "bolkhi2"
 
 [node name="Wolf" parent="YSort" instance=ExtResource( 29 )]
@@ -308,12 +307,10 @@ position = Vector2( -664, -648 )
 id = "3"
 
 [node name="Bokhi" parent="YSort" instance=ExtResource( 34 )]
-position = Vector2( 638.051, 317.259 )
-scale = Vector2( -1, 1 )
+position = Vector2( 653.296, 279.571 )
 
 [node name="Bokhi2" parent="YSort" instance=ExtResource( 34 )]
-position = Vector2( 920.274, 204.68 )
-scale = Vector2( -1, 1 )
+position = Vector2( 585.449, 198.787 )
 
 [node name="BolkhiV2" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( -1827.86, -1463.69 )
@@ -348,22 +345,22 @@ position = Vector2( 600, 320 )
 [node name="Battles" type="Node2D" parent="."]
 
 [node name="FirstBolki" parent="Battles" instance=ExtResource( 7 )]
-position = Vector2( 673.171, 329.391 )
+position = Vector2( 622.674, 296.827 )
 battle_id = "bolkhi"
 
 [node name="PlayerPosition" parent="Battles/FirstBolki" index="0"]
-position = Vector2( 56.0628, 26.1747 )
+position = Vector2( -48.5964, 29.7785 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/FirstBolki"]
-position = Vector2( -17.9567, 11.5531 )
+position = Vector2( -17.4848, 11.5531 )
 polygon = PoolVector2Array( -103.187, 5.90662, 52.7687, -75.2383, 163.662, -17.859, -2.70822, 68.5877 )
 
 [node name="SecondBolkhi" parent="Battles" instance=ExtResource( 7 )]
-position = Vector2( 955.218, 213.107 )
-battle_id = "bolkhi"
+position = Vector2( 532.047, 222.281 )
+battle_id = "bolkhi2"
 
 [node name="PlayerPosition" parent="Battles/SecondBolkhi" index="0"]
-position = Vector2( 57.4063, 30.0994 )
+position = Vector2( -55.8586, 30.0994 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Battles/SecondBolkhi"]
 position = Vector2( -17.9567, 11.5531 )

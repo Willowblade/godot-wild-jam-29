@@ -546,8 +546,8 @@ func handle_trigger(trigger: Dictionary):
 		for npc in get_tree().get_nodes_in_group("npc"):
 			if npc.id == trigger.show:
 				npc.show()
-				npc.collision_layer = 1
-				npc.collision_mask = 1
+				npc.collision_layer = 3
+				npc.collision_mask = 3
 	elif "conversation" in trigger:
 		if "move" in trigger.conversation:
 			state = LevelState.TRANSITION

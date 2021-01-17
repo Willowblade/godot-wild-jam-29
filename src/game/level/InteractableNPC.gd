@@ -15,13 +15,16 @@ func _ready():
 		collision_mask = 0
 	if conditions.get("death", []):
 		var should_be_dead = true
-		for condition in conditions.get("exist", []):
+		for condition in conditions.get("death", []):
 			if !State.player.has_condition(condition):
 				should_be_dead = false 
 		if should_be_dead:
 			hide()
 			collision_layer = 0
 			collision_mask = 0
+	print(name)
+	print(collision_layer)
+	print(collision_mask)
 
 func get_conversation():
 	var conversations = Flow.get_npc_value(id, "conversations", {})

@@ -105,8 +105,6 @@ func clean():
 					if !nw_exists:
 						set_cellv(used_cell, name_to_id_mapping["floor_half_left_obstructed_edge"])
 					else:
-						if name == "Z4" and used_cell == Vector2(-20, 8):
-							print("hehe")
 						set_cellv(used_cell, name_to_id_mapping["floor_half_left_obstructed"])
 				elif used_cells.has(used_cell + Vector2(1, 1)) and id_to_name_mapping[used_cells[used_cell + Vector2(1, 1)]].begins_with("slope_sw"):
 					set_cellv(used_cell, name_to_id_mapping["floor_half_left_obstructed_slope"])

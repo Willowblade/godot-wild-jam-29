@@ -53,7 +53,6 @@ func perform_action(stamina_amount: int):
 
 func get_direction_when_moving(velocity: Vector2):
 	var normalized_velocity = velocity.normalized()
-	print(normalized_velocity)
 	if normalized_velocity.x == 1:
 		return "e"
 	elif normalized_velocity.x == - 1:

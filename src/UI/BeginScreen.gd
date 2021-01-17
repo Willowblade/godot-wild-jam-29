@@ -14,7 +14,6 @@ func _ready():
 func show_text():
 	var text = label.bbcode_text
 	var parts = text.split("\n\n")
-	print(parts)
 	var i = 0
 	var count = 0
 	for part in parts:

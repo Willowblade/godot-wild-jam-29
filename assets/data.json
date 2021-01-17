@@ -447,12 +447,17 @@
                             {
                                 "speaker": "bataar",
                                 "text": "That.. Wasn't a question.",
-                                "audio": "bataar_laughing"
+                                "audio": "bataar_mocking"
                             },
                             {
                                 "speaker": "bolkhi",
                                 "text": "Oh! Yea I knew that.",
-                                "audio": "male_laughing"
+                                "audio": "male_mocking"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "condition": "bolkhi:spoken"
                             }
                         ]
                     }
@@ -479,12 +484,12 @@
                             {
                                 "speaker": "bataar",
                                 "text": "I can't say I disagree, hahah.",
-                                "audio":"bataar_laughing"
+                                "audio":"bataar_mocking"
                             },
                             {
                                 "speaker": "bataar",
                                 "text": "You're out of breath though Bolkhi. You should probably exercise a bit more.",
-                                "audio":"bataar_laughing"
+                                "audio":"bataar_mocking"
                             },
                             {
                                 "speaker": "bolkhi",
@@ -680,36 +685,20 @@
                 "after": {
                     "dialogue": [
                         {
-                            "speaker": "bataar",
-                            "text": "Still here?",
-                            "animation": "angry",
-                            "audio": "bataar_mocking"
-                        },
-                        {
-                            "speaker": "copy",
+                            "speaker": "bolkhi",
                             "text": "Still here?",
                             "animation": "angry",
                             "audio": "male_mocking"
                         },
                         {
                             "speaker": "bataar",
-                            "text": "You. Me. Now.",
+                            "text": "Going, going.",
                             "animation": "none",
                             "audio": "none"
                         }
                     ],
-                    "conditions": ["copy:talked"],
-                    "triggers": [
-                        {
-                            "condition": "copy:hidden"
-                        },
-                        {
-                            "hide": "copy"
-                        },
-                        {
-                            "battle": "copy"
-                        }
-                    ]
+                    "conditions": ["bolkhi:talked"],
+                    "triggers": []
                 }
             }
         },
