@@ -36,7 +36,7 @@ var current_battle_zone: BattleZone = null
 
 var player_interactables = []
 
-export var EAGLE_ZOOM = 1.2
+export var EAGLE_ZOOM = 1.1
 
 var location = null
 
@@ -46,6 +46,8 @@ var battle_zones = {}
 var dungeons = {}
 var caves = {}
 var cave_interiors = {}
+
+var previous_interactables = null
 
 func _ready():
 	AudioEngine.play_ambiance()
@@ -320,6 +322,13 @@ func _on_target_enemy(target):
 
 func _process(delta):
 	_process_inputs(delta)
+	
+	if previous_interactables:
+		previous_interactables.hide_hint()
+	previous_interactables = player.collider_under_raycast
+	if previous_interactables and state == LevelState.EXPLORING:
+		previous_interactables.show_hint()
+	
 
 	if state == LevelState.EXPLORING and location_state == LocationState.OUTSIDE:
 		var floor_player = floors.get_tile_floor(player.position)
@@ -364,8 +373,8 @@ func transition_to_eagle_flight():
 	eagle.add_child(camera)
 	camera.smoothing_enabled = true
 	transition_tiles(2, 0.8)
-	camera_tween.interpolate_property(camera, "zoom", null, Vector2(0.9, 0.9), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
-	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.8, 1.8) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	camera_tween.interpolate_property(camera, "zoom", null, Vector2(0.8, 0.8), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.6, 1.6) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.start()
 	yield(camera_tween, "tween_completed")
 	state = LevelState.FLIGHT
@@ -477,7 +486,7 @@ func switch_state(new_state: int):
 
 func counter_scale_camera(delta, increase):
 	var current_zoom = camera.zoom.x
-	var new_zoom = max(0.6, min(1.4, current_zoom + 0.3 * delta * increase))
+	var new_zoom = max(0.6, min(1.0, current_zoom + 0.3 * delta * increase))
 	camera.zoom = Vector2(new_zoom, new_zoom)
 	eagle.sprite.scale = 2 * camera.zoom * EAGLE_ZOOM
 

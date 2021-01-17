@@ -273,7 +273,7 @@ func _process(delta):
 		if state == SelectionState.SELECT_TARGET:
 			var new_index = (selected_target.index - 1) % targets_list.size()
 			set_target_page(new_index)
-	elif Input.is_action_just_pressed("confirm"):
+	elif Input.is_action_just_pressed("confirm") or Input.is_action_just_pressed("interact"):
 		if state == SelectionState.SELECT_MOVE:
 			go_to_target_select()
 		elif state == SelectionState.SELECT_TARGET:
