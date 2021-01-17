@@ -8,7 +8,7 @@ onready var burg_action_timer = $VBoxContainer/MarginContainer/PanelContainer/HB
 
 onready var health_value: Label = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/HealthContainer/HealthValue
 onready var stamina_value: Label = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/StaminaContainer/StaminaValue
-
+onready var level_value: Label = $VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/NameContainer/LevelValue
 func _ready():
 	GameFlow.register_overlay("hud", self)
 
@@ -22,6 +22,8 @@ func _on_updated_charges(chargers):
 
 func on_player_updated_stats(updated_stats):
 	var player_stats = State.player.get_stats()
+	
+	level_value.text = "lvl. " + str(State.player.get_level(State.player.experience))
 
 	# TODO get max player stat from game data (calculation plus upgrades)
 	health_value.text = str(updated_stats.health) + "/" + str(player_stats.max_health)

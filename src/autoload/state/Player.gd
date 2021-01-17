@@ -29,15 +29,15 @@ func get_context() -> Dictionary:
 	
 func get_player_level_effect(level_index: int) -> Dictionary:
 	return {
-		"health": int(6 * (1 + level_index / 3)),
-		"stamina": int(4 * (1 + level_index / 2)),
+		"max_health": int(6 * (1 + float(level_index) / 3)),
+		"max_stamina": int(4 * (1 + float(level_index) / 2)),
 		"strength": 0.1,
 		"defense": +0.08
 	}
 	
 func get_eagle_level_effect(level_index: int) -> Dictionary:
 	return {
-		"strength": 0.15,
+		"strength": 0.1,
 	}
 
 func add_condition(condition: String):
@@ -85,11 +85,16 @@ func get_level_effects() -> Array:
 
 func get_stats() -> Dictionary:
 	var stats: Dictionary = get_base_stats().duplicate(true)
-	for upgrade in State.upgrades + get_level_effects():
+	for upgrade in State.upgrades:
 		var upgrade_target = Flow.get_upgrade_value(upgrade.id, "target", "player")
 		var upgrade_effects = Flow.get_upgrade_value(upgrade.id, "effects", {})
 		if upgrade_target == "player":
 			var effect = upgrade_effects
+			for key in effect:
+				stats[key] += effect[key]
+	for level_effect in get_level_effects():
+		if upgrade_target == "player":
+			var effect = level_effect.effects
 			for key in effect:
 				stats[key] += effect[key]
 	return stats

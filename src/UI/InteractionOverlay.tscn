@@ -60,23 +60,22 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 7.0
-margin_right = 394.0
-margin_bottom = 117.0
+margin_right = 430.0
+margin_bottom = 130.0
 custom_constants/margin_top = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
-margin_right = 394.0
-margin_bottom = 110.0
+margin_right = 430.0
+margin_bottom = 130.0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 387.0
-margin_bottom = 103.0
+margin_right = 423.0
+margin_bottom = 123.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -85,6 +84,6 @@ custom_constants/margin_bottom = 8
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 372.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 350, 80 )
+margin_right = 408.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 400, 100 )

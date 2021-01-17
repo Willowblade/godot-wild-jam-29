@@ -8,7 +8,7 @@
 [ext_resource path="res://src/game/Eagle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/game/battle/BattleZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/game/level/interactable/npc/BolkhiV3.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/graphics/ui/selected.png" type="Texture" id=9]
+[ext_resource path="res://assets/graphics/ui/Sandstorm_Battle_Arrow.png" type="Texture" id=9]
 [ext_resource path="res://src/game/level/BattleStatus.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/game/level/YurtInterior.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/game/level/interactable/items/desert/Saxual.tscn" type="PackedScene" id=12]
@@ -1768,7 +1768,7 @@ scale = Vector2( -1, 1 )
 position = Vector2( 320, 56 )
 
 [node name="Snake2" parent="YSort" instance=ExtResource( 30 )]
-position = Vector2( 416, -264 )
+position = Vector2( 416, -257.157 )
 
 [node name="Snake4" parent="YSort" instance=ExtResource( 30 )]
 position = Vector2( -192, 24 )
@@ -1814,7 +1814,7 @@ position = Vector2( 96, -624 )
 scale = Vector2( -1, 1 )
 
 [node name="Snake3" parent="YSort" instance=ExtResource( 30 )]
-position = Vector2( 448, -264 )
+position = Vector2( 447.625, -264 )
 
 [node name="Alpha" parent="YSort" instance=ExtResource( 28 )]
 position = Vector2( -720, -448 )
@@ -2013,6 +2013,7 @@ position = Vector2( -17.4567, 12.0531 )
 polygon = PoolVector2Array( -124.567, -19.3962, 52.7687, -75.2383, 163.662, -17.859, 102.613, 97.757 )
 
 [node name="TargetSelector" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 9 )
 
 [node name="BattleStatus" parent="." instance=ExtResource( 10 )]

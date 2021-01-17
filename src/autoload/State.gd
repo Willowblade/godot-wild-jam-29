@@ -16,6 +16,8 @@ func load_state_from_context(context : Dictionary):
 	upgrades.clear()
 	battles.clear()
 
+
+
 	# UPGRADES NEEDS TO BE CREATED FIRST!!!
 	for upgrade_context in context.get("upgrades", {}):
 		add_upgrade_from_context(upgrade_context)
@@ -25,6 +27,10 @@ func load_state_from_context(context : Dictionary):
 
 	add_player_from_context(context.get("player", {}))
 
+	for i in range(9):
+		print(i)
+		print(player.)
+		
 func save_state_to_context() -> Dictionary:
 	var context := {}
 

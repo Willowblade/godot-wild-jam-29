@@ -155,13 +155,12 @@ func game_start_sequence():
 			
 			{
 				"speaker": "copy",
-				"text": "Choose wrestling moves and targets with arrows and E or Enter",
+				"text": "In battle, pick wrestling moves and targets with arrows and E or Enter",
 			},
 			{
 				"speaker": "bataar",
-				"text": "Choose wrestling moves and targets with arrows and E or Enter",
+				"text": "In battle, pick wrestling moves and targets with arrows and E or Enter",
 			},
-			
 			{
 				"speaker": "copy",
 				"text": "Use the Tab key to use your eagle to navigate the desert",
@@ -192,12 +191,15 @@ func game_start_sequence():
 
 func _on_character_attack_ready(character):
 	if character is Player:
-		battle_status.stop_charging()
-		GameFlow.overlays.battle.resume()
+		if current_battle_zone.enemies.size() > 0:
+			battle_status.stop_charging()
+			GameFlow.overlays.battle.resume()
 	elif character is Eagle:
-		eagle_attack()
+		if current_battle_zone.enemies.size() > 0:
+			eagle_attack()
 	elif character is Enemy:
-		enemy_attack(character)
+		if current_battle_zone.enemies.size() > 0:
+			enemy_attack(character)
 
 
 func eagle_attack():
@@ -212,7 +214,8 @@ func eagle_attack():
 			battle_status.performed_move = move
 
 	GameFlow.overlays.popup.show_popup("Burg used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
-
+	camera_tween.remove_all()
+	tween.remove_all()
 
 	# todo this might need a cleanup at some point
 	eagle.set_physics_process(false)
@@ -258,7 +261,7 @@ func enemy_attack(enemy: Enemy):
 			random_enemy_move_counter += chance
 
 	GameFlow.overlays.popup.show_popup(enemy.name + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
-	
+	tween.remove_all()
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
 	var enemy_start_position = enemy.position + Vector2()
@@ -293,6 +296,9 @@ func _on_player_entered_battle_zone(battle_zone: BattleZone):
 	print("Starting battle")
 	if battle_zone.enemies.size() == 0:
 		print("No enemies here, not doing anything")
+		return
+	
+	battle_zone.started = true
 	for enemy in battle_zone.enemies:
 		enemy.connect("damage_taken", self, "_on_target_take_damage")
 		# enemy.connect("death", self, "_on_target_death")
@@ -305,7 +311,11 @@ func _on_attack_move_chosen(move, target):
 	battle_status.performer = player
 	player.perform_action(move.cost)
 	GameFlow.overlays.battle.pause()
+	battle_status.stop_charging()
 	target_selector.hide()
+	
+	camera_tween.remove_all()
+	tween.remove_all()
 
 	var enemy = target.target
 
@@ -333,15 +343,18 @@ func update_battle():
 		var message = "You gained " + str(experience) + " experience! "
 		if State.player.get_level(State.player.experience + experience) != State.player.get_level(experience):
 			message += "You leveled up to level " + str(State.player.get_level(State.player.experience + experience)) + "! Not only does this make you wrestle harder, it also makes you feel better."
-
+		State.player.experience += experience
+		player.refresh_stats()
+		GameFlow.overlays.hud.set_explore_mode()
+		GameFlow.overlays.battle.stop()
+		battle_status.stop_charging()
 		yield(show_interact(message, []), "completed")
 		state = LevelState.BATTLE
 
 		for trigger in triggers:
 			handle_trigger(trigger)
 
-		GameFlow.overlays.hud.set_explore_mode()
-		GameFlow.overlays.battle.stop()
+		
 		AudioEngine.play_background_music("main2")
 		state = LevelState.BATTLE
 		yield(switch_state(LevelState.EXPLORING), "completed")
@@ -364,6 +377,7 @@ func update_battle():
 
 
 func move_player_to_enemy(enemy: Enemy):
+	tween.remove_all()
 	var enemy_position = enemy.position + Vector2(6, 12)
 	if player.position.distance_to(enemy_position) > player.position.distance_to(enemy.position + Vector2(6, 12)):
 		enemy_position = enemy.position + Vector2(0, 12)
@@ -450,8 +464,8 @@ func _process(delta):
 			transition_tiles(current_floor_player, 0.5)
 				
 			var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
-			tween.interpolate_property(camera, "zoom", null, new_zoom, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-			tween.start()
+			camera_tween.interpolate_property(camera, "zoom", null, new_zoom, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+			camera_tween.start()
 		
 func transition_tiles(floor_level, duration):
 	var floors_below = floors.get_floors_below(floor_level)
@@ -468,7 +482,8 @@ func transition_tiles(floor_level, duration):
 func transition_to_eagle_flight():
 	state = LevelState.TRANSITION
 	
-	camera_tween.stop_all()
+	camera_tween.remove_all()
+	tween.remove_all()
 	camera.position = Vector2(0, 0)
 	
 	# add_child(camera)
@@ -485,8 +500,9 @@ func transition_to_eagle_flight():
 	camera.smoothing_enabled = true
 	transition_tiles(2, 0.8)
 	camera_tween.interpolate_property(camera, "zoom", null, Vector2(0.8, 0.8), 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
-	camera_tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.6, 1.6) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	tween.interpolate_property(eagle.sprite, "scale", null, Vector2(1.6, 1.6) * EAGLE_ZOOM, 0.8, Tween.TRANS_CUBIC, Tween.EASE_IN)
 	camera_tween.start()
+	tween.start()
 	yield(camera_tween, "tween_completed")
 	state = LevelState.FLIGHT
 
@@ -494,7 +510,8 @@ func transition_to_player_from_battle():
 	state = LevelState.TRANSITION
 	# TODO replace by a fade to black perhaps?
 	
-	camera_tween.stop_all()
+	camera_tween.remove_all()
+	tween.remove_all()
 	camera.position = Vector2(0, 0)
 
 	# add_child(camera)
@@ -518,7 +535,8 @@ func transition_to_player_from_flight():
 	state = LevelState.TRANSITION
 	# TODO replace by a fade to black perhaps?
 	
-	camera_tween.stop_all()
+	camera_tween.remove_all()
+	tween.remove_all()
 	camera.position = Vector2(0, 0)
 	eagle.set_physics_process(false)
 

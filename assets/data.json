@@ -220,8 +220,8 @@
             "name": "Bolkhi",
             "description": "You're not sure why you're wrestling this guy every day",
             "stats": {
-                "timeout": 8,
-                "max_health": 30,
+                "timeout": 5,
+                "max_health": 60,
                 "strength": 1.0,
                 "defense": 1.0,
                 "moves": [
@@ -456,7 +456,7 @@
                             },
                             {
                                 "speaker": "bolkhi",
-                                "text": "He always has something helpful to say.",
+                                "text": "She always has something helpful to say.",
                                 "audio": "male_explaining"
                             },
                             {

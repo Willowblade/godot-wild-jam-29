@@ -49,5 +49,5 @@ func _on_body_entered(body: Node):
 			enemies.append(body)
 			total_experience += Flow.get_enemy_value(body.id, "xp", 3)
 	if body is Player:
-		if not completed and not triggered:
+		if not completed and not triggered and not started:
 			emit_signal("player_entered", self)
