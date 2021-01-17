@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/level/InteractableDoor.gd"
 }, {
+"base": "InteractableNPC",
+"class": "InteractableFloor",
+"language": "GDScript",
+"path": "res://src/game/level/interactable/npc/InteractableFloor.gd"
+}, {
 "base": "Interactable",
 "class": "InteractableItem",
 "language": "GDScript",
@@ -102,6 +107,7 @@ _global_script_class_icons={
 "GamePopup": "",
 "Interactable": "",
 "InteractableDoor": "",
+"InteractableFloor": "",
 "InteractableItem": "",
 "InteractableNPC": "",
 "JSONBeautifier": "",
