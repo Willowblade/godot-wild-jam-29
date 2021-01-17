@@ -25,8 +25,7 @@ func _on_resume_button_pressed():
 	Flow.toggle_paused()
 
 func _on_restart_button_pressed():
-	# TODO load game
-	Flow.toggle_paused()
+	Flow.load_game()
 
 func _on_settings_button_pressed():
 	emit_signal("button_pressed", TABS.SETTINGS)
