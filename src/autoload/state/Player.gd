@@ -92,10 +92,11 @@ func get_stats() -> Dictionary:
 			var effect = upgrade_effects
 			for key in effect:
 				stats[key] += effect[key]
+				
 	for level_effect in get_level_effects():
 		if level_effect.target == "player":
 			var effect = level_effect.effects
-			for key in effect:
+			for key in effect.keys():
 				stats[key] += effect[key]
 	return stats
 
