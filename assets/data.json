@@ -158,7 +158,7 @@
         },
         "snake": {
             "name": "Snake",
-            "description": "Very kawaii, but don't let them cuddle you to death.",
+            "description": "When you hear its rattle, you better get on your guard. Pit vipers are among the most aggressive animals in the Gobi.",
             "stats": {
                 "timeout": 6.5,
                 "max_health": 12,
@@ -175,7 +175,7 @@
         },
         "wolf": {
             "name": "Wolf",
-            "description": "Despite its adoring looks, it's out for your blood!.",
+            "description": "Hunts in packs, and it's out for your blood!.",
             "stats": {
                 "timeout": 5.5,
                 "max_health": 30,

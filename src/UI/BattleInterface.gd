@@ -285,7 +285,10 @@ func _process(delta):
 			set_target_page(new_index)
 	elif Input.is_action_just_pressed("confirm") or Input.is_action_just_pressed("interact"):
 		if state == SelectionState.SELECT_MOVE:
-			go_to_target_select()
+			if selected_move.cost > player.stats.stamina:
+				GameFlow.overlays.popup.show_popup("Not enough stamina")
+			else:
+				go_to_target_select()
 		elif state == SelectionState.SELECT_TARGET:
 			if selected_move.cost > player.stats.stamina:
 				print("No good! Insufficient stamina...")
