@@ -327,11 +327,12 @@ func _on_attack_move_chosen(move, target):
 func update_battle():
 	if battle_status.number_of_enemies == 0:
 		current_battle_zone.battle_completed()
+		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
 		yield(switch_state(LevelState.EXPLORING), "completed")
 		GameFlow.overlays.hud.set_explore_mode()
 		GameFlow.overlays.battle.stop()
 		AudioEngine.play_background_music("main2")
-		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
+
 		for trigger in triggers:
 			handle_trigger(trigger)
 	elif player.dead:
