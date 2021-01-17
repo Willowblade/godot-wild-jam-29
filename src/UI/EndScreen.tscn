@@ -26,11 +26,11 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/CenterContainer"]
-margin_left = 230.0
-margin_top = 170.0
-margin_right = 730.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 500, 200 )
+margin_left = 229.0
+margin_top = 120.0
+margin_right = 729.0
+margin_bottom = 420.0
+rect_min_size = Vector2( 500, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -40,6 +40,12 @@ Bataar and Bolkhi went on to join the Mongol Empire.
 Led by none other than Genghis Kahn.
 
 The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
+
+Thank you for playing
+
+Isabella Lau - Composition & SFX
+Jerico Landry -  Art
+Laurent Van Acker - Programming
 [/center]"
 text = "
 Bataar and Bolkhi went on to join the Mongol Empire.
@@ -47,6 +53,12 @@ Bataar and Bolkhi went on to join the Mongol Empire.
 Led by none other than Genghis Kahn.
 
 The Mongol Emprire still currently holds the record for the largest contiguous Empire to ever have existed.
+
+Thank you for playing
+
+Isabella Lau - Composition & SFX
+Jerico Landry -  Art
+Laurent Van Acker - Programming
 "
 
 [node name="Tween" type="Tween" parent="."]
