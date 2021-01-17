@@ -92,7 +92,7 @@ func get_stats() -> Dictionary:
 			var effect = upgrade_effects
 			for key in effect:
 				stats[key] += effect[key]
-				
+
 	for level_effect in get_level_effects():
 		if level_effect.target == "player":
 			var effect = level_effect.effects
@@ -103,9 +103,17 @@ func get_stats() -> Dictionary:
 func get_eagle_stats() -> Dictionary:
 	var stats: Dictionary = get_base_eagle_stats().duplicate(true)
 	for upgrade in State.upgrades:
-		if upgrade.target == "eagle":
-			var effect = upgrade.effect
+		var upgrade_target = Flow.get_upgrade_value(upgrade.id, "target", "player")
+		var upgrade_effects = Flow.get_upgrade_value(upgrade.id, "effects", {})
+		if upgrade_target == "eagle":
+			var effect = upgrade_effects
 			for key in effect:
+				stats[key] += effect[key]
+				
+	for level_effect in get_level_effects():
+		if level_effect.target == "player":
+			var effect = level_effect.effects
+			for key in effect.keys():
 				stats[key] += effect[key]
 	return stats
 

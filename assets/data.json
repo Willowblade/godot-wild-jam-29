@@ -62,6 +62,17 @@
                 "max_stamina": 15,
                 "moves": ["slam"]
             }
+        },
+        "death_wurm_tooth": {
+            "target": "player",
+            "description": "A relic from the most formidable foe in the desert",
+            "effects": {
+                "strength": 0.5,
+                "defense": 0.5,
+                "max_health": 30,
+                "max_stamina": 30,
+                "moves": []
+            }
         }
     },
     "player": {
@@ -69,7 +80,7 @@
         "level": 1,
         "experience": 0,
         "base_stats": {
-            "max_health": 40,
+            "max_health": 32,
             "max_stamina": 20,
             "strength": 1.0,
             "defense": 1.0,
@@ -78,7 +89,7 @@
         }
     },
     "eagle": {
-        "name": "Bataar",
+        "name": "Eagle",
         "level": 1,
         "experience": 0,
         "base_stats": {
@@ -95,32 +106,32 @@
             "name": "Mongolian Slap™",
             "description": "Not sure what makes it mongolian, but they own it",
             "cost": 0,
-            "damage": 10
+            "damage": 9
         },
         "throw": {
             "name": "Throw",
             "description": "Throws your opponent up in the air, making them fall. Hurts...",
             "cost": 5,
-            "damage": 15
+            "damage": 14
         },
         "slam": {
             "name": "Heavenly Slam",
             "description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
             "cost": 10,
-            "damage": 20
+            "damage": 18
         },
         "loremaster": {
             "name": "Storytime",
             "description": "Tell your adversary all about the history you've uncovered so far, making them sympathise with you",
             "cost": 8,
-            "damage": 25,
+            "damage": 20,
             "sfx": "male_dialogue1"
         },
         "rend": {
             "name": "Rend Throw",
             "description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
             "cost": 10,
-            "damage": 8,
+            "damage": 7,
             "animation": "throw",
             "sfx": "eagle_screech1"
         }
@@ -131,7 +142,7 @@
             "description": "Slimes are a pest in this desert, I think there's a reward for eradicating all of them",
             "stats": {
                 "timeout": 4.5,
-                "max_health": 20,
+                "max_health": 25,
                 "strength": 0.5,
                 "defense": 0.7,
                 "moves": [
@@ -149,9 +160,9 @@
             "name": "Snake",
             "description": "Very kawaii, but don't let them cuddle you to death.",
             "stats": {
-                "timeout": 7.5,
+                "timeout": 6.5,
                 "max_health": 12,
-                "strength": 0.5,
+                "strength": 0.7,
                 "defense": 0.7,
                 "moves": [
                     {
@@ -166,10 +177,10 @@
             "name": "Wolf",
             "description": "Despite its adoring looks, it's out for your blood!.",
             "stats": {
-                "timeout": 6.5,
-                "max_health": 24,
+                "timeout": 5.5,
+                "max_health": 30,
                 "strength": 0.8,
-                "defense": 0.9,
+                "defense": 0.8,
                 "moves": [
                     {
                         "name": "slap",
@@ -183,10 +194,10 @@
             "name": "Alpha Wolf",
             "description": "You've really done it this time Bataar... This wolf commands all the wolves in this entire region. Surely defeating it warrants a reward...",
             "stats": {
-                "timeout": 5.5,
-                "max_health": 50,
+                "timeout": 5.0,
+                "max_health": 55,
                 "strength": 1.1,
-                "defense": 1.1,
+                "defense": 1.2,
                 "moves": [
                     {
                         "name": "throw",
@@ -194,7 +205,7 @@
                     }
                 ]
             },
-            "xp": 30
+            "xp": 40
         },
         "copy": {
             "name": "Bataar???",
@@ -220,10 +231,10 @@
             "name": "Bolkhi",
             "description": "You're not sure why you're wrestling this guy every day",
             "stats": {
-                "timeout": 5,
+                "timeout": 4,
                 "max_health": 60,
-                "strength": 1.0,
-                "defense": 1.0,
+                "strength": 0.8,
+                "defense": 0.7,
                 "moves": [
                     {
                         "name": "slap",

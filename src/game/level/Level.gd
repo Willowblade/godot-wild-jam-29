@@ -190,6 +190,7 @@ func game_start_sequence():
 	State.player.add_condition("started_game")
 
 func _on_character_attack_ready(character):
+	battle_status.stop_charging()
 	if character is Player:
 		if current_battle_zone.enemies.size() > 0:
 			battle_status.stop_charging()
@@ -260,7 +261,7 @@ func enemy_attack(enemy: Enemy):
 		else:
 			random_enemy_move_counter += chance
 
-	GameFlow.overlays.popup.show_popup(enemy.name + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
+	GameFlow.overlays.popup.show_popup(GameFlow.overlays.battle.get_name(enemy) + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
 	tween.remove_all()
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
