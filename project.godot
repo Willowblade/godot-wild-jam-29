@@ -124,6 +124,7 @@ _global_script_class_icons={
 
 config/name="Godot Wild Jam 29"
 run/main_scene="res://src/Menu.tscn"
+boot_splash/image="res://assets/graphics/ui/background.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 

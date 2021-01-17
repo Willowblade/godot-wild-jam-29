@@ -172,5 +172,5 @@ func _physics_process(delta):
 		velocity = velocity.normalized() * MOVEMENT_SPEED * speed_factor * sqrt(2)
 	
 	if Input.is_action_pressed("sprint"):
-		velocity *= 6
+		velocity *= sqrt(2)
 	move_and_slide(velocity)

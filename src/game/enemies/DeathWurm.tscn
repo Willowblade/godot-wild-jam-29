@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/game/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/characters/Mongolian_Death_Worm.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="DeathWurm" instance=ExtResource( 1 )]
+id = "death_wurm"
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2( 0, -10.345 )
+frames = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -19.8872, 0.471806, 0.469093, 7.81342, 20.6585, 0.138096, -0.213638, -8.77165 )

@@ -65,11 +65,11 @@
         },
         "death_wurm_tooth": {
             "target": "player",
-            "description": "A relic from the most formidable foe in the desert",
+            "description": "A relic from the most formidable foe in the desert, Death Wurm Barrudin.",
             "effects": {
                 "strength": 0.5,
                 "defense": 0.5,
-                "max_health": 30,
+                "max_health": 35,
                 "max_stamina": 30,
                 "moves": []
             }
@@ -207,6 +207,27 @@
             },
             "xp": 40
         },
+        "death_wurm": {
+            "name": "Death Wurm Barrudin, Bane of the Gobi",
+            "description": "Many lives were lost to Mongolian Death Wurm Barrudin, swallowed whole and minced to pieces.",
+            "stats": {
+                "timeout": 4.0,
+                "max_health": 105,
+                "strength": 1.6,
+                "defense": 1.6,
+                "moves": [
+                    {
+                        "name": "throw",
+                        "chance": 0.5
+                    },
+                    {
+                        "name": "slam",
+                        "chance": 0.5
+                    }
+                ]
+            },
+            "xp": 399
+        },
         "copy": {
             "name": "Bataar???",
             "description": "You're not sure why you're fighting your alter image?",
@@ -326,6 +347,13 @@
         }
     },
     "battles": {
+        "death_wurm": {
+            "triggers": [
+                {
+                    "upgrade": "death_wurm_tooth"
+                }
+            ]
+        },
         "copy": {
             "triggered": true,
             "triggers": [

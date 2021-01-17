@@ -93,8 +93,8 @@ func _unhandled_input(event : InputEvent):
 	if InputMap.has_action("toggle_full_screen") and event.is_action_pressed("toggle_full_screen"):
 		OS.window_fullscreen = not OS.window_fullscreen
 
-	if InputMap.has_action("restart") and event.is_action_pressed("restart"):
-		call_deferred("deferred_reload_current_scene")
+	# if InputMap.has_action("restart") and event.is_action_pressed("restart"):
+	# 	call_deferred("deferred_reload_current_scene")
 
 	match _game_state:
 		STATE.GAME:
