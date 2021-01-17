@@ -8,7 +8,7 @@ onready var sigil = $Sigil
 var activated = false
 
 func _ready():
-	show_sigil()
+	pass
 
 
 func show_sigil():

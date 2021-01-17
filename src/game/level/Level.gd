@@ -678,8 +678,13 @@ func _process_inputs(delta):
 				var triggers = Flow.get_interactive_value(player.collider_under_raycast.id, "triggers", [])
 				show_interact(description, triggers)
 			if player.collider_under_raycast is InteractableNPC:
+				
 				print("We're interacting with ", player.collider_under_raycast, " ", player.collider_under_raycast.id)
 				var conversation = player.collider_under_raycast.get_conversation()
+				# TODO superhacky fix to see if it's an actually good dialogue
+				if len(conversation.dialogue) > 3:
+					if player.collider_under_raycast is InteractableFloor:
+						player.collider_under_raycast.show_sigil()
 				var triggers = conversation.get("triggers", [])
 				show_dialogue(conversation, triggers)
 				

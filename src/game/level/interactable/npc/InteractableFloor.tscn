@@ -4,13 +4,13 @@
 [ext_resource path="res://assets/graphics/level/platform.png" type="Texture" id=2]
 [ext_resource path="res://src/game/level/interactable/npc/InteractableFloor.gd" type="Script" id=3]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 80, 48 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -21,7 +21,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2( -0.992119, 25.4222 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 
 [node name="Bounds" type="StaticBody2D" parent="." index="1"]
 position = Vector2( -0.992119, 41.6931 )

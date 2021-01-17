@@ -41,8 +41,8 @@ func get_conversation():
 			return conversations[conversation_key]
 
 	return {
-		"dialogue": {
+		"dialogue": [{
 			"speaker": "copy",
 			"text": "Bataar, you're not allowed to speak to me, I don't exist in this game's code..."
-		}
+		}]
 	}
