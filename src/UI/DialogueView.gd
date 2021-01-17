@@ -145,5 +145,5 @@ func progress_dialogue():
 
 func _process(_delta):
 
-	if Input.is_action_just_pressed("confirm"):
+	if Input.is_action_just_pressed("confirm") or Input.is_action_just_pressed("interact"):
 		progress_dialogue()

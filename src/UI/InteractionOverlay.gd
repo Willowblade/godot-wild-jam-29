@@ -21,5 +21,5 @@ func stop_showing_text():
 	emit_signal("finished")
 	
 func _process(delta):
-	if Input.is_action_just_pressed("confirm"):
+	if Input.is_action_just_pressed("confirm") or Input.is_action_just_pressed("interact"):
 		stop_showing_text()
