@@ -48,7 +48,27 @@ func add_condition(condition: String):
 func has_condition(condition: String):
 	return conditions.has(condition)
 	
+func get_level():
+	if experience > 600:
+		return 9
+	elif experience > 470:
+		return 8
+	elif experience > 350:
+		return 7
+	elif experience > 250:
+		return 6
+	elif experience > 170:
+		return 5
+	elif experience > 100:
+		return 4
+	elif experience > 50:
+		return 3
+	elif experience > 20:
+		return 2
+	return 1
+	
 func get_level_effects() -> Array:
+	var actual_level = get_level()
 	var upgrades = []
 	for i in range(1, level):
 		upgrades.append({
@@ -66,8 +86,10 @@ func get_level_effects() -> Array:
 func get_stats() -> Dictionary:
 	var stats: Dictionary = get_base_stats().duplicate(true)
 	for upgrade in State.upgrades + get_level_effects():
-		if upgrade.target == "player":
-			var effect = upgrade.effect
+		var upgrade_target = Flow.get_upgrade_value(upgrade.id, "target", "player")
+		var upgrade_effects = Flow.get_upgrade_value(upgrade.id, "effects", {})
+		if upgrade_target == "player":
+			var effect = upgrade_effects
 			for key in effect:
 				stats[key] += effect[key]
 	return stats

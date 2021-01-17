@@ -188,7 +188,7 @@ func game_start_sequence():
 			},
 		]
 	}, [])
-	State.player.add_condition("game_started")
+	State.player.add_condition("started_game")
 
 func _on_character_attack_ready(character):
 	if character is Player:
@@ -210,6 +210,9 @@ func eagle_attack():
 		if damage > eagle_move_most_damage_value:
 			eagle_move_most_damage_value = damage
 			battle_status.performed_move = move
+
+	GameFlow.overlays.popup.show_popup("Burg used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
+
 
 	# todo this might need a cleanup at some point
 	eagle.set_physics_process(false)
@@ -253,17 +256,19 @@ func enemy_attack(enemy: Enemy):
 			break
 		else:
 			random_enemy_move_counter += chance
+
+	GameFlow.overlays.popup.show_popup(enemy.name + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
 	
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
 	var enemy_start_position = enemy.position + Vector2()
 	var target = player.position + Vector2(-6, -8)
 	enemy.sprite.speed_scale = 2.0
-	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	var duration = enemy.position.distance_to(target) / player.MOVEMENT_SPEED / 2
 	tween.interpolate_property(enemy, "position", null, target, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
+	AudioEngine.play_effect(Flow.get_move_value(battle_status.performed_move, "sfx", battle_status.performed_move))
 	enemy.sprite.speed_scale = 1.0
 	tween.interpolate_property(enemy, "position", null, target + Vector2(0, 4), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
@@ -321,12 +326,13 @@ func _on_attack_move_chosen(move, target):
 
 func update_battle():
 	if battle_status.number_of_enemies == 0:
+		current_battle_zone.battle_completed()
+		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
 		yield(switch_state(LevelState.EXPLORING), "completed")
 		GameFlow.overlays.hud.set_explore_mode()
 		GameFlow.overlays.battle.stop()
 		AudioEngine.play_background_music("main2")
-		current_battle_zone.battle_completed()
-		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
+
 		for trigger in triggers:
 			handle_trigger(trigger)
 	elif player.dead:
@@ -341,6 +347,10 @@ func update_battle():
 
 func move_player_to_enemy(enemy: Enemy):
 	var enemy_position = enemy.position + Vector2(6, 12)
+	if player.position.distance_to(enemy_position) > player.position.distance_to(enemy.position + Vector2(6, 12)):
+		enemy_position = enemy.position + Vector2(0, 12)
+	if player.position.distance_to(enemy_position) > player.position.distance_to(enemy.position + Vector2(-6, 12)):
+		enemy_position = enemy.position + Vector2(-6, 12)
 	player.set_animation(enemy_position - player.position)
 	var duration = player.position.distance_to(enemy_position) / player.MOVEMENT_SPEED / 2
 	player.sprite.speed_scale = 2.0
@@ -612,6 +622,7 @@ func handle_trigger(trigger: Dictionary):
 			return
 		yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
 		player.position = current_battle_zone.position + current_battle_zone.player_position.position
+		player.set_animation(current_battle_zone.position - player.position)
 		camera_tween.stop_all()
 		tween.stop_all()
 		camera.position = Vector2(0, 0)

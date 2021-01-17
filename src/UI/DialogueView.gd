@@ -22,8 +22,8 @@ onready var other_speakers := {
 
 onready var speaker_names := {
 	"copy": "Bataar???",
-	"shaman": "Sha Man",
-	"bolkhi": "Bulky",
+	"shaman": "Idugan",
+	"bolkhi": "Bolkhi",
 	"boz": "Boz Tengri, the God of Ground",
 	"od": "Öd Tengri, the God of Time",
 	"kok":"Kök Tengri, the God of the Sky, God of Gods",
@@ -78,10 +78,10 @@ func set_speaker(speaker: String):
 		bataar_speaker.modulate = Color(0.6, 0.6, 0.6, 0.6)
 		speaker_label.text = speaker_names[speaker]
 		for other_speaker_name in other_speakers:
-			if other_speaker_name == speaker:
-				other_speakers[other_speaker_name].show()
-			else:
-				other_speakers[other_speaker_name].hide()
+			other_speakers[other_speaker_name].hide()
+		var speaker_sprite = other_speakers.get(speaker)
+		if speaker_sprite:
+			speaker_sprite.show()
 				
 func animate_speaker(speaker: String, animation: String):
 	if animation == "none":
