@@ -10,6 +10,8 @@ signal player_entered(battle_zone)
 var triggered = false
 var started = false
 
+var total_experience = 0
+
 var enemies = []
 var completed = false
 
@@ -45,6 +47,7 @@ func _on_body_entered(body: Node):
 			body.queue_free()
 		else:
 			enemies.append(body)
+			total_experience += Flow.get_enemy_value(body.id, "xp", 3)
 	if body is Player:
 		if not completed and not triggered:
 			emit_signal("player_entered", self)

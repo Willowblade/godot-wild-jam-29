@@ -328,13 +328,31 @@ func update_battle():
 	if battle_status.number_of_enemies == 0:
 		current_battle_zone.battle_completed()
 		var triggers = Flow.get_battle_value(current_battle_zone.battle_id, "triggers", [])
-		yield(switch_state(LevelState.EXPLORING), "completed")
-		GameFlow.overlays.hud.set_explore_mode()
-		GameFlow.overlays.battle.stop()
-		AudioEngine.play_background_music("main2")
+		
+		var experience = current_battle_zone.total_experience
+		var message = "You gained " + str(experience) + " experience! "
+		if State.player.get_level(State.player.experience + experience) != State.player.get_level(experience):
+			message += "You leveled up to level " + str(State.player.get_level(State.player.experience + experience)) + "! Not only does this make you wrestle harder, it also makes you feel better."
+
+		yield(show_interact(message, []), "completed")
+		state = LevelState.BATTLE
 
 		for trigger in triggers:
 			handle_trigger(trigger)
+
+		GameFlow.overlays.hud.set_explore_mode()
+		GameFlow.overlays.battle.stop()
+		AudioEngine.play_background_music("main2")
+		state = LevelState.BATTLE
+		yield(switch_state(LevelState.EXPLORING), "completed")
+		var should_pause_player = false
+		for trigger in triggers:
+			if "conversation" in trigger or "interact" in trigger or "upgrade" in trigger:
+				player.set_still()
+				player.set_animation(Vector2(0, 0))
+				if state == LevelState.EXPLORING:
+					state = LevelState.TRANSITION
+		
 	elif player.dead:
 		# big TODO
 		set_process(false)
@@ -422,7 +440,6 @@ func _process(delta):
 	previous_interactables = player.collider_under_raycast
 	if previous_interactables and state == LevelState.EXPLORING and previous_interactables is Interactable:
 		previous_interactables.show_hint()
-	
 
 	if state == LevelState.EXPLORING and location_state == LocationState.OUTSIDE:
 		var floor_player = floors.get_tile_floor(player.position)
@@ -669,9 +686,11 @@ func handle_trigger(trigger: Dictionary):
 		player.refresh_stats()
 		show_interact(upgrade_description, trigger.get("triggers", []))
 	elif "conversation" in trigger:
+		player.set_still()
 		state = LevelState.TRANSITION
 		if "move" in trigger.conversation:
 			state = LevelState.TRANSITION
+			player.set_still()
 			yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
 			# hack for last teleport
 			if location_state == LocationState.INSIDE:
@@ -772,28 +791,31 @@ func show_interact(description: String, triggers: Array):
 	yield(get_tree().create_timer(0.2), "timeout")
 	player.set_moving()
 	state = LevelState.EXPLORING
-	var save_point = Flow.get_interactive_value(player.collider_under_raycast.id, "save_point", false)
-	if save_point:
-		state = LevelState.TRANSITION
-		player.set_still()
-		yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+	if player.collider_under_raycast:
+		var save_point = Flow.get_interactive_value(player.collider_under_raycast.id, "save_point", false)
+		if save_point:
+			state = LevelState.TRANSITION
+			player.set_still()
+			yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
+			
+			Flow.save_game()
+			if State.player.location != null and State.player.location.location == "yurt":
+				var yurt = yurts[State.player.location.id]
+				add_player(player, yurt.position + yurt.player_position.position)
+				var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+				camera.zoom = new_zoom
+				location_state = LocationState.OUTSIDE
+				player.set_animation(Vector2(0, 1))
+				player.set_animation(Vector2(0, 0))
+				player.refresh_stats()
+			yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
+			# TODO move player to wake up outside yurt
+			player.set_moving()
+			state = LevelState.EXPLORING
 		
-		Flow.save_game()
-		if State.player.location != null and State.player.location.location == "yurt":
-			var yurt = yurts[State.player.location.id]
-			add_player(player, yurt.position + yurt.player_position.position)
-			var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
-			camera.zoom = new_zoom
-			location_state = LocationState.OUTSIDE
-			player.set_animation(Vector2(0, 1))
-			player.set_animation(Vector2(0, 0))
-			player.refresh_stats()
-		yield(GameFlow.overlays.transition.transition_to_clear(), "completed")
-		# TODO move player to wake up outside yurt
-		player.set_moving()
-		state = LevelState.EXPLORING
 	for trigger in triggers:
 		handle_trigger(trigger)
+
 
 func _process_inputs(delta):
 	if state == LevelState.EXPLORING:
