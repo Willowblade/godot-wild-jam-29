@@ -162,7 +162,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("debugging"):
 		pass
 
-	if Input.is_action_just_pressed("sprint"):
+	if Input.is_action_pressed("sprint"):
 		velocity *= 6
 		
 	set_animation_when_moving(velocity)
