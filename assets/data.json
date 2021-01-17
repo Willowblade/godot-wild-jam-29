@@ -113,11 +113,78 @@
                 ]
             }
         },
+        "snake": {
+            "name": "Snake",
+            "description": "Very kawaii, but don't let them cuddle you to death.",
+            "stats": {
+                "timeout": 7.5,
+                "max_health": 12,
+                "strength": 0.5,
+                "defense": 0.7,
+                "moves": [
+                    {
+                        "name": "slap",
+                        "chance": 1.0
+                    }
+                ]
+            }
+        },
+        "wolf": {
+            "name": "Wolf",
+            "description": "Despite its adoring looks, it's out for your blood!.",
+            "stats": {
+                "timeout": 6.5,
+                "max_health": 24,
+                "strength": 0.8,
+                "defense": 0.9,
+                "moves": [
+                    {
+                        "name": "slap",
+                        "chance": 1.0
+                    }
+                ]
+            }
+        },
+        "alpha": {
+            "name": "Alpha Wolf",
+            "description": "You've really done it this time Bataar... This wolf commands all the wolves in this entire region. Surely defeating it warrants a reward...",
+            "stats": {
+                "timeout": 5.5,
+                "max_health": 50,
+                "strength": 1.1,
+                "defense": 1.1,
+                "moves": [
+                    {
+                        "name": "throw",
+                        "chance": 1.0
+                    }
+                ]
+            }
+        },
         "copy": {
             "name": "Bataar???",
             "description": "You're not sure why you're fighting your alter image?",
             "stats": {
                 "timeout": 4.5,
+                "max_health": 30,
+                "strength": 1.0,
+                "defense": 1.0,
+                "moves": [
+                    {
+                        "name": "slap",
+                        "chance": 0.7
+                    }, {
+                        "name": "throw",
+                        "chance": 0.3
+                    }
+                ]
+            }
+        },
+        "bolkhi": {
+            "name": "Bolkhi",
+            "description": "You're not sure why you're wrestling this guy every day",
+            "stats": {
+                "timeout": 8,
                 "max_health": 30,
                 "strength": 1.0,
                 "defense": 1.0,
