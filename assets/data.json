@@ -813,22 +813,22 @@
                         {
                             "speaker": "shaman",
                             "text": "You may ask. But YOU must answer.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "We all seek answers.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "Walk the path, seek the shrines of the Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And find your answer.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "bataar",
@@ -837,17 +837,17 @@
                         {
                             "speaker": "shaman",
                             "text": "To the East, you will find the cave shrine of Boz Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "To the North West, you will find the cave shrine of Od Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "bataar",
@@ -876,17 +876,17 @@
                         {
                             "speaker": "shaman",
                             "text": "To the East, you will find the cave shrine of Boz Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "To the North West, you will find the cave shrine of Od Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         }
                     ],
                     "conditions": ["shaman:talked"],
