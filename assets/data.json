@@ -211,18 +211,18 @@
             "name": "Death Wurm Barrudin, Bane of the Gobi",
             "description": "Many lives were lost to Mongolian Death Wurm Barrudin, swallowed whole and minced to pieces.",
             "stats": {
-                "timeout": 5.0,
-                "max_health": 80,
+                "timeout": 4.0,
+                "max_health": 120,
                 "strength": 1.5,
                 "defense": 1.5,
                 "moves": [
                     {
                         "name": "throw",
-                        "chance": 0.6
+                        "chance": 0.5
                     },
                     {
                         "name": "slam",
-                        "chance": 0.4
+                        "chance": 0.5
                     }
                 ]
             },
