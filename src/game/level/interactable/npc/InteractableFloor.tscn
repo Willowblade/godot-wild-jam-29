@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/game/level/InteractableNPC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/graphics/level/platform.png" type="Texture" id=2]
+[ext_resource path="res://src/game/level/interactable/npc/InteractableFloor.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 80, 48 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="InteractableNPC" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2( -0.992119, 25.4222 )
+frames = SubResource( 1 )
+
+[node name="Bounds" type="StaticBody2D" parent="." index="1"]
+position = Vector2( -0.992119, 41.6931 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounds" index="0"]
+visible = false
+polygon = PoolVector2Array( -16.0303, 3.21133, -0.625, -12.1875, 7.8125, -9.625, 37.3125, -24.625, 7.94002, -39.5645, -20.125, -24.8125, -14.125, -20.1875, -30.8628, -3.14545, -32.7169, -4.46978, -21.4601, -15.4617, -23.9763, -16.1239, -23.579, -25.5266, 8.07245, -41.4186, 40.7834, -24.8644, 40.2536, -15.3293, 8.73461, 0.430237, 0.391342, -3.54275 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+visible = false
+position = Vector2( -0.992119, 41.6931 )
+polygon = PoolVector2Array( -6.2056, -22.6272, -4.91584, -28.0839, 1.63219, -31.3579, 13.8353, -31.2587, 22.1692, -26.5957, 21.5739, -21.4367, 14.2322, -18.3611, 3.21959, -17.9642 )
+
+[node name="Tween" type="Tween" parent="." index="3"]
+
+[node name="Sigil" type="Sprite" parent="." index="4"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 7.85194, 18.5003 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 97, -3, 63, 38 )

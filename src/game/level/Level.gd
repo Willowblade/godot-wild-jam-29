@@ -44,8 +44,11 @@ var yurts = {}
 var yurt_interiors = {}
 var battle_zones = {}
 var dungeons = {}
+var caves = {}
+var cave_interiors = {}
 
 func _ready():
+	AudioEngine.play_ambiance()
 	camera.smoothing_enabled = true
 	AudioEngine.play_background_music("main2")
 
@@ -73,6 +76,20 @@ func _ready():
 		var yurt_interior = yurt_interiors[yurt_id]
 		yurt.match_yurt_interior(yurt_interior)
 		yurt_interior.match_yurt(self, yurt)
+
+	for cave in get_tree().get_nodes_in_group("cave"):
+		caves[cave.id] = cave
+
+	for cave_interior in get_tree().get_nodes_in_group("cave_interior"):
+		if cave_interior.id == "":
+			push_error("cave has no valid id " + cave_interior.name)
+		cave_interiors[cave_interior.id] = cave_interior
+
+	for cave_id in caves:
+		var cave = caves[cave_id]
+		var cave_interior = cave_interiors[cave_id]
+		cave.match_cave_interior(cave_interior)
+		cave_interior.match_entrance(self, cave)
 
 	var spawn_location = State.player.location
 
@@ -555,7 +572,8 @@ func show_dialogue(conversation: Dictionary, triggers: Array):
 
 func use_door(door):
 	print("Moving to target", door.target.name)
-	AudioEngine.play_effect("door_open")
+	if State.player.location.location != "cave":
+		AudioEngine.play_effect("door_open")
 	yield(GameFlow.overlays.transition.transition_to_dark(), "completed")
 	door.target.add_player(player, door.target_position)
 	if location_state == LocationState.INSIDE:
@@ -563,11 +581,16 @@ func use_door(door):
 		camera.zoom = new_zoom
 		location_state = LocationState.OUTSIDE
 		eagle.set_process(true)
+		AudioEngine.stop_ambiance()
 	elif location_state == LocationState.OUTSIDE:
 		camera.zoom = Vector2(0.33, 0.33)
 		location_state = LocationState.INSIDE
 		eagle.set_process(false)
-	AudioEngine.play_effect("door_close")
+		AudioEngine.play_ambiance()
+
+	if not door.target.is_in_group("cave_interior"):
+		AudioEngine.play_effect("door_close")
+
 	camera.smoothing_enabled = false
 	yield(get_tree().create_timer(0.5), "timeout")
 	camera.smoothing_enabled = true
@@ -582,6 +605,11 @@ func use_door(door):
 		State.player.location = {
 			"location": "overworld",
 			"position": player.position,
+		}
+	elif door.target.is_in_group("cave_interior"):
+		State.player.location = {
+			"location": "cave",
+			"id": door.target.id,
 		}
 	else:
 		# TODO get the eagle here?

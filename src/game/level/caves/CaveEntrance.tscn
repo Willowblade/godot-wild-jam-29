@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/game/level/InteractableDoor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/game/level/caves/CaveEntrance.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphics/level/cave.png" type="Texture" id=3]
+
+[node name="CaveEntrance" type="StaticBody2D" groups=[
+"cave",
+]]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 47.865 )
+texture = ExtResource( 3 )
+
+[node name="InteractableDoor" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 47.865 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InteractableDoor"]
+polygon = PoolVector2Array( 24.0018, 8.43044, 9.13579, 1.2334, -6.91007, 9.72827, -7.26403, 15.9814, -2.07272, 21.9986 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, 47.865 )
+polygon = PoolVector2Array( -73.1632, 39.9273, -55.9771, 23.4086, -56.3108, 15.5665, -40.1259, -0.451622, -40.4596, -16.6366, -23.971, -33.0474, 5.00716, -47.2215, 25.9487, -48.0053, 39.9645, -40.4968, 40.4367, -25.6429, 56.6582, -16.666, 72.7222, 0.0279961, 71.1472, 1.28792, 55.2407, -14.9336, 40.1217, -22.1781, 39.9645, -8.2938, 24.1133, -0.618477, 39.5859, 16.3814, 24.1133, 7.72427, 16.1083, 4.6594, -7.10741, 15.9696, 9.09634, 31.7514, 6.25981, 33.4199, -9.59142, 16.7344, -40.1259, 32.5856, -54.976, 24.5766, -71.1609, 41.0953 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, 47.865 )
+polygon = PoolVector2Array( -39.7643, 55.7798, -24.667, 39.7554, -9.96692, 32.4716, -25.1967, 24.923, -22.1507, 23.3338, -7.45069, 31.2797, -7.58312, 40.8149 )
+
+[node name="PlayerPosition" type="Position2D" parent="."]
+position = Vector2( 21.4541, 70.1894 )

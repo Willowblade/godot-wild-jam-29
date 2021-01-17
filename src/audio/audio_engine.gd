@@ -80,6 +80,7 @@ const sfx = {
 
 
 onready var background_player: AudioStreamPlayer = $BackgroundPlayer
+onready var ambiance_player: AudioStreamPlayer = $AmbiancePlayer
 onready var dialogue_player: AudioStreamPlayer = $DialoguePlayer
 onready var effects: Node = $Effects
 
@@ -105,7 +106,13 @@ func play_effect(effect_name: String):
 func reset():
 #	effects.reset()
 	stop_background_music()
+	
+func play_ambiance():
+	ambiance_player.play()
 
+func stop_ambiance():
+	ambiance_player.stop()
+	
 func play_background_music(track_name: String):
 	var track_path = tracks[track_name]
 	if background_audio == track_path:
