@@ -73,7 +73,7 @@
             "max_stamina": 20,
             "strength": 1.0,
             "defense": 1.0,
-            "moves": ["slap"],
+            "moves": ["slap", "throw"],
             "timeout": 3.5
         }
     },
@@ -117,11 +117,11 @@
             "sfx": "male_dialogue1"
         },
         "rend": {
-            "name": "Rend Slam",
+            "name": "Rend Throw",
             "description": "Jump up in the air with your opponent, turning them around twice and slamming them face first into the ground. Boom!",
             "cost": 10,
-            "damage": 12,
-            "animation": "slam",
+            "damage": 8,
+            "animation": "throw",
             "sfx": "eagle_screech1"
         }
     },
