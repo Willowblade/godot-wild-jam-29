@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/graphics/tilesets/CaveFloor.tres" type="TileSet" id=1]
+[ext_resource path="res://src/game/level/floor/Floor.gd" type="Script" id=2]
+
+[node name="Floor" type="TileMap"]
+mode = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 16 )
+cell_quadrant_size = 64
+format = 1
+tile_data = PoolIntArray( -131073, 39, 0, -65539, 39, 0, -65538, 39, 0, -5, 39, 0, -4, 39, 0, 65530, 39, 0, 131064, 39, 0, 131065, 39, 0, 196598, 39, 0, 196599, 39, 0, 262133, 39, 0, 786432, 39, 0, 786433, 39, 0, 786434, 39, 0, 851971, 39, 0, 851972, 39, 0 )
+script = ExtResource( 2 )
