@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/menu/main/MainMenuTab.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=2]
 
 [node name="MainMenuTab" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -19,68 +21,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_left = 421.0
-margin_right = 539.0
-margin_bottom = 14.0
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="FrontSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-margin_right = 32.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 32, 0 )
-
-[node name="TitleLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 36.0
-margin_right = 82.0
-margin_bottom = 14.0
-size_flags_horizontal = 4
-text = "GWJ 29"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
-margin_left = 86.0
-margin_right = 118.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 32, 0 )
-
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 83.0
 margin_right = 960.0
-margin_bottom = 400.0
-custom_constants/margin_top = 400
+margin_bottom = 383.0
+custom_constants/margin_top = 0
+custom_constants/margin_bottom = 300
 
 [node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_left = 200.0
-margin_top = 424.0
+margin_top = 407.0
 margin_right = 760.0
-margin_bottom = 486.0
+margin_bottom = 457.0
 size_flags_horizontal = 4
-size_flags_vertical = 3
 custom_constants/separation = 16
 alignment = 1
 
 [node name="NewButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 128.0
-margin_bottom = 62.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 128, 0 )
 text = "NEW"
 
 [node name="LoadButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_left = 144.0
 margin_right = 272.0
-margin_bottom = 62.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 128, 0 )
 text = "LOAD"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_left = 288.0
 margin_right = 416.0
-margin_bottom = 62.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 3
 text = "SETTINGS"
@@ -88,25 +61,10 @@ text = "SETTINGS"
 [node name="QuitButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_left = 432.0
 margin_right = 560.0
-margin_bottom = 62.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 3
 text = "QUIT"
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 510.0
-margin_right = 960.0
-margin_bottom = 540.0
-custom_constants/margin_top = 30
-
-[node name="StatusLabel" type="Label" parent="VBoxContainer"]
-visible = false
-margin_top = 526.0
-margin_right = 960.0
-margin_bottom = 540.0
-text = "Loaded..."
-align = 1
-valign = 1
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/NewButton" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/LoadButton" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_entered" from="VBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_button_mouse_entered"]

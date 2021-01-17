@@ -24,8 +24,6 @@ func _ready():
 	_error =_new_button.connect("pressed", self, "_on_new_button_pressed")
 	_error =_load_button.connect("pressed", self, "_on_load_button_pressed")
 
-func update_tab():
-	_status_label.text = ""
 		
 func _on_settings_button_pressed():
 	emit_signal("button_pressed", TABS.SETTINGS)

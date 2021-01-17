@@ -39,11 +39,9 @@ margin_bottom = 15.0
 
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 960, 540 )
-margin_left = 6.0
 margin_right = 6.0
-margin_top = 6.0
-margin_bottom = 6.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [sub_resource type="DynamicFontData" id=6]
 font_path = "res://assets/fonts/pixellari.ttf"

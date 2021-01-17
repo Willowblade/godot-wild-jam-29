@@ -25,10 +25,7 @@ __meta__ = {
 }
 
 [node name="MainMenuTab" parent="TabContainer" instance=ExtResource( 2 )]
-margin_left = 6.0
-margin_top = 6.0
 margin_right = -6.0
-margin_bottom = -6.0
 
 [node name="SettingsMenuTab" parent="TabContainer" instance=ExtResource( 4 )]
 visible = false
