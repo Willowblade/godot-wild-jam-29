@@ -26,7 +26,7 @@ onready var speaker_names := {
 	"bolkhi": "Bulky",
 	"boz": "Boz Tengri, the God of Ground",
 	"od": "Öd Tengri, the God of Time",
-	"kok":"Kök Tengri, the God of the Sky, or the God of Gods",
+	"kok":"Kök Tengri, the God of the Sky, God of Gods",
 }
 
 signal finished

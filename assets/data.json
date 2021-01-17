@@ -30,6 +30,38 @@
                 "strength": 0.2,
                 "moves": ["slam"]
             }
+        },
+        "boz_blessing": {
+            "target": "player",
+            "description": "The blessing of Boz runs through your body, and in a flash of insight you learn the sacred Heavenly Slam technique. You also feel more powerful",
+            "effects": {
+                "strength": 0.2,
+                "max_health": 10,
+                "max_stamina": 5,
+                "moves": ["slam"]
+            }
+        },
+        "od_blessing": {
+            "target": "player",
+            "description": "The blessing of Od runs through you, and you feel more powerful.",
+            "effects": {
+                "strength": 0.2,
+                "defense": 0.1,
+                "max_health": 15,
+                "max_stamina": 10,
+                "moves": ["loremaster"]
+            }
+        },
+        "kok_blessing": {
+            "target": "player",
+            "description": "The blessing of Kok runs through your body, you feel the air's blessing in every pulse. You feel indestructable",
+            "effects": {
+                "strength": 0.3,
+                "defense": 0.2,
+                "max_health": 25,
+                "max_stamina": 15,
+                "moves": ["slam"]
+            }
         }
     },
     "player": {
@@ -447,12 +479,17 @@
                             {
                                 "speaker": "bataar",
                                 "text": "That.. Wasn't a question.",
-                                "audio": "bataar_laughing"
+                                "audio": "bataar_mocking"
                             },
                             {
                                 "speaker": "bolkhi",
                                 "text": "Oh! Yea I knew that.",
-                                "audio": "male_laughing"
+                                "audio": "male_mocking"
+                            }
+                        ],
+                        "triggers": [
+                            {
+                                "condition": "bolkhi:spoken"
                             }
                         ]
                     }
@@ -479,12 +516,12 @@
                             {
                                 "speaker": "bataar",
                                 "text": "I can't say I disagree, hahah.",
-                                "audio":"bataar_laughing"
+                                "audio":"bataar_mocking"
                             },
                             {
                                 "speaker": "bataar",
                                 "text": "You're out of breath though Bolkhi. You should probably exercise a bit more.",
-                                "audio":"bataar_laughing"
+                                "audio":"bataar_mocking"
                             },
                             {
                                 "speaker": "bolkhi",
@@ -507,8 +544,8 @@
                                 "text": "WOOOOOO!!! Lets gooooo!"
                             }
                         ],
-                        "triggers": {
-                            "conversation": {
+                        "triggers": [
+                            {"conversation": {
                                 "move": {
                                     "location": "npc",
                                     "npc": "bolkhi3"
@@ -561,8 +598,11 @@
                                 ]
                             }
                         }
+                        ]
+                            
+                        }
                     }
-                }
+                
             ]
         }
     },
@@ -641,7 +681,7 @@
         "bolkhi": {
             "conditions": {
                 "exist": [],
-                "death": ["bolky:hidden"]
+                "death": ["bolkhi:hidden"]
             },
             "conversations": {
                 "start": {
@@ -680,36 +720,20 @@
                 "after": {
                     "dialogue": [
                         {
-                            "speaker": "bataar",
-                            "text": "Still here?",
-                            "animation": "angry",
-                            "audio": "bataar_mocking"
-                        },
-                        {
-                            "speaker": "copy",
+                            "speaker": "bolkhi",
                             "text": "Still here?",
                             "animation": "angry",
                             "audio": "male_mocking"
                         },
                         {
                             "speaker": "bataar",
-                            "text": "You. Me. Now.",
+                            "text": "Going, going.",
                             "animation": "none",
                             "audio": "none"
                         }
                     ],
-                    "conditions": ["copy:talked"],
-                    "triggers": [
-                        {
-                            "condition": "copy:hidden"
-                        },
-                        {
-                            "hide": "copy"
-                        },
-                        {
-                            "battle": "copy"
-                        }
-                    ]
+                    "conditions": ["bolkhi:talked"],
+                    "triggers": []
                 }
             }
         },
@@ -813,22 +837,22 @@
                         {
                             "speaker": "shaman",
                             "text": "You may ask. But YOU must answer.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "We all seek answers.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "Walk the path, seek the shrines of the Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And find your answer.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "bataar",
@@ -837,32 +861,27 @@
                         {
                             "speaker": "shaman",
                             "text": "To the East, you will find the cave shrine of Boz Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "To the North West, you will find the cave shrine of Od Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "bataar",
-                            "text": "What path..?"
+                            "text": "I will go, immediately. Thank you."
                         }
                     ],
                     "conditions": [],
                     "triggers": [
                         {
                             "condition": "shaman:talked"
-                        },
-                        {
-                            "interact": {
-                                "description": "Your copy looks annoyed..."
-                            }
                         }
                     ]
                 },
@@ -876,17 +895,21 @@
                         {
                             "speaker": "shaman",
                             "text": "To the East, you will find the cave shrine of Boz Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "To the North West, you will find the cave shrine of Od Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
                         },
                         {
                             "speaker": "shaman",
                             "text": "And to the North, you will find the final cave shrine of Kok Tengri.",
-                            "audio": "male_explaining"
+                            "audio": "female_explaining"
+                        },
+                        {
+                            "speaker": "bataar",
+                            "text": "I will go, immediately. Thank you."
                         }
                     ],
                     "conditions": ["shaman:talked"],
@@ -1101,23 +1124,23 @@
                 "death": []
             },
             "conversations": {
-                "start": {
-                    "invalid": {
-                        "dialogue": [{
-                            "speaker": "bataar",
-                            "text": "Such beautiful inscriptions. Nothing is happening... I wonder if someone can help me."
-                        }],
-                        "conditions": [],
-                        "triggers": []
-                    },
-                    "invalid_shaman": {
-                        "dialogue": [{
-                            "speaker": "bataar",
-                            "text": "Nothing is happening... I should remember what the shaman told me."
-                        }],
-                        "conditions": ["shaman:talked"],
-                        "triggers": []
-                    },
+                "invalid": {
+                    "dialogue": [{
+                        "speaker": "bataar",
+                        "text": "Such beautiful inscriptions. Nothing is happening... I wonder if someone can help me."
+                    }],
+                    "conditions": [],
+                    "triggers": []
+                },
+                "invalid_shaman": {
+                    "dialogue": [{
+                        "speaker": "bataar",
+                        "text": "Nothing is happening... I should remember what the shaman told me."
+                    }],
+                    "conditions": ["shaman:talked"],
+                    "triggers": []
+                },
+                "start": {  
                     "dialogue": [
                         {
                             "speaker": "bataar",
@@ -1227,6 +1250,15 @@
                             "upgrade": "kok_blessing",
                             "triggers": [
                                 {
+                                    "condition": "bolkhi:hidden"
+                                },
+                                {
+                                    "hide": "bolkhi"
+                                },
+                                {
+                                    "show": "bolkhi2"
+                                },
+                                {
                                     "conversation": {
                                         "move": {
                                             "location": "npc",
@@ -1234,22 +1266,18 @@
                                         },
                                         "dialogue": [
                                             {
+                                                "speaker": "copy",
+                                                "text": "Wake up! You're daydreaming again!",
+                                                "animation": "angry"
+                                            },
+                                            {
                                                 "speaker": "bataar",
-                                                "text": "You here again?"
+                                                "text": "Wait, was it all a dream?"
                                             },
                                             {
                                                 "speaker": "copy",
-                                                "text": "A copy? I'm the real Bataar, jerk! I was put here for testing purposes"
-                                            },
-                                            {
-                                                "speaker": "bataar",
-                                                "text": "Right... I'll be leaving"
-                                                
-                                            }
-                                        ],
-                                        "triggers": [
-                                            {
-                                                "battle": "bolkhi2"
+                                                "text": "Always has been.",
+                                                "audio": "bataar_mocking"
                                             }
                                         ]
                                     }

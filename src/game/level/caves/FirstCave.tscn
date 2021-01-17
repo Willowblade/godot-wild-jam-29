@@ -19,5 +19,9 @@ id = "boz_tengri"
 [node name="PlayerPosition" parent="." index="3"]
 position = Vector2( 31.3302, 9.92823 )
 
+[node name="Door" parent="." index="4"]
+position = Vector2( 54.4916, 17.9539 )
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Door" index="0"]
+position = Vector2( -64.571, -22.6786 )
 polygon = PoolVector2Array( 27.3542, 28.8376, 72.79, 4.78335, 95.5079, 16.365, 48.0676, 39.3057 )

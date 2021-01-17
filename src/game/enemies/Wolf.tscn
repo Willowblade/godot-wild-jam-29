@@ -10,3 +10,6 @@ id = "wolf"
 position = Vector2( 0, -15.7145 )
 frames = ExtResource( 2 )
 frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -15.1806, -0.792824, 2.08237, 8.33474, 13.7895, 2.18356, -5.06094, -6.94401 )

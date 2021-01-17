@@ -129,7 +129,6 @@ func update_targets():
 			target.selectable.set_label_name(target.name)
 	
 	var hidden_selectables = []
-	print(visible_targets)
 	for selectable_target in selectables.targets:
 		if selectable_target in visible_targets:
 			selectable_target.show()

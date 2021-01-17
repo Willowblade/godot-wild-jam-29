@@ -6,3 +6,6 @@ var target = null
 
 func _ready():
 	pass
+
+func get_interactable_location():
+	return Vector2(0, -8)

@@ -9,3 +9,6 @@ id = "alpha"
 [node name="Sprite" parent="Visual" index="0"]
 position = Vector2( 0, -15.7145 )
 frames = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -14.9041, -0.504749, 1.18253, 8.86442, 14.9711, 1.08624, -5.71175, -6.69193 )

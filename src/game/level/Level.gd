@@ -12,7 +12,7 @@ enum LocationState {
 	OUTSIDE
 }
 
-const ZOOM_PER_FLOOR = 1.08
+const ZOOM_PER_FLOOR = 1.04
 
 onready var player: Player = $YSort/Player
 onready var floors: Node2D = $Floors
@@ -105,6 +105,90 @@ func _ready():
 	eagle.set_player(player)
 	eagle.set_start_position()
 
+	if State.player.has_condition("started_game"):
+		pass
+	else:
+		game_start_sequence()
+
+
+func game_start_sequence():
+	yield(show_begin(), "completed")
+	GameFlow.overlays.begin.stop()
+	show_dialogue({
+		"dialogue": [
+			{
+				"speaker": "copy",
+				"text": "Hey sleepyhead! Wake up! You're daydreaming again!",
+				"animation": "angry",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Wait, are you me?"
+			},
+			
+			{
+				"speaker": "copy",
+				"text": "No Bataar, I am merely a storytelling device constructed in your own mind to visualize your subconsciousness.",
+				"audio": "bataar_explaining",
+				"animation": "none"
+			},
+			{
+				"speaker": "copy",
+				"text": "Anyway... Time for your mantras",
+			},
+			{
+				"speaker": "copy",
+				"text": "Walk around with the arrow keys",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Walk around with the arrow keys",
+			},
+			{
+				"speaker": "copy",
+				"text": "Interact with E or Enter",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Interact with E or Enter",
+			},
+			
+			{
+				"speaker": "copy",
+				"text": "Choose wrestling moves and targets with arrows and E or Enter",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Choose wrestling moves and targets with arrows and E or Enter",
+			},
+			
+			{
+				"speaker": "copy",
+				"text": "Use the Tab key to use your eagle to navigate the desert",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Use the Tab key to use your eagle to navigate the desert",
+			},
+			{
+				"speaker": "copy",
+				"text": "Up and down let Burg fly higher or lower, turn Burg with left and right",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Up and down let Burg fly higher or lower, turn Burg with left and right",
+			},
+			{
+				"speaker": "copy",
+				"text": "Good! I see you still have them memorized",
+			},
+			{
+				"speaker": "copy",
+				"text": "If you don't want to see me again, I advise you to get some sleep inside the yurt, saving your progress",
+			},
+		]
+	}, [])
+	State.player.add_condition("game_started")
 
 func _on_character_attack_ready(character):
 	if character is Player:
@@ -237,7 +321,7 @@ func _on_attack_move_chosen(move, target):
 
 func update_battle():
 	if battle_status.number_of_enemies == 0:
-		switch_state(LevelState.EXPLORING)
+		yield(switch_state(LevelState.EXPLORING), "completed")
 		GameFlow.overlays.hud.set_explore_mode()
 		GameFlow.overlays.battle.stop()
 		AudioEngine.play_background_music("main2")
@@ -323,10 +407,10 @@ func _on_target_enemy(target):
 func _process(delta):
 	_process_inputs(delta)
 	
-	if previous_interactables:
+	if previous_interactables and previous_interactables is Interactable:
 		previous_interactables.hide_hint()
 	previous_interactables = player.collider_under_raycast
-	if previous_interactables and state == LevelState.EXPLORING:
+	if previous_interactables and state == LevelState.EXPLORING and previous_interactables is Interactable:
 		previous_interactables.show_hint()
 	
 
@@ -473,15 +557,20 @@ func switch_state(new_state: int):
 			player.set_moving()
 	elif new_state == LevelState.BATTLE:
 		player.set_still()
-		eagle.set_battle_zone(current_battle_zone)
-		eagle.set_battle()
+		if location_state == LocationState.OUTSIDE:
+			eagle.set_battle_zone(current_battle_zone)
+			eagle.set_battle()
 		yield(transition_to_battle_zone_from_player(), "completed")
 		GameFlow.overlays.battle.set_player(player)
 		GameFlow.overlays.battle.set_battle_zone(current_battle_zone)
 		GameFlow.overlays.battle.start()
 		GameFlow.overlays.hud.set_battle_mode()
 
-		battle_status.set_chargers([player, eagle] + current_battle_zone.enemies)
+		if location_state == LocationState.OUTSIDE:
+			battle_status.set_chargers([player, eagle] + current_battle_zone.enemies)
+		else:
+			battle_status.set_chargers([player] + current_battle_zone.enemies)
+
 		battle_status.start_charging()
 
 func counter_scale_camera(delta, increase):
@@ -489,6 +578,17 @@ func counter_scale_camera(delta, increase):
 	var new_zoom = max(0.6, min(1.0, current_zoom + 0.3 * delta * increase))
 	camera.zoom = Vector2(new_zoom, new_zoom)
 	eagle.sprite.scale = 2 * camera.zoom * EAGLE_ZOOM
+
+
+func show_begin():
+	state = LevelState.TRANSITION
+	GameFlow.overlays.begin.start()
+	yield(GameFlow.overlays.begin, "finished")
+
+
+func show_end():
+	state = LevelState.TRANSITION
+	GameFlow.overlays.end.start()
 
 func add_player(player: Player, player_position: Vector2):
 	var current_parent = player.get_parent()
@@ -517,9 +617,10 @@ func handle_trigger(trigger: Dictionary):
 		camera.position = Vector2(0, 0)
 		player.remove_child(camera)
 		current_battle_zone.add_child(camera)
-		eagle.set_battle_zone(current_battle_zone)
-		eagle.set_start_position()
-		eagle.set_battle()
+		if location_state == LocationState.OUTSIDE:
+			eagle.set_battle_zone(current_battle_zone)
+			eagle.set_start_position()
+			eagle.set_battle()
 		AudioEngine.play_background_music("battle3")
 		GameFlow.overlays.battle.set_player(player)
 		GameFlow.overlays.battle.set_battle_zone(current_battle_zone)
@@ -530,8 +631,11 @@ func handle_trigger(trigger: Dictionary):
 		for enemy in current_battle_zone.enemies:
 			enemy.connect("damage_taken", self, "_on_target_take_damage")	
 		yield(GameFlow.overlays.transition.transition_to_clear(0.8), "completed")
+		if location_state == LocationState.OUTSIDE:
+			battle_status.set_chargers([player, eagle] + current_battle_zone.enemies)
+		else:
+			battle_status.set_chargers([player] + current_battle_zone.enemies)
 
-		battle_status.set_chargers([player, eagle] + current_battle_zone.enemies)
 		battle_status.start_charging()
 
 	elif "hide" in trigger:
@@ -546,25 +650,43 @@ func handle_trigger(trigger: Dictionary):
 		for npc in get_tree().get_nodes_in_group("npc"):
 			if npc.id == trigger.show:
 				npc.show()
-				npc.collision_layer = 1
-				npc.collision_mask = 1
+				npc.collision_layer = 3
+				npc.collision_mask = 3
+	elif "upgrade" in trigger:
+		var upgrade_description = Flow.get_upgrade_value(trigger.upgrade, "description", "No DESC")
+		State.add_new_upgrade(trigger.upgrade)
+		player.refresh_stats()
+		show_interact(upgrade_description, trigger.get("triggers", []))
 	elif "conversation" in trigger:
+		state = LevelState.TRANSITION
 		if "move" in trigger.conversation:
 			state = LevelState.TRANSITION
 			yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
+			# hack for last teleport
+			if location_state == LocationState.INSIDE:
+				add_player(player, Vector2(0, 0))
+				var new_zoom = Vector2(0.5, 0.5) / pow(ZOOM_PER_FLOOR, current_floor_player)
+				camera.zoom = new_zoom
+				location_state = LocationState.OUTSIDE
+				eagle.set_process(true)
 			if trigger.conversation.move.location == "npc":
 				var found = false
 				for npc in get_tree().get_nodes_in_group("npc"):
 					if npc.id == trigger.conversation.move.npc:
+						camera.smoothing_enabled = false
 						player.position = npc.position + Vector2(-8, 8)
 						player.set_animation(Vector2(1, -1))
+						yield(get_tree().create_timer(0.5), "timeout")
+						camera.smoothing_enabled = true
 						found = true
 				if !found:
 					GameFlow.overlays.popup.show_popup("Couldn't find target " + trigger.conversation.move.npc)
 			yield(GameFlow.overlays.transition.transition_to_clear(0.5), "completed")
-			show_dialogue(trigger.conversation, trigger.conversation.get("triggers", []))
+		show_dialogue(trigger.conversation, trigger.conversation.get("triggers", []))
 	elif "interact" in trigger:
 		show_interact(trigger.interact.description, trigger.interact.get("triggers", []))
+	elif "end" in trigger:
+		show_end()
 
 func show_dialogue(conversation: Dictionary, triggers: Array):
 	print("We got conversation", conversation)
@@ -678,8 +800,13 @@ func _process_inputs(delta):
 				var triggers = Flow.get_interactive_value(player.collider_under_raycast.id, "triggers", [])
 				show_interact(description, triggers)
 			if player.collider_under_raycast is InteractableNPC:
+				
 				print("We're interacting with ", player.collider_under_raycast, " ", player.collider_under_raycast.id)
 				var conversation = player.collider_under_raycast.get_conversation()
+				# TODO superhacky fix to see if it's an actually good dialogue
+				if len(conversation.dialogue) > 3:
+					if player.collider_under_raycast is InteractableFloor:
+						player.collider_under_raycast.show_sigil()
 				var triggers = conversation.get("triggers", [])
 				show_dialogue(conversation, triggers)
 				

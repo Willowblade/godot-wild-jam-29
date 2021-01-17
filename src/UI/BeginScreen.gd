@@ -8,13 +8,27 @@ signal finished()
 var halted = false
 
 func _ready():
+	if name == "BeginScreen":
+		GameFlow.register_overlay("begin", self)
+	else:
+		GameFlow.register_overlay("end", self)
 	set_process(false)
+
+
+func start():
+	set_process(true)
+	show()
+	label.percent_visible = 0
+	show_text()
+
+func stop():
+	set_process(true)
+	hide()
 	
 	
 func show_text():
 	var text = label.bbcode_text
 	var parts = text.split("\n\n")
-	print(parts)
 	var i = 0
 	var count = 0
 	for part in parts:
