@@ -161,6 +161,23 @@ func game_start_sequence():
 				"speaker": "bataar",
 				"text": "Choose wrestling moves and targets with arrows and E or Enter",
 			},
+			
+			{
+				"speaker": "copy",
+				"text": "Use the Tab key to use your eagle to navigate the desert",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Use the Tab key to use your eagle to navigate the desert",
+			},
+			{
+				"speaker": "copy",
+				"text": "Up and down let Burg fly higher or lower, turn Burg with left and right",
+			},
+			{
+				"speaker": "bataar",
+				"text": "Up and down let Burg fly higher or lower, turn Burg with left and right",
+			},
 			{
 				"speaker": "copy",
 				"text": "Good! I see you still have them memorized",
