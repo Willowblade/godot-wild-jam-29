@@ -102,6 +102,7 @@ func _ready():
 	
 	player.set_animation(Vector2(0, 1))
 	player.set_animation(Vector2(0, 0))
+	eagle.set_follow()
 	eagle.set_player(player)
 	eagle.set_start_position()
 

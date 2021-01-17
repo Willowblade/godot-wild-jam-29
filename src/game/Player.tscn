@@ -272,7 +272,7 @@ scale = Vector2( 0.9, 1 )
 position = Vector2( 0.5, -15 )
 frames = ExtResource( 1 )
 animation = "nw"
-frame = 3
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

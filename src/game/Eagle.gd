@@ -94,7 +94,8 @@ func set_animation(velocity: Vector2):
 func set_start_position():
 	patrol_timer = randf() * 2 * PI
 	update_target()
-	position = target
+	position = position + target
+	update_target()
 		
 func set_free():
 	state = MovementState.FREE
