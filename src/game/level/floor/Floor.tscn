@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/graphics/tilesets/Floor.tres" type="TileSet" id=1]
-[ext_resource path="res://src/game/level/floor/Floor.gd" type="Script" id=2]
+[ext_resource path="res://src/game/level/floor/FloorCave.gd" type="Script" id=2]
 
 [node name="Floor" type="TileMap"]
 mode = 1
