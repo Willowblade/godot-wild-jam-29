@@ -21,3 +21,15 @@ func add_player(player: Player, player_position: Vector2):
 	current_parent.remove_child(player)
 	$YSort.add_child(player)
 	player.position = player_position
+	popup()
+
+
+func popup():
+	if name == "YurtInterior1":
+		GameFlow.overlays.popup.show_popup_custom("Entered Bataar's yurt", Vector2(0, 40), "yurt", 2.5)
+	elif name == "YurtInterior2":
+		GameFlow.overlays.popup.show_popup_custom("Entered Bolkhi's yurt", Vector2(0, 40), "yurt", 2.5)
+	elif name == "YurtInterior5":
+		GameFlow.overlays.popup.show_popup_custom("Entered Sha Man's yurt", Vector2(0, 40), "yurt", 2.5)
+	else:	
+		GameFlow.overlays.popup.show_popup_custom("Entered yurt", Vector2(0, 40), "yurt", 2.5)
