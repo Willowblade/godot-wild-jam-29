@@ -188,7 +188,7 @@ func game_start_sequence():
 			},
 		]
 	}, [])
-	State.player.add_condition("game_started")
+	State.player.add_condition("started_game")
 
 func _on_character_attack_ready(character):
 	if character is Player:
