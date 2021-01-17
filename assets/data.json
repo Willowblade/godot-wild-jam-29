@@ -336,6 +336,7 @@
             ]
         },
         "bolkhi": {
+            "triggered": true,
             "triggers": [
                 {
                     "show": "bolkhi"
@@ -459,6 +460,7 @@
             ]
         },
         "bolkhi2": {
+            "triggered": true,
             "triggers": [
                 {
                     "show": "bolkhi2"
