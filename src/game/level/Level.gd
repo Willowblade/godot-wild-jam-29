@@ -346,6 +346,10 @@ func update_battle():
 
 func move_player_to_enemy(enemy: Enemy):
 	var enemy_position = enemy.position + Vector2(6, 12)
+	if player.position.distance_to(enemy_position) > player.position.distance_to(enemy.position + Vector2(6, 12)):
+		enemy_position = enemy.position + Vector2(0, 12)
+	if player.position.distance_to(enemy_position) > player.position.distance_to(enemy.position + Vector2(-6, 12)):
+		enemy_position = enemy.position + Vector2(-6, 12)
 	player.set_animation(enemy_position - player.position)
 	var duration = player.position.distance_to(enemy_position) / player.MOVEMENT_SPEED / 2
 	player.sprite.speed_scale = 2.0
@@ -617,6 +621,7 @@ func handle_trigger(trigger: Dictionary):
 			return
 		yield(GameFlow.overlays.transition.transition_to_dark(1.0), "completed")
 		player.position = current_battle_zone.position + current_battle_zone.player_position.position
+		player.set_animation(current_battle_zone.position - player.position)
 		camera_tween.stop_all()
 		tween.stop_all()
 		camera.position = Vector2(0, 0)
