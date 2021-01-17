@@ -10,3 +10,6 @@ id = "bolkhi"
 position = Vector2( 0, -15.4597 )
 frames = ExtResource( 2 )
 animation = "blue_woman_1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+polygon = PoolVector2Array( -11.7013, -0.207672, 0.91214, 7.04506, 14.0511, -0.417896, -0.138977, -5.6735 )

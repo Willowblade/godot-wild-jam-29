@@ -323,10 +323,10 @@ func _on_target_enemy(target):
 func _process(delta):
 	_process_inputs(delta)
 	
-	if previous_interactables:
+	if previous_interactables and previous_interactables is Interactable:
 		previous_interactables.hide_hint()
 	previous_interactables = player.collider_under_raycast
-	if previous_interactables and state == LevelState.EXPLORING:
+	if previous_interactables and state == LevelState.EXPLORING and previous_interactables is Interactable:
 		previous_interactables.show_hint()
 	
 

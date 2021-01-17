@@ -7,7 +7,7 @@ onready var raycast: RayCast2D = $RayCast
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-export var MOVEMENT_SPEED: float = 50.0
+export var MOVEMENT_SPEED: float = 300.0
 
 signal interact
 signal damage_taken(player)

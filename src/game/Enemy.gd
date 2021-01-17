@@ -10,6 +10,8 @@ onready var visual: Node2D = $Visual
 onready var sprite: AnimatedSprite = $Visual/Sprite
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var original_scale = Vector2(1, 1)
+
 var selector_point := Vector2(0, 0)
 var eagle_point := Vector2(0, 0)
 
@@ -28,6 +30,7 @@ func trigger_damage_taken():
 	emit_signal("damage_taken", self, visual.position)
 
 func _ready():
+	original_scale = scale
 	if id == "":
 		print("Bad ID! for enemy", name)
 	var sprite_frames = sprite.frames
