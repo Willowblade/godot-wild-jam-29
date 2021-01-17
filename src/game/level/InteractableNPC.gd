@@ -28,9 +28,11 @@ func _ready():
 
 func get_conversation():
 	var conversations = Flow.get_npc_value(id, "conversations", {})
+	print(conversations)
 	var conversation_keys: Array = conversations.keys()
 	conversation_keys.invert()
 	for conversation_key in conversation_keys:
+		print("Checking key ", conversation_key)
 		var conditions_met = true
 		for condition in conversations[conversation_key].get("conditions", []):
 			print("Checking condition ", condition)

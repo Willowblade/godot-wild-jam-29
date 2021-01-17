@@ -42,6 +42,9 @@ script = ExtResource( 4 )
 
 [node name="Floors" type="Node2D" parent="."]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Z0" parent="Floors" instance=ExtResource( 1 )]
 collision_layer = 2147483650
@@ -115,7 +118,7 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Yurt1" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 480, 392 )
+position = Vector2( -797.38, -460.235 )
 id = "1"
 
 [node name="Sprite" parent="YSort/Yurt1" index="0"]
@@ -525,3 +528,5 @@ position = Vector2( -3220.5, 1555.5 )
 [editable path="Interiors/YurtInterior9"]
 
 [editable path="Interiors/YurtInterior10"]
+
+[editable path="Interiors/ThirdCave"]

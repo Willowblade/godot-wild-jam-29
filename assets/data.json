@@ -30,6 +30,38 @@
                 "strength": 0.2,
                 "moves": ["slam"]
             }
+        },
+        "boz_blessing": {
+            "target": "player",
+            "description": "The blessing of Boz runs through your body, and in a flash of insight you learn the sacred Heavenly Slam technique. You also feel more powerful",
+            "effects": {
+                "strength": 0.2,
+                "max_health": 10,
+                "max_stamina": 5,
+                "moves": ["slam"]
+            }
+        },
+        "od_blessing": {
+            "target": "player",
+            "description": "The blessing of Od runs through you, and you feel more powerful.",
+            "effects": {
+                "strength": 0.2,
+                "defense": 0.1,
+                "max_health": 15,
+                "max_stamina": 10,
+                "moves": ["loremaster"]
+            }
+        },
+        "kok_blessing": {
+            "target": "player",
+            "description": "The blessing of Kok runs through your body, you feel the air's blessing in every pulse. You feel indestructable",
+            "effects": {
+                "strength": 0.3,
+                "defense": 0.2,
+                "max_health": 25,
+                "max_stamina": 15,
+                "moves": ["slam"]
+            }
         }
     },
     "player": {
@@ -1089,23 +1121,23 @@
                 "death": []
             },
             "conversations": {
-                "start": {
-                    "invalid": {
-                        "dialogue": [{
-                            "speaker": "bataar",
-                            "text": "Such beautiful inscriptions. Nothing is happening... I wonder if someone can help me."
-                        }],
-                        "conditions": [],
-                        "triggers": []
-                    },
-                    "invalid_shaman": {
-                        "dialogue": [{
-                            "speaker": "bataar",
-                            "text": "Nothing is happening... I should remember what the shaman told me."
-                        }],
-                        "conditions": ["shaman:talked"],
-                        "triggers": []
-                    },
+                "invalid": {
+                    "dialogue": [{
+                        "speaker": "bataar",
+                        "text": "Such beautiful inscriptions. Nothing is happening... I wonder if someone can help me."
+                    }],
+                    "conditions": [],
+                    "triggers": []
+                },
+                "invalid_shaman": {
+                    "dialogue": [{
+                        "speaker": "bataar",
+                        "text": "Nothing is happening... I should remember what the shaman told me."
+                    }],
+                    "conditions": ["shaman:talked"],
+                    "triggers": []
+                },
+                "start": {  
                     "dialogue": [
                         {
                             "speaker": "bataar",

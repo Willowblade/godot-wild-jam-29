@@ -12,7 +12,7 @@ enum LocationState {
 	OUTSIDE
 }
 
-const ZOOM_PER_FLOOR = 1.08
+const ZOOM_PER_FLOOR = 1.04
 
 onready var player: Player = $YSort/Player
 onready var floors: Node2D = $Floors
