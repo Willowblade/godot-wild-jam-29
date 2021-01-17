@@ -100,7 +100,7 @@ func set_battle_zone(battle_zone):
 func set_player(new_player: Player):
 	player = new_player
 
-func get_name(enemy: Enemy):
+func get_enemy_name(enemy: Enemy):
 	for target in targets_list:
 		if target.target == enemy:
 			return target.name

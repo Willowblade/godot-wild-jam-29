@@ -261,7 +261,7 @@ func enemy_attack(enemy: Enemy):
 		else:
 			random_enemy_move_counter += chance
 
-	GameFlow.overlays.popup.show_popup(GameFlow.overlays.battle.get_name(enemy) + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
+	GameFlow.overlays.popup.show_popup(GameFlow.overlays.battle.get_enemy_name(enemy) + " used " + Flow.get_move_value(battle_status.performed_move, "name", "NO NAME"))
 	tween.remove_all()
 	battle_status.stop_charging()
 	# TODO pick a move from available moves...
