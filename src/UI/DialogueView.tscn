@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/graphics/characters/character.png" type="Texture" id=1]
+[ext_resource path="res://assets/graphics/characters/npcs.png" type="Texture" id=2]
 [ext_resource path="res://src/UI/DialogueView.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
@@ -328,12 +329,33 @@ region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
 position = Vector2( 76.1591, 372.879 )
 
 [node name="Copy" type="Sprite" parent="OtherSpeaker"]
+visible = false
 position = Vector2( 4.29999, -49.054 )
-rotation = 3.14159
-scale = Vector2( 4, -4 )
+scale = Vector2( -4, 4 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 40.1255, 108.435, 15.5338, 33.0094 )
+
+[node name="Buddy" type="Sprite" parent="OtherSpeaker"]
+position = Vector2( 4.29999, -49.054 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 103, 61, 19, 31 )
+
+[node name="God" type="Sprite" parent="OtherSpeaker"]
+position = Vector2( 4.29999, -49.054 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 7, 55, 20, 41 )
+
+[node name="Shaman" type="Sprite" parent="OtherSpeaker"]
+position = Vector2( 4.29999, -49.054 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 296, 160, 17, 27 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bataar_angry = SubResource( 1 )

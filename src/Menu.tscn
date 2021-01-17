@@ -1,21 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Menu.gd" type="Script" id=1]
 [ext_resource path="res://src/menu/main/MainMenuTab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/menu/MenuTabContainer.gd" type="Script" id=3]
 [ext_resource path="res://src/menu/settings/SettingsMenuTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/graphics/ui/background.png" type="Texture" id=5]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=6]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 6 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 540.0
 tabs_visible = false
 script = ExtResource( 3 )
 __meta__ = {
@@ -23,14 +34,14 @@ __meta__ = {
 }
 
 [node name="MainMenuTab" parent="TabContainer" instance=ExtResource( 2 )]
-margin_left = 4.0
-margin_top = 8.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
 
 [node name="SettingsMenuTab" parent="TabContainer" instance=ExtResource( 4 )]
 visible = false
-margin_left = 4.0
-margin_top = 8.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0

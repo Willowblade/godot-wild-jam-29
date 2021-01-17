@@ -13,10 +13,20 @@ onready var other_speaker := $OtherSpeaker
 
 onready var other_speakers := {
 	"copy": $OtherSpeaker/Copy,
+	"shaman": $OtherSpeaker/Shaman,
+	"bolkhi": $OtherSpeaker/Buddy,
+	"boz": $OtherSpeaker/God,
+	"od": $OtherSpeaker/God,
+	"kok": $OtherSpeaker/God,
 }
 
 onready var speaker_names := {
-	"copy": "Bataar???"
+	"copy": "Bataar???",
+	"shaman": "Sha Man",
+	"bolkhi": "Bulky",
+	"boz": "Boz Tengri, the God of Ground",
+	"od": "Öd Tengri, the God of Time",
+	"kok":"Kök Tengri, the God of the Sky, or the God of Gods",
 }
 
 signal finished
@@ -38,6 +48,8 @@ func set_conversation(conversation: Dictionary):
 	bataar_speaker.hide()
 	other_speaker.hide()
 	tween.remove_all()
+	bataar_speaker.modulate = Color(1, 1, 1, 1)
+	other_speaker.modulate = Color(1, 1,1 ,1)
 	for dialogue_entry in dialogue:
 		set_speaker(dialogue_entry.get("speaker", "bataar"))
 		bataar_speaker.hide()
